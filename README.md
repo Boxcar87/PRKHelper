@@ -30,6 +30,6 @@ Step 7: Use commands as show below
 
 Timer will not let you know when it expires, sorry :)
 
-You will have to select a new log file for a each new character every time you open PRKHelp
+You will have to select a new log file for each new character every time you open PRKHelp
 
 Path settings will persist otherwise
