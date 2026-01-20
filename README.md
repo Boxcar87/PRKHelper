@@ -13,6 +13,7 @@ Step 6: Hit confirm
 Step 7: Use commands as show below
 
 
+
 /calc 1+1
 
 /oe 200
@@ -22,6 +23,7 @@ Step 7: Use commands as show below
 /timer Name 1h20m30s
 
 /timers
+
 
 
 Timer will not let you know when it expires, sorry :)
