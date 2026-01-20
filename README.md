@@ -14,7 +14,7 @@ Step 5: Target your scripts folder
 
 Step 6: Hit confirm
 
-Step 7: Use commands as show below
+Step 7: Use commands as shown below
 
 
 Timer will not let you know when it expires, sorry :)
