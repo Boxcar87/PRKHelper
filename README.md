@@ -17,6 +17,12 @@ Step 6: Hit confirm
 Step 7: Use commands as show below
 
 
+Timer will not let you know when it expires, sorry :)
+
+You will have to select a new log file for each new character every time you open PRKHelp
+
+Path settings will persist otherwise
+
 
 ### /calc 1+1
 <img width="199" height="54" alt="{B0E3934B-530F-4BAE-ABFC-6473C3218D79}" src="https://github.com/user-attachments/assets/4e02baae-c48b-4f86-8f5e-7117cae2d381" />
@@ -34,9 +40,3 @@ Step 7: Use commands as show below
 <img width="452" height="403" alt="{0CA619F7-3C77-4A19-9C04-B8F686BE95EF}" src="https://github.com/user-attachments/assets/6c900886-f427-4d05-9eb1-88862db7861f" />
 
 
-
-Timer will not let you know when it expires, sorry :)
-
-You will have to select a new log file for each new character every time you open PRKHelp
-
-Path settings will persist otherwise
