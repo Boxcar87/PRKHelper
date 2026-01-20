@@ -1,0 +1,5 @@
+C:\Users\Kyle\Documents\Projects\PRK_ChatBot\PRKHelp.exe
+C:\Users\Kyle\Documents\Projects\PRK_ChatBot\PRKHelp.dll
+C:\Users\Kyle\Documents\Projects\PRK_ChatBot\PRKHelp.deps.json
+C:\Users\Kyle\Documents\Projects\PRK_ChatBot\PRKHelp.runtimeconfig.json
+C:\Users\Kyle\Documents\Projects\PRK_ChatBot\PRKHelp.pdb
