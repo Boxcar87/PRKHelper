@@ -1,3 +1,5 @@
+You can build the solution yourself or download the zipped executable on the right under Releases
+
 Step 1: Create a new chat window in Anarchy online and enable Vicinity messages to it (Shift+C)
 
 Step 2: "Log messages" of that window (right click its name)
