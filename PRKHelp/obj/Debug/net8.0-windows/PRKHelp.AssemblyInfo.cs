@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PRKHelp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc9998ad75093c0f4bc450e942c3894369356847")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+33a58543b16a29137d1095cbd98503c1ee11d5f9")]
 [assembly: System.Reflection.AssemblyProductAttribute("PRKHelp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PRKHelp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

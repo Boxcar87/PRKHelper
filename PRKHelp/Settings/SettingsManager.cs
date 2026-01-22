@@ -3,10 +3,10 @@ using System;
 using System.IO;
 using System.Text.Json;
 
-namespace PRKHelp
+namespace PRKHelp.Settings
 {
     public partial class SettingsManager
-        {
+    {
         readonly static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         readonly static string Settings = Path.Combine(AppDataPath, "PRKHelp", "Settings");
         readonly static string SettingsFile = "PRKHelpPaths.json";

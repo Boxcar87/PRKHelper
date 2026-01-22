@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PRKHelp
+﻿namespace PRKHelp.Components
 {
-    internal class MA
+    public class MA : Component
     {
-        public static string GetResult(string value)
+        public MA()
         {
-            bool valid = Int32.TryParse(value, out int numValue);
-            if (!valid)
-                return "/text Error! Check your input value";
-            if (numValue < 0)
-                return "/text Error! Value must be > 0";
+            ParamTypes.Add(typeof(int));
+            ParamSyntax = "/mafist 100";
+        }
+        public override int Process(string[] _params)
+        {
+            int numValue = int.Parse(_params[0]);
             if (numValue > 3000)
                 numValue = 3000;
 
@@ -50,14 +45,12 @@ namespace PRKHelp
             else
                 range = 3;
 
-            string textColor = "#FFFFFF";
-            string highlightColor = "#FFFF00";
+            OutputStrings[0] = $"/text {TextColor}{HighlightColor}{numValue}{EndColor} MA{EndColor} - {EndColor}{HighlightColor}";
+            OutputStrings[0] += $"{BuildItemRef(martialArtistIDs[range].Item1, martialArtistIDs[range].Item2, (int)qualityLevel, "Martial Artist")} | ";
+            OutputStrings[0] += $"{BuildItemRef(shadeIDs[range].Item1, shadeIDs[range].Item2, (int)qualityLevel, "Shade")} | ";
+            OutputStrings[0] += $"{BuildItemRef(othersIDs[range].Item1, othersIDs[range].Item2, (int)qualityLevel, "Others")}{EndColor}";
 
-            string responseText = $"/text <font color={textColor}><font color={highlightColor}>{numValue}</font> MA</font> - </font><font color={highlightColor}>";
-            responseText += $"<a href=\"itemref://{martialArtistIDs[range].Item1}/{martialArtistIDs[range].Item2}/{qualityLevel}\">Martial Artist</a> | ";
-            responseText += $"<a href=\"itemref://{shadeIDs[range].Item1}/{shadeIDs[range].Item2}/{qualityLevel}\">Shade</a> | ";
-            responseText += $"<a href=\"itemref://{othersIDs[range].Item1}/{othersIDs[range].Item2}/{qualityLevel}\">Others</a></font>";
-            return responseText;
+            return 1;
         }
     }
 }

@@ -1,16 +1,18 @@
 
+using PRKHelp.Settings;
+
 namespace PRKHelp
 {
-    public partial class Form1 : Form
+    public partial class FormUI : Form
     {
         static string PathPRK = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Funcom\\Anarchy Online");
         static string LogFilePath;
         static string ScriptsFolderPath;
-        static long FileSize;
-        GameTimers Timers;
-        public Form1()
+
+        public FormUI()
         {
             InitializeComponent();
+
             LogFilePath = SettingsManager.GetPath("LogFilePath");
             ScriptsFolderPath = SettingsManager.GetPath("ScriptsFolderPath");
             if (LogFilePath.Length > 0)
@@ -28,6 +30,8 @@ namespace PRKHelp
             else
                 folderPathText.Text = "";
         }
+
+        // Called from UI button
         private void GetLogFile(object sender, EventArgs e)
         {
 
@@ -48,6 +52,7 @@ namespace PRKHelp
             }
         }
 
+        // Called from UI button
         private void GetScriptsPath(object sender, EventArgs e)
         {
 
@@ -65,19 +70,14 @@ namespace PRKHelp
             }
         }
 
+        // Called from UI button
         private void StartWatching(object sender, EventArgs e)
         {
-            Timers = new(LogFilePath);
-            //Watcher.Path = LogFilePath[..^8];
-            //Watcher.Changed += (sender, e) => ScriptManager.RouteCommand(LogFilePath);
-
-            FileInfo fileInfo = new FileInfo(LogFilePath);
-            FileSize = fileInfo.Length;
-
-            using (var fileStream = new FileStream(LogFilePath, FileMode.Truncate, FileAccess.ReadWrite, FileShare.ReadWrite))
+            using (FileStream fileStream = new(LogFilePath, FileMode.Truncate, FileAccess.ReadWrite, FileShare.ReadWrite))
             {
             }
-            ScriptManager.Run(LogFilePath, ScriptsFolderPath, Timers);
+
+            ScriptManager.Init(ScriptsFolderPath);
             this.Size = new Size(Width, 280);
             runningText.Visible = true;
             Run();
@@ -85,15 +85,37 @@ namespace PRKHelp
 
         async static Task Run()
         {
-            using (FileStream fileStream = new(LogFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (FileStream fileStream = new(LogFilePath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
             {
-                if(fileStream.Length != FileSize)
+                if (fileStream.Length > 0)
                 {
-                    ScriptManager.RouteCommand(LogFilePath);
-                    FileSize = fileStream.Length;
+                    using (StreamReader reader = new(fileStream))
+                    {
+                        string rawText = reader.ReadToEnd();
+
+                        if (rawText.Length < 1)
+                            return;
+
+                        string[] filtering = rawText.Split(']');
+                        string command = filtering[1];
+
+                        // Erase file contents if its not a command
+                        if (!command[0].ToString().Equals("!"))
+                        {
+                            fileStream.SetLength(0);
+                            return;
+                        }
+
+                        command = command.Trim('\n');
+                        command = command.Trim(' ');
+                        Route.Handle(command[1..]);
+                    }
                 }
             }
-            await Task.Delay(500);
+            using (FileStream fileStream = new(LogFilePath, FileMode.Truncate, FileAccess.ReadWrite, FileShare.ReadWrite))
+            {
+            }
+                await Task.Delay(500);
             Run();
         }
     }

@@ -1,6 +1,8 @@
-﻿namespace PRKHelp
+﻿using Microsoft.Data.Sqlite;
+
+namespace PRKHelp
 {
-    partial class Form1
+    partial class FormUI
     {
         /// <summary>
         ///  Required designer variable.
@@ -145,7 +147,7 @@
             Controls.Add(folderPathText);
             Controls.Add(getPathBtn);
             Name = "Form1";
-            Text = "Form1";
+            Text = "PRKHelp";
             ResumeLayout(false);
             PerformLayout();
         }

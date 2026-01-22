@@ -1,0 +1,50 @@
+﻿using PRKHelp.Components;
+
+namespace PRKHelp
+{
+    public static class Route
+    {
+        static Dictionary<string, Component> Components = new();
+        static Route()
+        {
+            GameTimers gameTimers = new();
+            Components.Add("calc", new Calc());
+            Components.Add("oe", new OE());
+            Components.Add("mafist", new MA());
+            Components.Add("itemfind", new Item());
+            Components.Add("timer", gameTimers);
+            Components.Add("timers", gameTimers);
+        }
+        public static void Handle(string _input)
+        {
+            string[] sectioned = _input.Split(' ');
+            string path = sectioned[0];
+            string[] parameters = new string[sectioned.Length-1];
+            if (parameters.Length > 0)
+                parameters = sectioned[1..];
+
+            List<string> outputStrings = [];
+            if (Components.ContainsKey(path))
+            {
+                (int validStatus, string validMessage) = Components[path].ValidateParams(parameters);
+
+                if (validStatus < 0)
+                    outputStrings.Add(validMessage);
+
+                else
+                {
+                    int processStatus = Components[path].Process(parameters);
+
+                    if (processStatus < 0)
+                        outputStrings.Add($"/text Error processing inputs."); 
+                    else
+                        outputStrings = Components[path].GetResult();
+                }
+            }
+            else
+                outputStrings.Add($"/text {_input} is not a valid command.");
+
+            ScriptManager.WriteOutput(outputStrings);
+        }
+    }
+}
