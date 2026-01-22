@@ -9,7 +9,15 @@
         {
             ScriptOutputFile = Path.Combine(_scriptsFolderPath, "PRKHelp");
             // Generate Script file if it doesnt exist
-            using (FileStream scriptStream = new(ScriptOutputFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite)) {}
+            using (FileStream scriptStream = new(ScriptOutputFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite)) { }
+            // Generate Chat link file
+            using (FileStream itemLinkStream = new(Path.Combine(_scriptsFolderPath, "PRKItemlink"), FileMode.Create, FileAccess.Write, FileShare.Write))
+            {
+                using(StreamWriter linkWriter = new(itemLinkStream))
+                {
+                    linkWriter.Write($"<a href=\"itemref://%1/%2/%3\">%4 %5 %6 %7 %8 %9</a>");
+                }
+            }
 
             GenerateInterfaceScripts(_scriptsFolderPath);
         }
@@ -23,11 +31,10 @@
                 if (i > 0)
                     _outputIndexString += i.ToString();
 
-                using (FileStream scriptStream = new(_outputIndexString, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
+                using (FileStream scriptStream = new(_outputIndexString, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
                 {
                     using (StreamWriter scriptWriter = new(scriptStream))
                     {
-                        scriptStream.SetLength(0); 
                         scriptWriter.Write($"{_output[i]}");
                         
                         // Create new page references as needed

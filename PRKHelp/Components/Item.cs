@@ -48,12 +48,14 @@
             OutputStrings[page] = $"/text <a href=\"text://{HighlightColor}Item Search Results{EndColor}<br><br>";
             foreach (AOItem item in items)
             {
-                if (ql < 0)
+                if (ql < 1)
                     ql = item.lowql;
-
+                string cleanName = item.name.Replace("'", "");
+                cleanName = cleanName.Replace("\"", "");
                 pageItem++;
-                OutputStrings[page] += $"<img src=rdb://{item.icon}><br> ";
-                OutputStrings[page] += $"{item.name} {BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} [{BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} - {BuildItemRef(item.lowid, item.highid, item.highql, item.highql.ToString())}]<br><br>";
+                OutputStrings[page] += $"<img src=rdb://{item.icon}><br>";
+                OutputStrings[page] += $"{item.name} {BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} [{BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} - {BuildItemRef(item.lowid, item.highid, item.highql, item.highql.ToString())}]<br>";
+                OutputStrings[page] += $"<a href='chatcmd:///PRKItemlink {item.lowid} {item.highid} {ql} {cleanName}'>Link to chat - QL {ql}</a><br><br>";
                 if (OutputStrings[page].Length > 3500)
                 {
                     OutputStrings[page] += $"\">Item Search Results ({pageFirstItem} - {pageItem} of {items.Count})</a>";
@@ -69,7 +71,6 @@
 
         static void LoadItems()
         {
-            //DB.InsertSQLFile("..\\..\\..\\SQL\\Items.sql");
             DB.InsertSQLFile(Path.GetDirectoryName(Application.ExecutablePath)+"\\SQL\\Items.sql");
         }
 
