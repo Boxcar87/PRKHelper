@@ -1,9 +1,7 @@
-﻿
-namespace PRKHelp.Components
+﻿namespace PRKHelp.Components
 {
     public class Component
     {
-        DB DB;
         public List<Type> ParamTypes = [];
         public string ParamSyntax = "None";
 
@@ -19,7 +17,6 @@ namespace PRKHelp.Components
         public Component()
         {
             OutputStrings.Add("");
-            DB = new DB();
         }
 
         // Generic validation based on 2 definitions

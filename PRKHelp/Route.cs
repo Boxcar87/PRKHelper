@@ -5,13 +5,16 @@ namespace PRKHelp
     public static class Route
     {
         static Dictionary<string, Component> Components = new();
+        static DB DB;
         static Route()
         {
+            DB = new DB();
+            
             GameTimers gameTimers = new();
             Components.Add("calc", new Calc());
             Components.Add("oe", new OE());
             Components.Add("mafist", new MA());
-            Components.Add("itemfind", new Item());
+            Components.Add("itemfind", new Item(DB));
             Components.Add("timer", gameTimers);
             Components.Add("timers", gameTimers);
         }

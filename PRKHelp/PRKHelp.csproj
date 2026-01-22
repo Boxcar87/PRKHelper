@@ -9,6 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SQL\Items.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SQL\Items.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="ScriptManager.cs" />
   </ItemGroup>
 

@@ -12,9 +12,11 @@
 
     public class Item : Component
     {
-        public Item()
+        DB DB;
+        public Item(DB _db)
         {
             LoadItems();
+            DB = _db;
         }
 
         // First input for Items can be int or string and spaces in names count as separate params
@@ -67,7 +69,8 @@
 
         static void LoadItems()
         {
-            DB.InsertSQLFile("..\\..\\..\\SQL\\Items.sql");
+            //DB.InsertSQLFile("..\\..\\..\\SQL\\Items.sql");
+            DB.InsertSQLFile(Path.GetDirectoryName(Application.ExecutablePath)+"\\SQL\\Items.sql");
         }
 
         static List<AOItem> GetItemsByName(string _name, int _ql)
