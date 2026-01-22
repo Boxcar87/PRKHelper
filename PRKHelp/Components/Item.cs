@@ -31,7 +31,7 @@
             
             string name = string.Join(" ", _params);
             name = name.Trim(' ');
-            int ql = -1;
+            int ql = 0;
             if (int.TryParse(_params[0], out ql))
                 name = string.Join(" ", _params[1..]);
             name = name.Replace("'", "''");
@@ -48,14 +48,19 @@
             OutputStrings[page] = $"/text <a href=\"text://{HighlightColor}Item Search Results{EndColor}<br><br>";
             foreach (AOItem item in items)
             {
+                int localQl = ql;
                 if (ql < 1)
-                    ql = item.lowql;
+                    localQl = item.lowql;
+
                 string cleanName = item.name.Replace("'", "");
                 cleanName = cleanName.Replace("\"", "");
+
                 pageItem++;
+
                 OutputStrings[page] += $"<img src=rdb://{item.icon}><br>";
                 OutputStrings[page] += $"{item.name} {BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} [{BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} - {BuildItemRef(item.lowid, item.highid, item.highql, item.highql.ToString())}]<br>";
-                OutputStrings[page] += $"<a href='chatcmd:///PRKItemlink {item.lowid} {item.highid} {ql} {cleanName}'>Link to chat - QL {ql}</a><br><br>";
+                OutputStrings[page] += $"<a href='chatcmd:///PRKItemlink {item.lowid} {item.highid} {localQl} {cleanName}'>Link to chat - QL {localQl}</a><br><br>";
+                
                 if (OutputStrings[page].Length > 3500)
                 {
                     OutputStrings[page] += $"\">Item Search Results ({pageFirstItem} - {pageItem} of {items.Count})</a>";
