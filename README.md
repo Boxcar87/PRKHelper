@@ -23,7 +23,9 @@ You will have to select a new log file for each new character every time you ope
 
 Path settings will persist otherwise
 
-### /itemfind (ql_ item name
+/items and /item are reserved commands it seems, sorry. Went with /itemfind as a hopefully acceptable substitute. QL is optional.
+
+### /itemfind (ql) item name
 <img width="462" height="606" alt="{06F933A9-769E-4821-98D4-CAD4E2EC96B3}" src="https://github.com/user-attachments/assets/4077765a-a390-423d-8f0a-165b152594ab" />
 
 ### /calc 1+1
