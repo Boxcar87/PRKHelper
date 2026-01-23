@@ -10,15 +10,7 @@
             DB = _db;
             LoadItems();
             ParamSyntax = $"/trickle stat amount stat amount stat amount";
-            StatValues = new Dictionary<string, float>()
-            {
-                {"agility", 0},
-                {"intelligence", 0},
-                {"psychic", 0},
-                {"stamina", 0},
-                {"strength", 0},
-                {"sense", 0},
-            };
+            StatValues = CreateEmptyStatValues();
         }
         public override (int, string) ValidateParams(string[] _params)
         {
@@ -74,11 +66,32 @@
             // Create two different sections for trickle info
             OutputStrings[0] = $"<a href=\"text://Trickle Results {paramsString}<br>";
             OutputStrings.Add($"<a href=\"text://Trickle Results {paramsString}<br>");
-            
+
             // Create custom section in gear section for treatment and comp lit
-            OutputStrings[0] += $"<br>{HighlightColor}Treatment & Comp. Liter{EndColor}<div align=right>";
-            OutputStrings[0] += $"Treatment | {ValueColor}{(trickleValues["Combat & Healing"]["Treatment"] / 4).ToString("N2")}{EndColor}{superIndent}<br>";
-            OutputStrings[0] += $"Comp. Liter | {ValueColor}{(trickleValues["Trade & Repair"]["Comp. Liter"] / 4).ToString("N2")}{EndColor}{superIndent}<br></div>";
+            bool headerMade = false;
+            if(trickleValues.ContainsKey("Combat & Healing"))
+            {
+                if(trickleValues["Combat & Healing"].ContainsKey("Treatment"))
+                {
+                    OutputStrings[0] += $"<br>{HighlightColor}Treatment & Comp. Liter{EndColor}<div align=right>";
+                    OutputStrings[0] += $"Treatment | {ValueColor}{(trickleValues["Combat & Healing"]["Treatment"] / 4).ToString("N2")}{EndColor}{superIndent}<br>";
+                    headerMade = true;
+                }
+            }
+            if (trickleValues.ContainsKey("Trade & Repair"))
+            {
+                if(!headerMade)
+
+                if (trickleValues["Combat & Healing"].ContainsKey("Comp. Liter"))
+                {
+                    if (!headerMade)
+                            OutputStrings[0] += $"<br>{HighlightColor}Treatment & Comp. Liter{EndColor}<div align=right>";
+                    OutputStrings[0] += $"Comp. Liter | {ValueColor}{(trickleValues["Trade & Repair"]["Comp. Liter"] / 4).ToString("N2")}{EndColor}{superIndent}<br>";
+                }
+            }
+
+            if (headerMade)
+                OutputStrings[0] += $"</div>";
 
             // Populate windows accordingly
             foreach (KeyValuePair<string, Dictionary<string, float>> statGroup in trickleValues)
@@ -87,7 +100,8 @@
                 if (statGroup.Key == "Trade & Repair" || statGroup.Key == "Nanos & Casting" || statGroup.Key == "Combat & Healing" || statGroup.Key == "Body & Defense")
                     pageIndex = 1;
 
-                OutputStrings[pageIndex] += $"<br>{HighlightColor}{statGroup.Key}{EndColor}<div align=right>";
+                if(trickleValues[statGroup.Key].Count > 0)
+                    OutputStrings[pageIndex] += $"<br>{HighlightColor}{statGroup.Key}{EndColor}<div align=right>";
 
                 foreach (KeyValuePair<string, float> stat in trickleValues[statGroup.Key]) 
                 {
@@ -98,6 +112,7 @@
             OutputStrings[0] += $"\">Trickle Results | Gear / Imps</a>";
             OutputStrings[1] += $"\">Trickle Results | Combat / Nanos / Trade</a>";
 
+            StatValues = CreateEmptyStatValues();
             return 1;
         }
 
@@ -131,6 +146,18 @@
             }
         }
 
+        static Dictionary<string, float> CreateEmptyStatValues()
+        {
+            return new Dictionary<string, float>()
+            {
+                {"agility", 0},
+                {"intelligence", 0},
+                {"psychic", 0},
+                {"stamina", 0},
+                {"strength", 0},
+                {"sense", 0},
+            };
+        }
         static Dictionary<string, Dictionary<string, float>> GetTrickleAmounts(float[] _statValues)
         {
 
