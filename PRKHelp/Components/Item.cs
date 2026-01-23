@@ -39,32 +39,35 @@
             List<AOItem> items = GetItemsByName(name, ql);
             if (items.Count == 0)
             {
-                OutputStrings[0] = $"/text No matching items. Inputs should match {ParamSyntax}";
+                OutputStrings[0] = $"No matching items. Inputs should match {ParamSyntax}";
                 return 1;
             }
             int page = 0;
             int pageFirstItem = 1;
             int pageItem = 0;
-            OutputStrings[page] = $"/text <a href=\"text://{HighlightColor}Item Search Results{EndColor}<br><br>";
+            OutputStrings[page] = $"<a href=\"text://{HighlightColor}Item Search Results{EndColor}<br><br>";
             foreach (AOItem item in items)
             {
                 int localQl = ql;
                 if (ql < 1)
                     localQl = item.lowql;
+                else
+                    localQl = ql;
 
                 string cleanName = item.name.Replace("'", "");
                 cleanName = cleanName.Replace("\"", "");
+                cleanName = cleanName.Replace(" ", "_");
 
                 pageItem++;
 
                 OutputStrings[page] += $"<img src=rdb://{item.icon}><br>";
-                OutputStrings[page] += $"{item.name} {BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} [{BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} - {BuildItemRef(item.lowid, item.highid, item.highql, item.highql.ToString())}]<br>";
-                OutputStrings[page] += $"<a href='chatcmd:///PRKItemlink {item.lowid} {item.highid} {localQl} {cleanName}'>Link to chat - QL {localQl}</a><br><br>";
+                OutputStrings[page] += $"{item.name} {BuildItemRef(item.lowid, item.highid, localQl, localQl.ToString())} [{BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} - {BuildItemRef(item.lowid, item.highid, item.highql, item.highql.ToString())}]<br>";
+                OutputStrings[page] += $"<a href='chatcmd:///PRKHelp/Itemlink {item.lowid} {item.highid} {localQl} {cleanName}'>Link to chat - QL {localQl}</a><br><br>";
                 
                 if (OutputStrings[page].Length > 3500)
                 {
                     OutputStrings[page] += $"\">Item Search Results ({pageFirstItem} - {pageItem} of {items.Count})</a>";
-                    OutputStrings.Add($"/text <a href=\"text://{HighlightColor}Item Search Results{EndColor}<br><br>");
+                    OutputStrings.Add($"<a href=\"text://{HighlightColor}Item Search Results ({pageFirstItem} - {pageItem} of {items.Count}){EndColor}<br><br>");
                     page++;
                     pageFirstItem = pageItem + 1;
                 }

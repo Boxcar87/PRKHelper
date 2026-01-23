@@ -16,7 +16,7 @@ namespace PRKHelp.Components
             int maxInputLength = 200; //Estimated limit to keep response under 1kb //This is really just to throttle the size of response from script, may not be an issue.
 
             if (_params[0].Length > maxInputLength)
-                return (-1, "/text Error: Input formula too large.");
+                return (-1, "Error: Input formula too large.");
             return (1, "true");
         }
 
@@ -27,7 +27,7 @@ namespace PRKHelp.Components
             //Style input string         
             string pattern = @"[+\-*/%()]";
 
-            OutputStrings[0] = $"/text Equation: {TextColor}";
+            OutputStrings[0] = $"Equation: {TextColor}";
 
             //Preliminary size check
 

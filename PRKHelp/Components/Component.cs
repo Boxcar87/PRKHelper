@@ -23,16 +23,16 @@
         public virtual (int, string) ValidateParams(string[] _params)
         {
             if (_params.Length != ParamTypes.Count)
-                return (-1, $"/text Error. Check your inputs, should match {ParamSyntax}");
+                return (-1, $"Error. Check your inputs, should match {ParamSyntax}");
             for(var i=0; i < _params.Length; i++)
             {
                 // Inputs are basically either string or int
                 if (ParamTypes[i] != typeof(string))
                 {
                     if (!int.TryParse(_params[i], out int parseResult))
-                        return (-1, $"/text Error. Check your inputs, should match {ParamSyntax}");
+                        return (-1, $"Error. Check your inputs, should match {ParamSyntax}");
                     if (parseResult < 0)
-                        return (-1, $"/text Error. Parameter must be greater that 0");
+                        return (-1, $"Error. Parameter must be greater that 0");
                 }
             }            
             return SpecificParamChecks(_params);

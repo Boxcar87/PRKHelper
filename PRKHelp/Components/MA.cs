@@ -45,7 +45,7 @@
             else
                 range = 3;
 
-            OutputStrings[0] = $"/text {TextColor}{HighlightColor}{numValue}{EndColor} MA{EndColor} - {EndColor}{HighlightColor}";
+            OutputStrings[0] = $"{TextColor}{HighlightColor}{numValue}{EndColor} MA{EndColor} - {EndColor}{HighlightColor}";
             OutputStrings[0] += $"{BuildItemRef(martialArtistIDs[range].Item1, martialArtistIDs[range].Item2, (int)qualityLevel, "Martial Artist")} | ";
             OutputStrings[0] += $"{BuildItemRef(shadeIDs[range].Item1, shadeIDs[range].Item2, (int)qualityLevel, "Shade")} | ";
             OutputStrings[0] += $"{BuildItemRef(othersIDs[range].Item1, othersIDs[range].Item2, (int)qualityLevel, "Others")}{EndColor}";

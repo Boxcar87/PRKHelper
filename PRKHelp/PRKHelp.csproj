@@ -10,10 +10,14 @@
 
   <ItemGroup>
     <None Remove="SQL\Items.sql" />
+    <None Remove="SQL\Trickle.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="SQL\Items.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SQL\Trickle.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

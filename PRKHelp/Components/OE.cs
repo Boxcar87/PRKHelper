@@ -20,7 +20,7 @@
             double oe50min = Math.Floor(numValue * 0.4);
             double oe25min = Math.Floor(numValue * 0.2);
 
-            OutputStrings[0] = $"/text <a href=\"text://{TextColor}OE data for {ValueColor}>{numValue}{EndColor} skill";
+            OutputStrings[0] = $"<a href=\"text://{TextColor}OE data for {ValueColor}>{numValue}{EndColor} skill";
             OutputStrings[0] += $"<br><br>Item requires {ValueColor}{numValue}{EndColor} - mininum required:";
             OutputStrings[0] += $"<br>{Indent}{HighlightColor}>100%{EndColor}: {ValueColor}>{oe100min}{EndColor}";
             OutputStrings[0] += $"<br>{Indent}{Indent}{HighlightColor} 75%{EndColor}: {ValueColor}>{oe75min}{EndColor}";

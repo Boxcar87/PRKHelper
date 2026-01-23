@@ -15,6 +15,7 @@ namespace PRKHelp
             Components.Add("oe", new OE());
             Components.Add("mafist", new MA());
             Components.Add("itemfind", new Item(DB));
+            Components.Add("trickle", new Trickle(DB));
             Components.Add("timer", gameTimers);
             Components.Add("timers", gameTimers);
         }
@@ -39,13 +40,13 @@ namespace PRKHelp
                     int processStatus = Components[path].Process(parameters);
 
                     if (processStatus < 0)
-                        outputStrings.Add($"/text Error processing inputs."); 
+                        outputStrings.Add($"Error processing inputs."); 
                     else
                         outputStrings = Components[path].GetResult();
                 }
             }
             else
-                outputStrings.Add($"/text {_input} is not a valid command.");
+                outputStrings.Add($"{_input} is not a valid command.");
 
             ScriptManager.WriteOutput(outputStrings);
         }

@@ -14,7 +14,7 @@ namespace PRKHelp.Components
             
             string name = _params[0];
             if (CustomTimers.ContainsKey(name))
-                return (-1, $"/text Timer already exists for {name}!");
+                return (-1, $"Timer already exists for {name}!");
 
             string duration = _params[1];
             long durationLimit = 2 * 3600000; // Do you want a limit?
@@ -36,19 +36,19 @@ namespace PRKHelp.Components
                 if (!uniqueDenotationsUsed.Contains(denotation))
                     uniqueDenotationsUsed.Add(denotation);
                 else
-                    return (-1, "/text Duplicate denotation used. Please used format 1h10m30s");
+                    return (-1, "Duplicate denotation used. Please used format 1h10m30s");
 
                 bool validDuration = long.TryParse(durationOnly, out long durationTime);
                 if (!validDuration)
-                    return (-1, "/text Invalid duration. Please use format 1h10m30s");
+                    return (-1, "Invalid duration. Please use format 1h10m30s");
                 if (durationTime < 0)
-                    return (-1, "/text Duration must be greater than 0. Please use format 1h10m30s");
+                    return (-1, "Duration must be greater than 0. Please use format 1h10m30s");
 
                 totalDuration += ParseDenotation(denotation.ToLower(), durationTime);
             }
            
             if (totalDuration > durationLimit)
-                return (-1, "/text No No No, I want to be alive when this timer ends. 1 Hour maximum");
+                return (-1, "No No No, I want to be alive when this timer ends. 1 Hour maximum");
 
             return (1, "true");
         }
@@ -88,13 +88,13 @@ namespace PRKHelp.Components
             newTimer.Start();
 
             CustomTimers.Add(name, (timerEnd, newTimer));
-            OutputStrings[0] = $"/text Created timer for {name} Successfully";
+            OutputStrings[0] = $"Created timer for {name} Successfully";
             return 1;
         }
 
         public int GetTimers()
         {
-            OutputStrings[0] = "/text <a href=\"text://Active Timers:<br><br>";
+            OutputStrings[0] = "<a href=\"text://Active Timers:<br><br>";
             foreach (KeyValuePair<string, (long, System.Timers.Timer)> timer in CustomTimers)
             {
                 string secondsColor = TextColor;

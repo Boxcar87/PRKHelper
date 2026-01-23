@@ -1,4 +1,6 @@
-﻿namespace PRKHelp
+﻿using System.IO;
+
+namespace PRKHelp
 {
     internal class ScriptManager
     {
@@ -7,15 +9,25 @@
 
         public static void Init(string _scriptsFolderPath)
         {
-            ScriptOutputFile = Path.Combine(_scriptsFolderPath, "PRKHelp");
+            // This exists to automatically clean up old versions of script generation pathing
+            string PRKPath = Path.Combine(_scriptsFolderPath, "PRKHelp");
+            if (File.Exists(PRKPath)) // This checks if a file exists at the path
+            {
+                FileAttributes attributes = File.GetAttributes(PRKPath);
+                if (!attributes.HasFlag(FileAttributes.Directory))
+                    File.Delete(Path.Combine(_scriptsFolderPath, "PRKHelp"));
+            }
+
+            Directory.CreateDirectory(Path.Combine(_scriptsFolderPath, "PRKHelp"));
+            ScriptOutputFile = Path.Combine(_scriptsFolderPath, "PRKHelp/Output");
             // Generate Script file if it doesnt exist
             using (FileStream scriptStream = new(ScriptOutputFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite)) { }
             // Generate Chat link file
-            using (FileStream itemLinkStream = new(Path.Combine(_scriptsFolderPath, "PRKItemlink"), FileMode.Create, FileAccess.Write, FileShare.Write))
+            using (FileStream itemLinkStream = new(Path.Combine(_scriptsFolderPath, "PRKHelp/Itemlink"), FileMode.Create, FileAccess.Write, FileShare.Write))
             {
                 using(StreamWriter linkWriter = new(itemLinkStream))
                 {
-                    linkWriter.Write($"<a href=\"itemref://%1/%2/%3\">%4 %5 %6 %7 %8 %9</a>");
+                    linkWriter.Write($"<a href=\"itemref://%1/%2/%3\">%4</a>");
                 }
             }
 
@@ -35,26 +47,28 @@
                 {
                     using (StreamWriter scriptWriter = new(scriptStream))
                     {
-                        scriptWriter.Write($"{_output[i]}");
+                        scriptWriter.Write($"/text {_output[i]}");
                         
                         // Create new page references as needed
                         if(_output.Count > 1 && _output.Count > i + 1)
                         {
-                            scriptWriter.Write($"\n/PRKHELP{i + 1}");
+                            scriptWriter.Write($"\n/PRKHelp/Output{i + 1}");
                         }
                     }
                 }                
             }
         }
 
+        // Add new script here so player can call the function
         private static void GenerateInterfaceScripts(string _scriptsFolderPath)
         {
-            File.WriteAllText(Path.Combine(_scriptsFolderPath, "calc"), $"/w !calc %1\n/delay {ExecutionDelay}\n/PRKHelp");
-            File.WriteAllText(Path.Combine(_scriptsFolderPath, "oe"), $"/w !oe %1\n/delay {ExecutionDelay}\n/PRKHelp");
-            File.WriteAllText(Path.Combine(_scriptsFolderPath, "mafist"), $"/w !mafist %1\n/delay {ExecutionDelay}\n/PRKHelp");
-            File.WriteAllText(Path.Combine(_scriptsFolderPath, "timer"), $"/w !timer %1 %2\n/delay {ExecutionDelay}\n/PRKHelp");
-            File.WriteAllText(Path.Combine(_scriptsFolderPath, "timers"), $"/w !timers\n/delay {ExecutionDelay}\n/PRKHelp");
-            File.WriteAllText(Path.Combine(_scriptsFolderPath, "itemfind"), $"/w !itemfind %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp");
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "calc"), $"/w !calc %1\n/delay {ExecutionDelay}\n/PRKHelp/Output");
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "oe"), $"/w !oe %1\n/delay {ExecutionDelay}\n/PRKHelp/Output");
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "mafist"), $"/w !mafist %1\n/delay {ExecutionDelay}\n/PRKHelp/Output");
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "timer"), $"/w !timer %1 %2\n/delay {ExecutionDelay}\n/PRKHelp/Output");
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "timers"), $"/w !timers\n/delay {ExecutionDelay}\n/PRKHelp/Output");
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "itemfind"), $"/w !itemfind %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output");
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "trickle"), $"/w !trickle %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output");
         }
     }
 }
