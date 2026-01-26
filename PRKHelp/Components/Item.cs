@@ -39,6 +39,9 @@
             if (int.TryParse(_params[0], out ql))
                 name = string.Join(" ", _params[1..]);
 
+            if (ql > 0)
+                _params = _params[1..];
+
             List<AOItem> items = GetItemsByName(_params, ql);
             if (items.Count == 0)
             {
