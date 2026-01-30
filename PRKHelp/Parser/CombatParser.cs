@@ -144,7 +144,7 @@ namespace PRKHelper.Parser
                             }
                             else
                             {
-                                int XPEndIndex = toParse.LastIndexOf(" ")-1;
+                                int XPEndIndex = toParse.LastIndexOf(" ");
                                 string truncated = toParse[..XPEndIndex];
                                 int XPStartingIndex = truncated.LastIndexOf(" ")+1;
                                 string XPString = truncated[XPStartingIndex..];
