@@ -18171,7 +18171,8 @@ INSERT INTO Items VALUES (267646, 267646, 200, 200, 'Nano Crystal (Doc: Dr Blaze
 INSERT INTO Items VALUES (265451, 265451, 175, 175, 'Nano Crystal (Doc: Fill Inbox)', 12257);
 INSERT INTO Items VALUES (267647, 267647, 200, 200, 'Nano Crystal (Doc: Nanite Enhanced Mutagenic Compound)', 42449);
 INSERT INTO Items VALUES (267648, 267648, 200, 200, 'Nano Crystal (Doc: Nanite Enhanced Mutagenic Plague)', 42449);
-INSERT INTO Items VALUES (301846, 301846, 145, 145, 'Nano Crystal (Doc: Rapid Palsy)', 301085);
+INSERT INTO Items VALUES (99591, 99591, 159, 159, 'Nano Crystal (Rapid Palsy)', 42450);
+INSERT INTO Items VALUES (99592, 99592, 83, 83, 'Nano Crystal (Muscle Atrophy)', 12258);
 INSERT INTO Items VALUES (279373, 279373, 20, 20, 'Nano Crystal (Doc: Tjernberg Soothing Adrenaline)', 12228);
 INSERT INTO Items VALUES (267650, 267650, 200, 200, 'Nano Crystal (Doc: Weak Mutagenic Plague)', 42449);
 INSERT INTO Items VALUES (28767, 28767, 7, 7, 'Nano Crystal (Doctor''s Grace)', 12228);

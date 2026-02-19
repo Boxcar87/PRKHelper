@@ -30,6 +30,7 @@ namespace PRKHelp
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormUI));
             getPathBtn = new Button();
             folderPathText = new Label();
             confirmBtn = new Button();
@@ -45,6 +46,7 @@ namespace PRKHelp
             button4 = new Button();
             settingsBox = new Panel();
             activeWindow = new Panel();
+            button5 = new Button();
             richTextBox6 = new RichTextBox();
             petNameInput = new TextBox();
             exitButton = new Button();
@@ -230,6 +232,7 @@ namespace PRKHelp
             // 
             // activeWindow
             // 
+            activeWindow.Controls.Add(button5);
             activeWindow.Controls.Add(richTextBox6);
             activeWindow.Controls.Add(petNameInput);
             activeWindow.Controls.Add(exitButton);
@@ -248,6 +251,18 @@ namespace PRKHelp
             activeWindow.Name = "activeWindow";
             activeWindow.Size = new Size(329, 341);
             activeWindow.TabIndex = 15;
+            // 
+            // button5
+            // 
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.ForeColor = Color.MistyRose;
+            button5.Location = new Point(267, 2);
+            button5.Name = "button5";
+            button5.Size = new Size(59, 23);
+            button5.TabIndex = 21;
+            button5.Text = "Hide";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
             // richTextBox6
             // 
@@ -424,6 +439,7 @@ namespace PRKHelp
             Controls.Add(activeWindow);
             Controls.Add(settingsBox);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormUI";
             Text = "PRKHelp";
             settingsBox.ResumeLayout(false);
@@ -464,6 +480,7 @@ namespace PRKHelp
         private Button exitButton;
         private RichTextBox richTextBox6;
         private TextBox petNameInput;
+        private Button button5;
         //private FileSystemWatcher Watcher;
     }
 }
