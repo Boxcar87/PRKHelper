@@ -116,13 +116,13 @@ namespace PRKHelper.Helpbot.Components
             return 1;
         }
 
-        static void LoadItems()
+        private void LoadItems()
         {
             DB.InsertSQLFile(Path.GetDirectoryName(Application.ExecutablePath) + "\\Helpbot\\SQL\\Pocketboss.sql");
             DB.InsertSQLFile(Path.GetDirectoryName(Application.ExecutablePath) + "\\Helpbot\\SQL\\Playfields.sql");
         }
 
-        static List<AOItem> GetItemsOfPB(int _bossID)
+        private List<AOItem> GetItemsOfPB(int _bossID)
         {
             string query = $"SELECT a.* FROM Symbiants p " +
                             $"LEFT JOIN Items a ON p.item_id = a.highid WHERE pocketboss_id = {_bossID} " +
@@ -131,7 +131,7 @@ namespace PRKHelper.Helpbot.Components
             return DB.QuerySymbiantsByPocketBoss(query);
         }
 
-        static List<PocketBoss> GetPocketBoss(string[] _name, bool _exact)
+        private List<PocketBoss> GetPocketBoss(string[] _name, bool _exact)
         {
             string name = string.Join(" ", _name);
             string likeString = $"name LIKE '%{_name[0]}%'";

@@ -88,7 +88,7 @@ namespace PRKHelper.Helpbot.Components
             newTimer.Start();
 
             CustomTimers.Add(name, (timerEnd, newTimer));
-            OutputStrings[0] = $"Created timer for {name} Successfully";
+            OutputStrings[0] = $"{TextColor}Successfully created timer for {name}";
             return 1;
         }
 
@@ -107,7 +107,7 @@ namespace PRKHelper.Helpbot.Components
             OutputStrings[0] += "\">Current Timers</a>";
             return 1;
         }
-        static void ExpireTimer(string name)
+        private void ExpireTimer(string name)
         {
             CustomTimers[name].Item2.Dispose();
             //Console.WriteLine($"{name} timer has been disposed"); // Left in for testing functionality
@@ -116,23 +116,22 @@ namespace PRKHelper.Helpbot.Components
         }
 
         // Convert time into readable string
-        static string ParseTimeRemaining(long remaining)
+        private string ParseTimeRemaining(long remaining)
         {
             TimeSpan t = TimeSpan.FromMilliseconds(remaining);
-
             remaining /= 1000;
             switch (remaining)
             {
                 case >= 3600: // Hours
-                    return $"{t.Hours}h {t.Minutes}m {t.Seconds}s";
+                    return $"{ValueColor}{t.Hours}{EndColor}h {ValueColor}{t.Minutes}{EndColor}m {ValueColor}{t.Seconds}{EndColor}s";
                 case >= 60: // Minutes
-                    return $"{t.Minutes}m {t.Seconds}s";
+                    return $"{ValueColor}{t.Minutes}{EndColor}m {ValueColor}{t.Seconds}{EndColor}s";
                 default:
-                    return $"{t.Seconds}s";
+                    return $"{ValueColor}{t.Seconds}{EndColor}s";
             }
         }
 
-        static long ParseDenotation(string _denotation, long _duration)
+        private long ParseDenotation(string _denotation, long _duration)
         {
             switch (_denotation.ToLower())
             {

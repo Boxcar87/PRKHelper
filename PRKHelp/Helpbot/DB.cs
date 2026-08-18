@@ -33,7 +33,7 @@ namespace PRKHelper.Helpbot
                 }
                 catch (SqliteException ex)
                 {
-                    //Debug.WriteLine($"An error occurred: {ex.Message}");
+                    Debug.WriteLine($"An error occurred: {ex.Message}");
                 }
             }
         }
@@ -225,6 +225,39 @@ namespace PRKHelper.Helpbot
                 Debug.WriteLine(_ex);
             }
             return data[0];
+        }
+        public static List<short> QueryMissions(string _query)
+        {
+            List<short> missions = new();
+            try
+            {
+                using (var command = new SqliteCommand(_query, Connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            LevelData level = new()
+                            {
+                                level = reader.GetInt16(reader.GetOrdinal("level")),
+                                teamMin = reader.GetInt16(reader.GetOrdinal("team_min")),
+                                teamMax = reader.GetInt16(reader.GetOrdinal("team_max")),
+                                pvpMin = reader.GetInt16(reader.GetOrdinal("pvp_min")),
+                                pvpMax = reader.GetInt16(reader.GetOrdinal("pvp_max")),
+                                xpToLevel = reader.GetInt32(reader.GetOrdinal("xpsk")),
+                                tokens = reader.GetInt16(reader.GetOrdinal("tokens")),
+                                missions = reader.GetString(reader.GetOrdinal("missions")),
+                            };
+                            missions.Add(reader.GetInt16(reader.GetOrdinal("level")));
+                        }
+                    }
+                }
+            }
+            catch (SqliteException _ex)
+            {
+                Debug.WriteLine(_ex);
+            }
+            return missions;
         }
     }
 }

@@ -55,7 +55,7 @@ namespace PRKHelper.Helpbot.Components
             return 1;
         }
 
-        static string TranslateSlotName(string _string)
+        private string TranslateSlotName(string _string)
         {
             Dictionary<string, string> slots = new Dictionary<string, string>()
             {
@@ -77,12 +77,12 @@ namespace PRKHelper.Helpbot.Components
             else
                 return _string;
         }
-        static void LoadItems()
+        private void LoadItems()
         {
             DB.InsertSQLFile(Path.GetDirectoryName(Application.ExecutablePath) + "\\Helpbot\\SQL\\Symbiants.sql");
         }
 
-        static List<(string, AOItem)> GetSymbiantsByName(string[] _name)
+        private List<(string, AOItem)> GetSymbiantsByName(string[] _name)
         {
             string likeString = $"LIKE '%{_name[0]}%'";
             for (int i = 1; i < _name.Length; i++)

@@ -62,24 +62,30 @@
         {
             int statusCode = 1; // -1 for error 1 for success
             LevelData data = GetLevel(int.Parse(_params[0]));
+            string[] missions = data.missions.Split(",");
 
-            OutputStrings[0] = $"<a href=\"text://Level Ranges for {data.level}";
-            OutputStrings[0] += $"{Indent} {HighlightColor}Team Ranges{EndColor}<br>{Indent}{Indent}Min: {ValueColor}{data.teamMin}{EndColor} Max: {ValueColor}{data.teamMax}{EndColor}<br><br>";
-            OutputStrings[0] += $"{Indent} {RedColor}PvP Ranges{EndColor}<br>{Indent}{Indent}Min: {ValueColor}{data.pvpMin}{EndColor} Max: {ValueColor}{data.pvpMax}{EndColor}<br><br>";
-            OutputStrings[0] += $"{Indent} Missions: {ValueColor}{data.missions}{EndColor}";
+            OutputStrings[0] = $"<a href=\"text://Data for Level {ValueColor}{data.level}{EndColor}<br><br>";
+            OutputStrings[0] += $"Tokens - {ValueColor}{data.tokens}{EndColor}<br><br>";
+            OutputStrings[0] += $"{Indent} {HighlightColor}Team{EndColor}<br>{Indent}{Indent}{Indent}Min: {ValueColor}{data.teamMin}{EndColor} {HighlightColor}|{EndColor} Max: {ValueColor}{data.teamMax}{EndColor}<br><br>";
+            OutputStrings[0] += $"{Indent} {RedColor}PvP{EndColor}<br>{Indent}{Indent}{Indent}Min: {ValueColor}{data.pvpMin}{EndColor} {RedColor}|{EndColor} Max: {ValueColor}{data.pvpMax}{EndColor}<br><br><br>";
+            OutputStrings[0] += $"Missions - |";
+            foreach(string mission in missions)
+            {
+                OutputStrings[0] += $"{ValueColor}{mission}{EndColor}|";
+            }
             OutputStrings[0] += $"\">Level Ranges for {data.level}</a>";
 
 
             // Route() will return a generic failure if value here is -1.
             return statusCode;
         }
-        static LevelData GetLevel(int _level)
+        private LevelData GetLevel(int _level)
         {
-            string query = $"SELECT * FROM Levels ORDER BY column_name LIMIT 1 OFFSET {_level-1};";
+            string query = $"SELECT * FROM Levels ORDER BY level LIMIT 1 OFFSET {_level-1};";
 
             return DB.QueryLevel(query);
         }
-            static void LoadItems()
+        private void LoadItems()
         {
             DB.InsertSQLFile(Path.GetDirectoryName(Application.ExecutablePath) + "\\Helpbot\\SQL\\Levels.sql");
         }

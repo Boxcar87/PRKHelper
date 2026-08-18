@@ -27,7 +27,7 @@ namespace PRKHelper.Helpbot.Components
             //Style input string         
             string pattern = @"[+\-*/%()]";
 
-            OutputStrings[0] = $"Equation: {TextColor}";
+            OutputStrings[0] = $"{TextColor}Equation: ";
 
             //Preliminary size check
 
