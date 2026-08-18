@@ -19,7 +19,7 @@
             Directory.CreateDirectory(Path.Combine(_scriptsFolderPath, "PRKHelp"));
             ScriptOutputFile = Path.Combine(_scriptsFolderPath, "PRKHelp/Output");
             // Generate script file if it doesnt exist
-            using (FileStream scriptStream = new(ScriptOutputFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite)) { }
+            using (FileStream scriptStream = new(ScriptOutputFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite)) {}
             // Generate chat item link file
             using (FileStream itemLinkStream = new(Path.Combine(_scriptsFolderPath, "PRKHelp/Itemlink"), FileMode.Create, FileAccess.Write, FileShare.Write))
             {
