@@ -23,7 +23,7 @@
         // Returning true cause Process handles orienting the parameters
         public override (int, string) ValidateParams(string[] _params)
         {
-            ParamSyntax = $"/item 100 item name";
+            ParamSyntax = $"/itemfind 100 item name";
             return (1, "true");
         }
         public override int Process(string[] _params)
@@ -70,7 +70,7 @@
                 OutputStrings[page] += $"{BuildItemRef(item.lowid, item.highid, localQl, item.name)} [{localQl}] [{BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} - {BuildItemRef(item.lowid, item.highid, item.highql, item.highql.ToString())}]<br>";
                 OutputStrings[page] += $"Link to chat - QL {localQl} <a href='chatcmd:///PRKHelp/Itemlink {item.lowid} {item.highid} {localQl} {cleanName}'>[->]</a><br><br>";
 
-                if (OutputStrings[page].Length > 3500)
+                if (OutputStrings[page].Length > 3600)
                 {
                     OutputStrings[page] += $"\">Item Search Results ({pageFirstItem} - {pageItem} of {items.Count})</a>";
                     OutputStrings.Add($"<a href=\"text://{HighlightColor}Item Search Results ({pageFirstItem} - {pageItem} of {items.Count}){EndColor}<br><br>");

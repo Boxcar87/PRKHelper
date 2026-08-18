@@ -46,20 +46,20 @@ namespace PRKHelp
             button4 = new Button();
             settingsBox = new Panel();
             activeWindow = new Panel();
-            button5 = new Button();
-            richTextBox6 = new RichTextBox();
-            petNameInput = new TextBox();
             exitButton = new Button();
-            selectCharacterButton = new Button();
-            xpReset = new Button();
-            xpToggle = new Button();
-            damageReset = new Button();
-            damageToggle = new Button();
-            xpAmount = new RichTextBox();
-            damageAmount = new RichTextBox();
-            richTextBox5 = new RichTextBox();
-            richTextBox4 = new RichTextBox();
+            button5 = new Button();
             activeCharacter = new RichTextBox();
+            richTextBox4 = new RichTextBox();
+            richTextBox5 = new RichTextBox();
+            damageAmount = new RichTextBox();
+            xpAmount = new RichTextBox();
+            damageToggle = new Button();
+            damageReset = new Button();
+            xpToggle = new Button();
+            xpReset = new Button();
+            selectCharacterButton = new Button();
+            petNameInput = new TextBox();
+            richTextBox6 = new RichTextBox();
             settingsBox.SuspendLayout();
             activeWindow.SuspendLayout();
             SuspendLayout();
@@ -252,41 +252,6 @@ namespace PRKHelp
             activeWindow.Size = new Size(329, 341);
             activeWindow.TabIndex = 15;
             // 
-            // button5
-            // 
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.ForeColor = Color.MistyRose;
-            button5.Location = new Point(267, 2);
-            button5.Name = "button5";
-            button5.Size = new Size(59, 23);
-            button5.TabIndex = 21;
-            button5.Text = "Hide";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
-            // 
-            // richTextBox6
-            // 
-            richTextBox6.BackColor = Color.FromArgb(95, 81, 115);
-            richTextBox6.BorderStyle = BorderStyle.None;
-            richTextBox6.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            richTextBox6.ForeColor = Color.SlateGray;
-            richTextBox6.Location = new Point(15, 69);
-            richTextBox6.Name = "richTextBox6";
-            richTextBox6.ReadOnly = true;
-            richTextBox6.Size = new Size(59, 20);
-            richTextBox6.TabIndex = 20;
-            richTextBox6.Text = "Pet name";
-            // 
-            // petNameInput
-            // 
-            petNameInput.BackColor = Color.FromArgb(95, 81, 115);
-            petNameInput.BorderStyle = BorderStyle.FixedSingle;
-            petNameInput.ForeColor = Color.Gainsboro;
-            petNameInput.Location = new Point(80, 66);
-            petNameInput.Name = "petNameInput";
-            petNameInput.Size = new Size(94, 23);
-            petNameInput.TabIndex = 19;
-            // 
             // exitButton
             // 
             exitButton.Dock = DockStyle.Bottom;
@@ -300,65 +265,71 @@ namespace PRKHelp
             exitButton.UseVisualStyleBackColor = true;
             exitButton.Click += OpenSettingsWindow;
             // 
-            // selectCharacterButton
+            // button5
             // 
-            selectCharacterButton.FlatStyle = FlatStyle.Flat;
-            selectCharacterButton.ForeColor = Color.LightCyan;
-            selectCharacterButton.Location = new Point(185, 37);
-            selectCharacterButton.Name = "selectCharacterButton";
-            selectCharacterButton.Size = new Size(131, 23);
-            selectCharacterButton.TabIndex = 17;
-            selectCharacterButton.Text = "Select New Char";
-            selectCharacterButton.UseVisualStyleBackColor = true;
-            selectCharacterButton.Click += OpenSettingsWindow;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.ForeColor = Color.MistyRose;
+            button5.Location = new Point(267, 2);
+            button5.Name = "button5";
+            button5.Size = new Size(59, 23);
+            button5.TabIndex = 21;
+            button5.Text = "Hide";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
             // 
-            // xpReset
+            // activeCharacter
             // 
-            xpReset.FlatStyle = FlatStyle.Flat;
-            xpReset.ForeColor = Color.LightCyan;
-            xpReset.Location = new Point(261, 148);
-            xpReset.Name = "xpReset";
-            xpReset.Size = new Size(55, 23);
-            xpReset.TabIndex = 16;
-            xpReset.Text = "Reset";
-            xpReset.UseVisualStyleBackColor = true;
-            xpReset.Click += ResetXPTracking;
+            activeCharacter.BackColor = Color.FromArgb(95, 81, 115);
+            activeCharacter.BorderStyle = BorderStyle.None;
+            activeCharacter.Font = new Font("Verdana", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            activeCharacter.ForeColor = Color.CornflowerBlue;
+            activeCharacter.Location = new Point(15, 37);
+            activeCharacter.Name = "activeCharacter";
+            activeCharacter.ReadOnly = true;
+            activeCharacter.Size = new Size(209, 26);
+            activeCharacter.TabIndex = 8;
+            activeCharacter.Text = "CharacterName";
             // 
-            // xpToggle
+            // richTextBox4
             // 
-            xpToggle.FlatStyle = FlatStyle.Flat;
-            xpToggle.ForeColor = Color.MediumSpringGreen;
-            xpToggle.Location = new Point(185, 148);
-            xpToggle.Name = "xpToggle";
-            xpToggle.Size = new Size(55, 23);
-            xpToggle.TabIndex = 15;
-            xpToggle.Text = "Start";
-            xpToggle.UseVisualStyleBackColor = true;
-            xpToggle.Click += ToggleXPTracking;
+            richTextBox4.BackColor = Color.FromArgb(95, 81, 115);
+            richTextBox4.BorderStyle = BorderStyle.None;
+            richTextBox4.Font = new Font("Verdana", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richTextBox4.ForeColor = Color.Cyan;
+            richTextBox4.Location = new Point(113, 109);
+            richTextBox4.Name = "richTextBox4";
+            richTextBox4.ReadOnly = true;
+            richTextBox4.Size = new Size(61, 20);
+            richTextBox4.TabIndex = 9;
+            richTextBox4.Text = "Dmg/m";
             // 
-            // damageReset
+            // richTextBox5
             // 
-            damageReset.FlatStyle = FlatStyle.Flat;
-            damageReset.ForeColor = Color.LightCyan;
-            damageReset.Location = new Point(261, 105);
-            damageReset.Name = "damageReset";
-            damageReset.Size = new Size(55, 23);
-            damageReset.TabIndex = 14;
-            damageReset.Text = "Reset";
-            damageReset.UseVisualStyleBackColor = true;
-            damageReset.Click += ResetDamageTracking;
+            richTextBox5.BackColor = Color.FromArgb(95, 81, 115);
+            richTextBox5.BorderStyle = BorderStyle.None;
+            richTextBox5.Font = new Font("Verdana", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richTextBox5.ForeColor = Color.Yellow;
+            richTextBox5.Location = new Point(113, 152);
+            richTextBox5.Name = "richTextBox5";
+            richTextBox5.ReadOnly = true;
+            richTextBox5.Size = new Size(61, 19);
+            richTextBox5.TabIndex = 10;
+            richTextBox5.Text = "XP/h";
             // 
-            // damageToggle
+            // damageAmount
             // 
-            damageToggle.FlatStyle = FlatStyle.Flat;
-            damageToggle.ForeColor = Color.MediumSpringGreen;
-            damageToggle.Location = new Point(185, 105);
-            damageToggle.Name = "damageToggle";
-            damageToggle.Size = new Size(55, 23);
-            damageToggle.TabIndex = 13;
-            damageToggle.Text = "Start";
-            damageToggle.UseVisualStyleBackColor = true;
-            damageToggle.Click += ToggleDamageTracking;
+            damageAmount.BackColor = Color.FromArgb(95, 81, 115);
+            damageAmount.BorderStyle = BorderStyle.None;
+            damageAmount.Font = new Font("Verdana", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            damageAmount.ForeColor = Color.Cyan;
+            damageAmount.Location = new Point(-3, 105);
+            damageAmount.Name = "damageAmount";
+            damageAmount.ReadOnly = true;
+            damageAmount.RightToLeft = RightToLeft.Yes;
+            damageAmount.ScrollBars = RichTextBoxScrollBars.None;
+            damageAmount.Size = new Size(97, 29);
+            damageAmount.TabIndex = 11;
+            damageAmount.Text = "444,444";
             // 
             // xpAmount
             // 
@@ -376,59 +347,88 @@ namespace PRKHelp
             xpAmount.Text = "888.68M";
             xpAmount.TextChanged += xpAmount_TextChanged;
             // 
-            // damageAmount
+            // damageToggle
             // 
-            damageAmount.BackColor = Color.FromArgb(95, 81, 115);
-            damageAmount.BorderStyle = BorderStyle.None;
-            damageAmount.Font = new Font("Verdana", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            damageAmount.ForeColor = Color.Cyan;
-            damageAmount.Location = new Point(-3, 105);
-            damageAmount.Name = "damageAmount";
-            damageAmount.ReadOnly = true;
-            damageAmount.RightToLeft = RightToLeft.Yes;
-            damageAmount.ScrollBars = RichTextBoxScrollBars.None;
-            damageAmount.Size = new Size(97, 29);
-            damageAmount.TabIndex = 11;
-            damageAmount.Text = "444,444";
+            damageToggle.FlatStyle = FlatStyle.Flat;
+            damageToggle.ForeColor = Color.MediumSpringGreen;
+            damageToggle.Location = new Point(185, 105);
+            damageToggle.Name = "damageToggle";
+            damageToggle.Size = new Size(55, 23);
+            damageToggle.TabIndex = 13;
+            damageToggle.Text = "Start";
+            damageToggle.UseVisualStyleBackColor = true;
+            damageToggle.Click += ToggleDamageTracking;
             // 
-            // richTextBox5
+            // damageReset
             // 
-            richTextBox5.BackColor = Color.FromArgb(95, 81, 115);
-            richTextBox5.BorderStyle = BorderStyle.None;
-            richTextBox5.Font = new Font("Verdana", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            richTextBox5.ForeColor = Color.Yellow;
-            richTextBox5.Location = new Point(113, 152);
-            richTextBox5.Name = "richTextBox5";
-            richTextBox5.ReadOnly = true;
-            richTextBox5.Size = new Size(61, 19);
-            richTextBox5.TabIndex = 10;
-            richTextBox5.Text = "XP/h";
+            damageReset.FlatStyle = FlatStyle.Flat;
+            damageReset.ForeColor = Color.LightCyan;
+            damageReset.Location = new Point(261, 105);
+            damageReset.Name = "damageReset";
+            damageReset.Size = new Size(55, 23);
+            damageReset.TabIndex = 14;
+            damageReset.Text = "Reset";
+            damageReset.UseVisualStyleBackColor = true;
+            damageReset.Click += ResetDamageTracking;
             // 
-            // richTextBox4
+            // xpToggle
             // 
-            richTextBox4.BackColor = Color.FromArgb(95, 81, 115);
-            richTextBox4.BorderStyle = BorderStyle.None;
-            richTextBox4.Font = new Font("Verdana", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            richTextBox4.ForeColor = Color.Cyan;
-            richTextBox4.Location = new Point(113, 109);
-            richTextBox4.Name = "richTextBox4";
-            richTextBox4.ReadOnly = true;
-            richTextBox4.Size = new Size(61, 20);
-            richTextBox4.TabIndex = 9;
-            richTextBox4.Text = "Dmg/m";
+            xpToggle.FlatStyle = FlatStyle.Flat;
+            xpToggle.ForeColor = Color.MediumSpringGreen;
+            xpToggle.Location = new Point(185, 148);
+            xpToggle.Name = "xpToggle";
+            xpToggle.Size = new Size(55, 23);
+            xpToggle.TabIndex = 15;
+            xpToggle.Text = "Start";
+            xpToggle.UseVisualStyleBackColor = true;
+            xpToggle.Click += ToggleXPTracking;
             // 
-            // activeCharacter
+            // xpReset
             // 
-            activeCharacter.BackColor = Color.FromArgb(95, 81, 115);
-            activeCharacter.BorderStyle = BorderStyle.None;
-            activeCharacter.Font = new Font("Verdana", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            activeCharacter.ForeColor = Color.CornflowerBlue;
-            activeCharacter.Location = new Point(15, 37);
-            activeCharacter.Name = "activeCharacter";
-            activeCharacter.ReadOnly = true;
-            activeCharacter.Size = new Size(209, 26);
-            activeCharacter.TabIndex = 8;
-            activeCharacter.Text = "CharacterName";
+            xpReset.FlatStyle = FlatStyle.Flat;
+            xpReset.ForeColor = Color.LightCyan;
+            xpReset.Location = new Point(261, 148);
+            xpReset.Name = "xpReset";
+            xpReset.Size = new Size(55, 23);
+            xpReset.TabIndex = 16;
+            xpReset.Text = "Reset";
+            xpReset.UseVisualStyleBackColor = true;
+            xpReset.Click += ResetXPTracking;
+            // 
+            // selectCharacterButton
+            // 
+            selectCharacterButton.FlatStyle = FlatStyle.Flat;
+            selectCharacterButton.ForeColor = Color.LightCyan;
+            selectCharacterButton.Location = new Point(185, 37);
+            selectCharacterButton.Name = "selectCharacterButton";
+            selectCharacterButton.Size = new Size(131, 23);
+            selectCharacterButton.TabIndex = 17;
+            selectCharacterButton.Text = "Select New Char";
+            selectCharacterButton.UseVisualStyleBackColor = true;
+            selectCharacterButton.Click += OpenSettingsWindow;
+            // 
+            // petNameInput
+            // 
+            petNameInput.BackColor = Color.FromArgb(95, 81, 115);
+            petNameInput.BorderStyle = BorderStyle.FixedSingle;
+            petNameInput.ForeColor = Color.Gainsboro;
+            petNameInput.Location = new Point(80, 66);
+            petNameInput.Name = "petNameInput";
+            petNameInput.Size = new Size(94, 23);
+            petNameInput.TabIndex = 19;
+            // 
+            // richTextBox6
+            // 
+            richTextBox6.BackColor = Color.FromArgb(95, 81, 115);
+            richTextBox6.BorderStyle = BorderStyle.None;
+            richTextBox6.Font = new Font("Verdana", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            richTextBox6.ForeColor = Color.SlateGray;
+            richTextBox6.Location = new Point(15, 69);
+            richTextBox6.Name = "richTextBox6";
+            richTextBox6.ReadOnly = true;
+            richTextBox6.Size = new Size(59, 20);
+            richTextBox6.TabIndex = 20;
+            richTextBox6.Text = "Pet name";
             // 
             // FormUI
             // 
@@ -467,20 +467,20 @@ namespace PRKHelp
         private Button button4;
         private Panel settingsBox;
         private Panel activeWindow;
-        private RichTextBox activeCharacter;
+        private Button button5;
+        private RichTextBox richTextBox6;
+        private TextBox petNameInput;
+        private Button exitButton;
+        private Button selectCharacterButton;
+        private Button xpReset;
+        private Button xpToggle;
+        private Button damageReset;
+        private Button damageToggle;
         private RichTextBox xpAmount;
         private RichTextBox damageAmount;
         private RichTextBox richTextBox5;
         private RichTextBox richTextBox4;
-        private Button damageReset;
-        private Button damageToggle;
-        private Button selectCharacterButton;
-        private Button xpReset;
-        private Button xpToggle;
-        private Button exitButton;
-        private RichTextBox richTextBox6;
-        private TextBox petNameInput;
-        private Button button5;
+        private RichTextBox activeCharacter;
         //private FileSystemWatcher Watcher;
     }
 }

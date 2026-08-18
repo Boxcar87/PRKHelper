@@ -22,6 +22,8 @@ namespace PRKHelper.Helpbot
             Components.Add("trickle", new Trickle(DB));
             Components.Add("symbiant", new Symbiant(DB));
             Components.Add("pocketboss", new PB(DB));
+            Components.Add("level", new Level(DB));
+            Components.Add("mission", new Mission(DB));
             Components.Add("timer", gameTimers);
             Components.Add("timers", gameTimers);
         }
