@@ -313,6 +313,31 @@ namespace PRKHelp
             }
 
         }
+        void DMG_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.drag = false;
+            // Update user settings with window position
+            SettingsManager.UpdateWindowPosition(this.Top, this.Left-145);
+        }
+
+        void DMG_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.startPoint = e.Location;
+            this.drag = true;
+        }
+
+        void DMG_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.drag)
+            {
+                Point p1 = new Point(e.X, e.Y);
+                Point p2 = this.PointToScreen(p1);
+                Point p3 = new Point(p2.X - this.startPoint.X,
+                                     p2.Y - this.startPoint.Y);
+                this.Location = p3;
+            }
+
+        }
 
         void WireMouseEvents(Control container)
         {
@@ -321,9 +346,9 @@ namespace PRKHelp
                 if (c is Button || c is TextBox)
                     continue;
 
-                c.MouseUp += (s, e) => Title_MouseUp(s, e);
-                c.MouseDown += (s, e) => Title_MouseDown(s, e);
-                c.MouseMove += (s, e) => Title_MouseMove(s, e);
+                c.MouseUp += (s, e) => DMG_MouseUp(s, e);
+                c.MouseDown += (s, e) => DMG_MouseDown(s, e);
+                c.MouseMove += (s, e) => DMG_MouseMove(s, e);
 
                 WireMouseEvents(c);
             };

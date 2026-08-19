@@ -317,7 +317,7 @@ namespace PRKHelp
             // 
             combatLogControlsContainer.BackColor = Color.Transparent;
             combatLogControlsContainer.Controls.Add(combatLogTextContainer);
-            combatLogControlsContainer.Controls.Add(combatPathButton);
+            combatLogControlsContainer.Controls.Add(chatLogButton);
             combatLogControlsContainer.Dock = DockStyle.Top;
             combatLogControlsContainer.Location = new Point(0, 202);
             combatLogControlsContainer.Name = "combatLogControlsContainer";
@@ -348,7 +348,7 @@ namespace PRKHelp
             // 
             chatLogControlsContainer.BackColor = Color.Transparent;
             chatLogControlsContainer.Controls.Add(chatFileTextContainer);
-            chatLogControlsContainer.Controls.Add(chatLogButton);
+            chatLogControlsContainer.Controls.Add(combatPathButton);
             chatLogControlsContainer.Dock = DockStyle.Top;
             chatLogControlsContainer.Location = new Point(0, 144);
             chatLogControlsContainer.Name = "chatLogControlsContainer";
