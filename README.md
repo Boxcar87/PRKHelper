@@ -57,4 +57,8 @@ Path settings will persist otherwise
 ### /timers
 <img width="452" height="403" alt="{0CA619F7-3C77-4A19-9C04-B8F686BE95EF}" src="https://github.com/user-attachments/assets/6c900886-f427-4d05-9eb1-88862db7861f" />
 
+### /level level
+<img width="415" height="544" alt="{CA949F60-2E43-4B02-9899-DCC5DE5E3EC4}" src="https://github.com/user-attachments/assets/5aec9251-d608-40f3-bb2f-330b1ee37122" />
 
+### /mission level
+<img width="608" height="62" alt="{BD17DD3F-4E8A-4C61-AA27-08E31BF9AB77}" src="https://github.com/user-attachments/assets/2f639bc5-7894-411f-98da-493f0aee97fe" />
