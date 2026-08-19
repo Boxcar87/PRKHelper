@@ -1,4 +1,4 @@
-<img width="486" height="391" alt="{DCB0F8BB-57E9-458C-920F-085E6FF245C7}" src="https://github.com/user-attachments/assets/93a42c57-eb2b-40f5-989a-a4191c171a29" />
+<img width="482" height="388" alt="{C6F5DB25-A681-4D05-BAC8-2C5F1DA4DD7A}" src="https://github.com/user-attachments/assets/46428bb6-de8d-46e4-b649-4eeb6bee88dd" />
 
 You can build the solution yourself or download the zipped executable on the right under [Releases](https://github.com/Boxcar87/PRKHelp/releases/latest)
 
