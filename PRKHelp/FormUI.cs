@@ -163,7 +163,9 @@ namespace PRKHelp
             SettingsManager.UpdateLastSelectedCharacter(SelectedCharacter);
             ScriptManager.Init(ScriptsFolderPath);
             this.MinimumSize = new Size(330, 275);
-            this.Size = new Size(330, 275);
+            this.Size = new Size(330, 275);            
+            this.Location = new Point(this.Left+145, this.Top);
+
             settingsBox.Visible = false;
             activeWindow.Visible = true;
             TopMost = true;
@@ -203,6 +205,7 @@ namespace PRKHelp
             FormBorderStyle = FormBorderStyle.None;
             this.MinimumSize = new Size(475, 380);
             this.Size = new Size(475, 380);
+            this.Location = new Point(this.Left - 145, this.Top);
             //Tell Tracker to stop watching
         }
 
