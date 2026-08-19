@@ -11,6 +11,8 @@ The flagship feature of PRKHelper is being able to post items and PB loot tables
 
 Planned features: Symbiant wishlist tracker, "Shop" advertisement script generator.
 
+### Setup
+
 Step 1: Create a new chat window in Anarchy online and enable Vicinity messages to it (Shift+C)
 
 Step 2: "Log messages" of that window (right click its name)
