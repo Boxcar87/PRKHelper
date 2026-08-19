@@ -2,6 +2,13 @@
 
 You can build the solution yourself or download the zipped executable on the right under [Releases](https://github.com/Boxcar87/PRKHelp/releases/latest)
 
+PRKHelper does not inject into AO, it works by reading logfiles. The premise is that you setup a new chat window which logs vicinity messages and then the program reads commands from vicinity that being with a !.
+The commands are sent via /whisper which has a very low range so conflicting messages between users is highly unlikely. The results themselves are echod to you so only you can see them. 
+
+The flagship feature of PRKHelper are being able to post items directly to chat. Items, symbiants, and pbs are all supported as well.
+
+Planned features: Symbiant wishlist tracker, "Shop" advertisement script generator.
+
 Step 1: Create a new chat window in Anarchy online and enable Vicinity messages to it (Shift+C)
 
 Step 2: "Log messages" of that window (right click its name)
