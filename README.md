@@ -1,3 +1,5 @@
+PRKHelper has a lot of moving parts and is not fully tested out. If you run into issues please make a note of them here. The way the bot with "break" is that it will regurgitate your previous script output instead of generating a new one.
+
 <img width="481" height="385" alt="{865EB111-C2C2-4EA5-9D4E-7A524F9A8D4C}" src="https://github.com/user-attachments/assets/174af59b-26a1-412e-bb8a-abad7f391097" />
 
 You can build the solution yourself or download the zipped executable on the right under [Releases](https://github.com/Boxcar87/PRKHelp/releases/latest)
