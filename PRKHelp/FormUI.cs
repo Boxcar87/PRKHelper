@@ -28,7 +28,7 @@ namespace PRKHelp
             SelectedCharacter = SettingsManager.GetLastSelectedCharacter();
             characterSelect.Text = SelectedCharacter;
             if (SelectedCharacter == String.Empty)
-                characterSelect.Text = "Select Character";
+                characterSelect.Text = "Type to add new..";
 
             ScriptsFolderPath = SettingsManager.GetScriptsPath();
             if (ScriptsFolderPath.Length > 0)

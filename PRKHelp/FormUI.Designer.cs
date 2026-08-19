@@ -254,6 +254,7 @@ namespace PRKHelp
             characterSelect.Name = "characterSelect";
             characterSelect.Size = new Size(181, 23);
             characterSelect.TabIndex = 12;
+            characterSelect.Text = "Type to add new..";
             characterSelect.SelectedIndexChanged += CharacterSelected;
             // 
             // addCharacterButton
