@@ -25,13 +25,6 @@ Step 6: Hit confirm
 
 Step 7: Use commands as shown below
 
-
-Timer will not let you know when it expires, sorry :)
-
-You will have to select a new log file for each new character every time you open PRKHelp
-
-Path settings will persist otherwise
-
 /items and /item are reserved commands it seems, sorry. Went with /itemfind as a hopefully acceptable substitute. QL is optional.
 /pb can take a pattern piece as input for search
 
