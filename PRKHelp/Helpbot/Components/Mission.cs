@@ -51,7 +51,7 @@ namespace PRKHelper.Helpbot.Components
             int statusCode = 1; // -1 for error 1 for success
 
             OutputStrings[0] = $"{TextColor}Mission level{EndColor} {_params[0]} {TextColor}can be rolled by levels |{EndColor}";
-            foreach(short level in GetLevels(int.Parse(_params[0])))
+            foreach (short level in GetLevels(int.Parse(_params[0])))
             {
                 OutputStrings[0] += $"{ValueColor}{level}{EndColor}{TextColor}|{EndColor}";
             }
@@ -62,7 +62,7 @@ namespace PRKHelper.Helpbot.Components
 
         private List<short> GetLevels(int _mission)
         {
-            string query = $"SELECT * FROM Levels WHERE missions LIKE '%{_mission}%'";
+            string query = $"SELECT * FROM Levels WHERE missions LIKE '%,{_mission},%'";
 
             return DB.QueryMissions(query);
         }

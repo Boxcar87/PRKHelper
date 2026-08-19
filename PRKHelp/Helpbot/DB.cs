@@ -237,17 +237,6 @@ namespace PRKHelper.Helpbot
                     {
                         while (reader.Read())
                         {
-                            LevelData level = new()
-                            {
-                                level = reader.GetInt16(reader.GetOrdinal("level")),
-                                teamMin = reader.GetInt16(reader.GetOrdinal("team_min")),
-                                teamMax = reader.GetInt16(reader.GetOrdinal("team_max")),
-                                pvpMin = reader.GetInt16(reader.GetOrdinal("pvp_min")),
-                                pvpMax = reader.GetInt16(reader.GetOrdinal("pvp_max")),
-                                xpToLevel = reader.GetInt32(reader.GetOrdinal("xpsk")),
-                                tokens = reader.GetInt16(reader.GetOrdinal("tokens")),
-                                missions = reader.GetString(reader.GetOrdinal("missions")),
-                            };
                             missions.Add(reader.GetInt16(reader.GetOrdinal("level")));
                         }
                     }
