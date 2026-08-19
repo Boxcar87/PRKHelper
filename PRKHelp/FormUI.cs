@@ -1,5 +1,6 @@
 
 using System.Diagnostics;
+using System.IO;
 using PRKHelp.Settings;
 using PRKHelper.Helpbot;
 using PRKHelper.Parser;
@@ -20,6 +21,9 @@ namespace PRKHelp
         public FormUI()
         {
             InitializeComponent();
+            (int top, int left) = SettingsManager.GetWindowPosition();
+            StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(left, top);
             activeWindow.Visible = false;
             SelectedCharacter = SettingsManager.GetLastSelectedCharacter();
             characterSelect.Text = SelectedCharacter;
@@ -44,6 +48,7 @@ namespace PRKHelp
                 characterSelect.Items.Add(character);
             }
             CombatParser = new CombatParser(damageAmount, xpAmount);
+            WireMouseEvents(activeWindow);
         }
 
         private void AddNewCharacter(object sender, EventArgs e)
@@ -84,7 +89,7 @@ namespace PRKHelp
                     LogFilePath = openFileDialog.FileName;
                     SettingsManager.UpdateFilePath(LogFilePath, "LogFilePath", SelectedCharacter);
                     string truncated = LogFilePath[PathPRK.Length..];
-                    filePathText.Text = "..AO" + truncated;
+                    chatFilePathText.Text = "..AO" + truncated;
                 }
             }
         }
@@ -133,10 +138,10 @@ namespace PRKHelp
             if (LogFilePath.Length > 0)
             {
                 string truncatedFile = LogFilePath[PathPRK.Length..];
-                filePathText.Text = "..AO" + truncatedFile;
+                chatFilePathText.Text = "..AO" + truncatedFile;
             }
             else
-                filePathText.Text = "";
+                chatFilePathText.Text = "";
             if (LogCombatFilePath.Length > 0)
             {
                 string truncatedFile = LogCombatFilePath[PathPRK.Length..];
@@ -157,14 +162,31 @@ namespace PRKHelp
 
             SettingsManager.UpdateLastSelectedCharacter(SelectedCharacter);
             ScriptManager.Init(ScriptsFolderPath);
-            this.Size = new Size(Width, 250);
+            this.MinimumSize = new Size(330, 275);
+            this.Size = new Size(330, 275);
             settingsBox.Visible = false;
             activeWindow.Visible = true;
             TopMost = true;
             TransparencyKey = BackColor;
             FormBorderStyle = FormBorderStyle.None;
-            CombatParser.UpdatePath(LogCombatFilePath);
-            using (FileStream fileStream = new(LogCombatFilePath, FileMode.Truncate, FileAccess.ReadWrite, FileShare.ReadWrite)) { }
+            if (LogCombatFilePath == "")
+            {
+                LogCombatFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PRKHelp\\DMGDummyFile.txt");
+                CombatParser.UpdatePath(LogCombatFilePath);
+                using (FileStream fileStream = new(LogCombatFilePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite)) { }
+            }
+            else if (!File.Exists(LogCombatFilePath))
+            {
+                LogCombatFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PRKHelp\\DMGDummyFile.txt");
+                CombatParser.UpdatePath(LogCombatFilePath);
+                using (FileStream fileStream = new(LogCombatFilePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite)) { }
+            }
+            else
+            {
+                CombatParser.UpdatePath(LogCombatFilePath);
+                using (FileStream fileStream = new(LogCombatFilePath, FileMode.Truncate, FileAccess.ReadWrite, FileShare.ReadWrite)) { }
+            }
+
             CombatParser.Run();
             SetTrackingUI();
 
@@ -178,8 +200,9 @@ namespace PRKHelp
             activeWindow.Visible = false;
             TopMost = false;
             TransparencyKey = Color.Empty;
-            FormBorderStyle = FormBorderStyle.Fixed3D;
-            this.Size = new Size(Width, 380);
+            FormBorderStyle = FormBorderStyle.None;
+            this.MinimumSize = new Size(475, 380);
+            this.Size = new Size(475, 380);
             //Tell Tracker to stop watching
         }
 
@@ -247,6 +270,60 @@ namespace PRKHelp
         private void button5_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void minimizeButton_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private bool drag = false;
+        private Point startPoint = new Point(0, 0);
+
+        void Title_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.drag = false;
+            // Update user settings with window position
+            SettingsManager.UpdateWindowPosition(this.Top, this.Left);
+        }
+
+        void Title_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.startPoint = e.Location;
+            this.drag = true;
+        }
+
+        void Title_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.drag)
+            {
+                Point p1 = new Point(e.X, e.Y);
+                Point p2 = this.PointToScreen(p1);
+                Point p3 = new Point(p2.X - this.startPoint.X,
+                                     p2.Y - this.startPoint.Y);
+                this.Location = p3;
+            }
+
+        }
+
+        void WireMouseEvents(Control container)
+        {
+            foreach (Control c in container.Controls)
+            {
+                if (c is Button || c is TextBox)
+                    continue;
+
+                c.MouseUp += (s, e) => Title_MouseUp(s, e);
+                c.MouseDown += (s, e) => Title_MouseDown(s, e);
+                c.MouseMove += (s, e) => Title_MouseMove(s, e);
+
+                WireMouseEvents(c);
+            };
         }
     }
 }

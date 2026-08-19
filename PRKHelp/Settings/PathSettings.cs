@@ -11,6 +11,8 @@
         public Dictionary<string, PathSettings> Characters { get; set; } = new Dictionary<string, PathSettings>();
         public string ScriptsPath { get; set; } = "";
         public string LastSelectedCharacter { get; set; } = "";
+        public int WindowPositionTop { get; set; } = 0;
+        public int WindowPositionLeft { get; set; } = 0;
     }
 }
 

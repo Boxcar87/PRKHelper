@@ -133,6 +133,30 @@ namespace PRKHelp.Settings
             }
         }
 
+        public static (int, int) GetWindowPosition()
+        {
+            Settings settings = GetSettings();
+            int top = (int)settings.GetType().GetProperty("WindowPositionTop").GetValue(settings);
+            int left = (int)settings.GetType().GetProperty("WindowPositionLeft").GetValue(settings);
+            return (top, left);
+        }
+
+        public static void UpdateWindowPosition(int _top, int _left)
+        {
+            Settings settings = GetSettings();
+            settings.GetType().GetProperty("WindowPositionTop").SetValue(settings, _top, null);
+            settings.GetType().GetProperty("WindowPositionLeft").SetValue(settings, _left, null);
+            string jsonString = "";
+            try
+            {
+                jsonString = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(Path.Combine(Settings, SettingsFile), jsonString);
+            }
+            catch (JsonException _ex)
+            {
+            }
+        }
+
         static Settings GetSettings()
         {
             if (!File.Exists(Path.Combine(Settings, SettingsFile)))
