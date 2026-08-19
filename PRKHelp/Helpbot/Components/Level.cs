@@ -62,14 +62,15 @@
         {
             int statusCode = 1; // -1 for error 1 for success
             LevelData data = GetLevel(int.Parse(_params[0]));
-            string[] missions = data.missions.Split(",");
+            string trimmed = data.missions[1..^1];
+            string[] missions = trimmed.Split(",");
 
             OutputStrings[0] = $"<a href=\"text://Data for Level {ValueColor}{data.level}{EndColor}<br><br>";
             OutputStrings[0] += $"Tokens - {ValueColor}{data.tokens}{EndColor}<br><br>";
             OutputStrings[0] += $"{Indent} {HighlightColor}Team{EndColor}<br>{Indent}{Indent}{Indent}Min: {ValueColor}{data.teamMin}{EndColor} {HighlightColor}|{EndColor} Max: {ValueColor}{data.teamMax}{EndColor}<br><br>";
             OutputStrings[0] += $"{Indent} {RedColor}PvP{EndColor}<br>{Indent}{Indent}{Indent}Min: {ValueColor}{data.pvpMin}{EndColor} {RedColor}|{EndColor} Max: {ValueColor}{data.pvpMax}{EndColor}<br><br><br>";
             OutputStrings[0] += $"Missions - |";
-            foreach(string mission in missions)
+            foreach (string mission in missions)
             {
                 OutputStrings[0] += $"{ValueColor}{mission}{EndColor}|";
             }
