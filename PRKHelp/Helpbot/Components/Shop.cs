@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Reflection;
 using System.Collections.Generic;
+using PRKHelp.Settings;
 
 namespace PRKHelper.Helpbot.Components
 {
@@ -50,7 +51,12 @@ namespace PRKHelper.Helpbot.Components
             int statusCode = -1;
             string statusMessage = "Invalid params";
 
-            if (_params.Length > 0)
+            if (_params.Length == 0)
+            {
+                statusCode = 1;
+                statusMessage = "Accepted";
+            }
+            else if (_params.Length > 0)
             {
                 if (_params[0] == "<a" || _params[0] == "add" && _params[1] == "<a")
                 {
@@ -62,26 +68,11 @@ namespace PRKHelper.Helpbot.Components
                     statusCode = 1;
                     statusMessage = "Accepted";
                 }
-
-                if (_params.Length == 3)
+                else if (_params[0] == "text")
                 {
-                    bool allInts = true;
-                    foreach (string param in _params)
-                    {
-                        bool isInt = int.TryParse(param, out statusCode);
-                        if (!isInt)
-                        {
-                            allInts = false;
-                            break;
-                        }
-                    }
-
-                    if (allInts)
-                    {
-                        statusCode = 1;
-                        statusMessage = "Accepted";
-                    }
-                }
+                    statusCode = 1;
+                    statusMessage = "Accepted";
+                }                
             }            
 
             return (statusCode, statusMessage);
@@ -98,7 +89,11 @@ namespace PRKHelper.Helpbot.Components
 
             string route = "";
 
-            if (_params[0] == "add" || _params[0] == "<a")
+            if (_params.Length == 0)
+            {
+                route = "view";
+            }
+            else if (_params[0] == "add" || _params[0] == "<a")
             {
                 route = "add";
                 if (_params[0] == "add")
@@ -106,7 +101,7 @@ namespace PRKHelper.Helpbot.Components
                     _params = _params[1..];
                 }
 
-                ShopItem newItem = ParseItem(string.Join(" ",_params));
+                ShopItem newItem = ParseItem(string.Join(" ", _params));
                 lowid = newItem.lowid;
                 highid = newItem.highid;
                 ql = newItem.ql;
@@ -119,12 +114,9 @@ namespace PRKHelper.Helpbot.Components
                 highid = int.Parse(_params[2]);
                 ql = int.Parse(_params[3]);
             }
-            else
+            else if (_params[0] == "text")
             {
-                route = "add";
-                lowid = int.Parse(_params[0]);
-                highid = int.Parse(_params[1]);
-                ql = int.Parse(_params[2]);
+                route = "text";
             }
 
             if (route == "add")
@@ -155,10 +147,35 @@ namespace PRKHelper.Helpbot.Components
                     ScriptManager.UpdateShop(shopText, editShopText);
                 }
             }
+            else if (route == "text")
+            {
+                _params = _params[1..];
+                string newText = string.Join(" ", _params);
+                OutputStrings[0] = $"{TextColor}Shop text updated - \'{newText}\'";
+                UpdateText(newText);
+            }
+            else if (route == "view")
+            {
+                Debug.WriteLine("view");
+                string editShopText = ViewEditShop();
+                OutputStrings[0] = $"{TextColor}View {editShopText}";
+            }
             
 
             // Route() will return a generic failure if value here is -1.
             return statusCode;
+        }
+
+        private string ViewEditShop()
+        {
+            (_, Dictionary<string, Dictionary<string, List<ShopItem>>> oldItems) = ReadShopItems();
+            (_, string editShopText) = GenerateNewShop(oldItems);
+            return editShopText;
+        }
+
+        private void UpdateText(string _message)
+        {
+            SettingsManager.UpdateShopMessage(_message);
         }
 
         private (int, string, string) RemoveFromShop(int lowid, int highid, int ql)
@@ -386,7 +403,8 @@ namespace PRKHelper.Helpbot.Components
 
         private (string, string) GenerateNewShop(Dictionary<string, Dictionary<string, List<ShopItem>>> _oldItems)
         {
-            string shopText = "<a href=\"text://";
+            string foreText = SettingsManager.GetShopMessage();
+            string shopText = $"{foreText} <a href=\"text://";
             string editShopText = "<a href=\"text://";
             if (_oldItems.ContainsKey("Weapons"))
             {
