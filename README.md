@@ -27,9 +27,8 @@ Step 6: Hit confirm
 
 Step 7: Use commands as shown below
 
-/items and /item are reserved commands it seems, sorry. Went with /itemfind as a hopefully acceptable substitute. QL is optional.
-/pb can take a pattern piece as input for search
 ## Shop script generator
+You can drag and drop items into your chat bar and create a persistent shop script. Limited to 15 items due to AO/PRK script size limitation. 
 ### /editshop add (drop item)
 <img width="535" height="418" alt="{A391CC16-F704-46E4-ABCF-52A7CFE58C3D}" src="https://github.com/user-attachments/assets/e9d5b24f-a726-466d-b822-458c2317b473" />
 
@@ -41,6 +40,9 @@ Step 7: Use commands as shown below
 
 
 ## General bot commands
+/items and /item are reserved commands it seems, sorry. Went with /itemfind as a hopefully acceptable substitute. QL is optional.
+/pb can take a pattern piece as input for search
+
 ### /symbiant and /pb 
 <img width="456" height="604" alt="{01A62B65-CAB8-4B4A-8281-CF790095CE4A}" src="https://github.com/user-attachments/assets/e240b0bd-18f7-4131-be14-ace05bd878b7" />
 
