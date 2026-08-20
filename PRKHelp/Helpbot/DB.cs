@@ -73,6 +73,34 @@ namespace PRKHelper.Helpbot
             }
             return items;
         }
+        public static AOItem QueryItemByIDs(string _query)
+        {
+            AOItem item = new AOItem();
+            try
+            {
+                using (var command = new SqliteCommand(_query, Connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            item.lowid = reader.GetInt32(reader.GetOrdinal("lowid"));
+                            item.highid = reader.GetInt32(reader.GetOrdinal("highid"));
+                            item.lowql = reader.GetInt32(reader.GetOrdinal("lowql"));
+                            item.highql = reader.GetInt32(reader.GetOrdinal("highql"));
+                            item.name = reader.GetString(reader.GetOrdinal("name"));
+                            item.type = reader.GetInt32(reader.GetOrdinal("class"));
+                            item.name = item.name.Replace("\"", "\\\"");
+                        }
+                    }
+                }
+            }
+            catch (SqliteException _ex)
+            {
+                Debug.WriteLine(_ex);
+            }
+            return item;
+        }
 
         public static Dictionary<string, Dictionary<string, float>> QueryTrickle(string _query)
         {

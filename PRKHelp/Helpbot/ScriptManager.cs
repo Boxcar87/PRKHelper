@@ -1,12 +1,16 @@
-﻿namespace PRKHelp
+﻿using System.Threading.Channels;
+
+namespace PRKHelp
 {
     internal class ScriptManager
     {
         static string ScriptOutputFile;
+        public static string ScriptFolder;
         static int ExecutionDelay = 1500;
 
         public static void Init(string _scriptsFolderPath)
         {
+            ScriptFolder = _scriptsFolderPath;
             // This exists to automatically clean up old versions of script generation pathing
             string PRKPath = Path.Combine(_scriptsFolderPath, "PRKHelp");
             if (File.Exists(PRKPath)) // This checks if a file exists at the path
@@ -19,7 +23,9 @@
             Directory.CreateDirectory(Path.Combine(_scriptsFolderPath, "PRKHelp"));
             ScriptOutputFile = Path.Combine(_scriptsFolderPath, "PRKHelp/Output");
             // Generate script file if it doesnt exist
-            using (FileStream scriptStream = new(ScriptOutputFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite)) {}
+            using (FileStream scriptStream = new(ScriptOutputFile, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite)) { }
+            // Generate shop script file if it doesnt exist
+            using (FileStream scriptStream = new(Path.Combine(_scriptsFolderPath, "PRKHelp/Shop"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite)) { }
             // Generate chat item link file
             using (FileStream itemLinkStream = new(Path.Combine(_scriptsFolderPath, "PRKHelp/Itemlink"), FileMode.Create, FileAccess.Write, FileShare.Write))
             {
@@ -29,13 +35,13 @@
                 }
             }
             // Generate chat pb link file
-            using (FileStream itemLinkStream = new(Path.Combine(_scriptsFolderPath, "PRKHelp/Itemlink"), FileMode.Create, FileAccess.Write, FileShare.Write))
-            {
-                using (StreamWriter linkWriter = new(itemLinkStream))
-                {
-                    linkWriter.Write($"<a href=\"itemref://%1/%2/%3\">%4</a>");
-                }
-            }
+            //using (FileStream itemLinkStream = new(Path.Combine(_scriptsFolderPath, "PRKHelp/Itemlink"), FileMode.Create, FileAccess.Write, FileShare.Write))
+            //{
+            //    using (StreamWriter linkWriter = new(itemLinkStream))
+            //    {
+            //        linkWriter.Write($"<a href=\"itemref://%1/%2/%3\">%4</a>");
+            //    }
+            //}
 
             GenerateInterfaceScripts(_scriptsFolderPath);
         }
@@ -66,6 +72,23 @@
             }
         }
 
+        public static void UpdateShop(string _shopText)
+        {
+            using (FileStream scriptStream = new(Path.Combine(ScriptFolder, "PRKHelp/Shop"), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
+            {
+                using (StreamWriter scriptWriter = new(scriptStream))
+                {
+                    scriptWriter.Write($"{_shopText}");
+
+                    // Create new page references as needed
+                    //if (_output.Count > 1 && _output.Count > i + 1)
+                    //{
+                    //    scriptWriter.Write($"\n/PRKHelp/Output{i + 1}");
+                    //}
+                }
+            }
+        }
+
         // Add new script here so player can call the function
         // Append appropriate amount of parameter inputs via add %1 %2 etc
         private static void GenerateInterfaceScripts(string _scriptsFolderPath)
@@ -83,6 +106,8 @@
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "symbiant"), $"/w !symbiant %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs,  each input is a word of the item name
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "pb"), $"/w !pocketboss %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs, 5th input could be start of inserted pattern name
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "pocketboss"), $"/w !pocketboss %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs, 5th input could be start of inserted pattern name
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "shop"), $"/w !shop %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs, 5th input could be start of inserted pattern name
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "shopthis"), $"/w !shop %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs, 5th input could be start of inserted pattern name
         }
     }
 }
