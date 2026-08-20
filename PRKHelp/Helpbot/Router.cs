@@ -24,6 +24,7 @@ namespace PRKHelper.Helpbot
             Components.Add("pocketboss", new PB(DB));
             Components.Add("level", new Level(DB));
             Components.Add("mission", new Mission(DB));
+            Components.Add("shop", new Shop(DB));
             Components.Add("timer", gameTimers);
             Components.Add("timers", gameTimers);
         }
@@ -56,6 +57,7 @@ namespace PRKHelper.Helpbot
             }
             else
                 outputStrings.Add($"{_input} is not a valid command.");
+
             if (channelOverride != null)
                 ScriptManager.WriteOutput(outputStrings, channelOverride);
             else

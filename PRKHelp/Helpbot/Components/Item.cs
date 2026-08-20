@@ -8,6 +8,7 @@
         internal int highql { get; set; }
         internal string name { get; set; }
         internal int icon { get; set; }
+        internal int type { get; set; }
     }
 
     public class Item : Component
