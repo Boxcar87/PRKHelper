@@ -29,7 +29,18 @@ Step 7: Use commands as shown below
 
 /items and /item are reserved commands it seems, sorry. Went with /itemfind as a hopefully acceptable substitute. QL is optional.
 /pb can take a pattern piece as input for search
+## Shop script generator
+### /editshop add (drop item)
+<img width="535" height="418" alt="{A391CC16-F704-46E4-ABCF-52A7CFE58C3D}" src="https://github.com/user-attachments/assets/e9d5b24f-a726-466d-b822-458c2317b473" />
 
+### /editshop text (limited to 8 words, AO scripting limitation. You can manually edit the script file to make a longer message)
+<img width="307" height="46" alt="{40431B03-F2D2-49FB-BFB2-186187FBBF25}" src="https://github.com/user-attachments/assets/215a2f0d-6756-4ec2-bf3e-69d791991849" />
+
+### /postshop
+<img width="537" height="523" alt="{9650F73B-BFE8-489A-A9D6-2122E8C54E46}" src="https://github.com/user-attachments/assets/64887ccb-b029-4fbc-9b21-d0ec0bdede62" />
+
+
+## General bot commands
 ### /symbiant and /pb 
 <img width="456" height="604" alt="{01A62B65-CAB8-4B4A-8281-CF790095CE4A}" src="https://github.com/user-attachments/assets/e240b0bd-18f7-4131-be14-ace05bd878b7" />
 
