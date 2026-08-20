@@ -57,6 +57,11 @@ namespace PRKHelper.Helpbot.Components
                     statusCode = 1;
                     statusMessage = "Accepted";
                 }
+                else if (_params[0] == "remove")
+                {
+                    statusCode = 1;
+                    statusMessage = "Accepted";
+                }
 
                 if (_params.Length == 3)
                 {
@@ -91,14 +96,14 @@ namespace PRKHelper.Helpbot.Components
             int highid = 0;
             int ql = 0;
 
+            string route = "";
+
             if (_params[0] == "add" || _params[0] == "<a")
             {
-                Debug.WriteLine(_params[0]);
+                route = "add";
                 if (_params[0] == "add")
                 {
                     _params = _params[1..];
-
-                    Debug.WriteLine("yes again");
                 }
 
                 ShopItem newItem = ParseItem(string.Join(" ",_params));
@@ -106,39 +111,155 @@ namespace PRKHelper.Helpbot.Components
                 highid = newItem.highid;
                 ql = newItem.ql;
             }
+            else if (_params[0] == "remove" && int.TryParse(_params[1], out statusCode) && int.TryParse(_params[2], out statusCode) && int.TryParse(_params[3], out statusCode))
+            {
+                route = "remove";
+
+                lowid = int.Parse(_params[1]);
+                highid = int.Parse(_params[2]);
+                ql = int.Parse(_params[3]);
+            }
             else
             {
+                route = "add";
                 lowid = int.Parse(_params[0]);
                 highid = int.Parse(_params[1]);
                 ql = int.Parse(_params[2]);
             }
 
-            (int status, string shopText) = AddToShop(lowid, highid, ql);
-            if (status < 0)
+            if (route == "add")
             {
-                statusCode = -1;
-                OutputStrings[0] = $"{TextColor}Item was unable to be added.";
+                (int status, string shopText, string editShopText) = AddToShop(lowid, highid, ql);
+                if (status < 0)
+                {
+                    // Using the shopText item to relay soft errors
+                    OutputStrings[0] = $"{TextColor}{shopText}";
+                }
+                else
+                {
+                    OutputStrings[0] = $"{TextColor}Item successfully added to shop - View {editShopText}";
+                    ScriptManager.UpdateShop(shopText, editShopText);
+                }
             }
-            if (shopText.Length > 1000)
+            else if (route == "remove")
             {
-                statusCode = -1;
-                OutputStrings[0] = $"{TextColor}Maximum script length reached.";
+                (int status, string shopText, string editShopText) = RemoveFromShop(lowid, highid, ql);
+                if (status < 0)
+                {
+                    // Using the shopText item to relay soft errors
+                    OutputStrings[0] = $"{TextColor}{shopText}";
+                }
+                else
+                {
+                    OutputStrings[0] = $"{TextColor}Item successfully added to shop - View {editShopText}";
+                    ScriptManager.UpdateShop(shopText, editShopText);
+                }
             }
-            else
-            {
-                OutputStrings[0] = $"{TextColor}Item successfully added to shop";
-                ScriptManager.UpdateShop(shopText);
-            }
+            
 
             // Route() will return a generic failure if value here is -1.
             return statusCode;
         }
 
-        private (int, string) AddToShop(int lowid, int highid, int ql) /* _params should be as follows | add category <a href.... |*/
+        private (int, string, string) RemoveFromShop(int lowid, int highid, int ql)
         {
-            //Dictionary<string, List<ShopItem>> ShopItemsByName = new Dictionary<string, List<ShopItem>>();
+            (int itemCount, Dictionary<string, Dictionary<string, List<ShopItem>>> oldItems) = ReadShopItems();
+
+            AOItem itemActual = GetItemByIDs(lowid);
+            if (itemActual.name == null)
+            {
+                return (-1, "Item not inside database. Filled implants not supported", "");
+            }
+            ShopItem itemToRemove = new ShopItem
+            {
+                lowid = lowid,
+                highid = highid,
+                ql = ql,
+                name = itemActual.name
+            };
+
+            string itemCategory = GetCategory(itemActual);
+            for (int i=0; i<oldItems[itemCategory][itemToRemove.name].Count; i++)
+            {
+                if (oldItems[itemCategory][itemToRemove.name][i].ql == itemToRemove.ql)
+                {
+                    oldItems[itemCategory][itemToRemove.name].RemoveAt(i);
+                    if (oldItems[itemCategory][itemToRemove.name].Count == 0)
+                        oldItems[itemCategory].Remove(itemToRemove.name);
+                    if (oldItems[itemCategory].Count == 0)
+                        oldItems.Remove(itemCategory);
+                    break;
+                }
+            }
+
+            (string shopText, string editShopText) = GenerateNewShop(oldItems);
+            return (1, shopText, editShopText);
+        }
+
+        private (int, string, string) AddToShop(int lowid, int highid, int ql) /* _params should be as follows | add category <a href.... |*/
+        {
+            (int itemCount, Dictionary<string, Dictionary<string, List<ShopItem>>> oldItems) = ReadShopItems();
+
+            if (itemCount >= 15)
+            {
+                return (-1, "Maximum item count reached", "");
+            }
+
+            AOItem itemActual = GetItemByIDs(lowid);
+            if (itemActual.name == null)
+            {
+                return (-1, "Item not inside database. Filled implants not supported", "");
+            }
+            ShopItem itemToAdd = new ShopItem
+            {
+                lowid = lowid,
+                highid = highid,
+                ql = ql,
+                name = itemActual.name
+            };
+
+            string itemCategory = GetCategory(itemActual);
+
+            //Insert new item in correct section in alphabetical order followed by ql order
+            if (!oldItems.ContainsKey(itemCategory))
+            {
+                oldItems[itemCategory] = new Dictionary<string, List<ShopItem>>();
+                oldItems[itemCategory][itemToAdd.name] = new List<ShopItem> { itemToAdd };
+            }
+            else
+            {
+                if (!oldItems[itemCategory].ContainsKey(itemToAdd.name))
+                {
+                    oldItems[itemCategory][itemToAdd.name] = new List<ShopItem> { itemToAdd };
+                }
+                else
+                {
+                    bool inserted = false;
+                    for (var i = 0; i < oldItems[itemCategory][itemToAdd.name].Count; i++)
+                    {
+                        if (itemToAdd.ql > oldItems[itemCategory][itemToAdd.name][i].ql)
+                        {
+                        oldItems[itemCategory][itemToAdd.name].Insert(i, itemToAdd);
+                            inserted = true;
+                            break;
+                        }
+                    }
+                    if (!inserted)
+                    {
+                        oldItems[itemCategory][itemToAdd.name].Add(itemToAdd);
+                    }
+                }
+            }
+
+            (string shopText, string editShopText) = GenerateNewShop(oldItems);
+            return (1, shopText, editShopText);
+        }
+
+        private (int, Dictionary<string, Dictionary<string, List<ShopItem>>>) ReadShopItems() 
+        {
             Dictionary<string, Dictionary<string, List<ShopItem>>> oldItems = new Dictionary<string, Dictionary<string, List<ShopItem>>>();
 
+            int itemCount = 0;
             //Open shop script        
             using (FileStream fileStream = new(Path.Combine(ScriptManager.ScriptFolder, "PRKHelp/Shop"), FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
             {
@@ -166,7 +287,7 @@ namespace PRKHelper.Helpbot.Components
                         {
                             // Moving to end of item index flag
                             itemIndex += 10;
-                            int itemEndIndex = textToRead.IndexOf("</a>")+4;
+                            int itemEndIndex = textToRead.IndexOf("</a>") + 4;
                             string currentItemString = textToRead[itemIndex..itemEndIndex];
                             ShopItem currentItem = ParseItem(currentItemString);
 
@@ -202,6 +323,7 @@ namespace PRKHelper.Helpbot.Components
                             }
                             textToRead = textToRead[textToRead.IndexOf("</a>")..];
                             textToRead = textToRead[3..];
+                            itemCount++;
                         }
 
                         else if (categoryIndex < itemIndex)
@@ -218,7 +340,11 @@ namespace PRKHelper.Helpbot.Components
                     }
                 }
             }
+            return (itemCount, oldItems);
+        }
 
+        private string GetCategory(AOItem _item)
+        {
             // We Can determine the category of the item to some degree. item.c 1 == Weapon | item.c 2 == Armor. We can parse Nano Crystal to check for nanos and Symbiant to check for symb(3rd word is always Symbiant)
             // This would leave us with Weapons|Armor|Nanos|Symbiants|Other as categories. The user never needs to input the category this way.
             // For each shop item added, lookup the low and high id paired with ql in itemDB 
@@ -227,158 +353,142 @@ namespace PRKHelper.Helpbot.Components
             {
                 [0] = "Other",
                 [1] = "Weapons",
-                [2] = "Armor"
+                [2] = "Armor",
+                [3] = "Implants"
             };
 
-            AOItem itemActual = GetItemByIDs(lowid, highid);
             string itemCategory = "Other";
 
-            if (itemActual.name == null)
+            if (_item.name.Length > 13)
             {
-                return (-1, "Item not inside database. Filled implants not supported");
-            }
-            if (itemActual.name.Length > 13)
-            {
-                if (itemActual.name[..12] == "Nano Crystal" || itemActual.name[..12] == "NanoCrystal ")
+                if (_item.name[..12] == "Nano Crystal" || _item.name[..12] == "NanoCrystal ")
                 {
                     itemCategory = "Nanos";
                 }
-                else if (itemActual.name.Contains(","))
+                else if (_item.name.Contains(","))
                 {
-                    if (itemActual.name.Substring(itemActual.name.IndexOf(",") - 8, 8) == "Symbiant")
+                    if (_item.name.Substring(_item.name.IndexOf(",") - 8, 8) == "Symbiant")
                     {
                         itemCategory = "Symbiants";
                     }
                 }
-                else if (categories.ContainsKey(itemActual.type))
+                else if (categories.ContainsKey(_item.type))
                 {
-                    itemCategory = categories[itemActual.type];
-                }
-            }            
-            else if (categories.ContainsKey(itemActual.type))
-            {
-                itemCategory = categories[itemActual.type];
-            }
-            ShopItem itemToAdd = new ShopItem
-            {
-                lowid = lowid,
-                highid = highid,
-                ql = ql,
-                name = itemActual.name
-            };
-            //Insert new item in correct section in alphabetical order followed by ql order
-            if (!oldItems.ContainsKey(itemCategory))
-            {
-                oldItems[itemCategory] = new Dictionary<string, List<ShopItem>>();
-                oldItems[itemCategory][itemToAdd.name] = new List<ShopItem> { itemToAdd };
-            }
-            else
-            {
-                if (!oldItems[itemCategory].ContainsKey(itemToAdd.name))
-                {
-                    oldItems[itemCategory][itemToAdd.name] = new List<ShopItem> { itemToAdd };
-                }
-                else
-                {
-                    bool inserted = false;
-                    for (var i = 0; i < oldItems[itemCategory][itemToAdd.name].Count; i++)
-                    {
-                        if (itemToAdd.ql > oldItems[itemCategory][itemToAdd.name][i].ql)
-                        {
-                        oldItems[itemCategory][itemToAdd.name].Insert(i, itemToAdd);
-                            inserted = true;
-                            break;
-                        }
-                    }
-                    if (!inserted)
-                    {
-                        oldItems[itemCategory][itemToAdd.name].Add(itemToAdd);
-                    }
+                    itemCategory = categories[_item.type];
                 }
             }
+            else if (categories.ContainsKey(_item.type))
+            {
+                itemCategory = categories[_item.type];
+            }
+            return itemCategory;
+        }
 
-            //Rewrite shop script
-            //Manual ordering of shop categories
+        private (string, string) GenerateNewShop(Dictionary<string, Dictionary<string, List<ShopItem>>> _oldItems)
+        {
             string shopText = "<a href=\"text://";
             string editShopText = "<a href=\"text://";
-            if (oldItems.ContainsKey("Weapons"))
+            if (_oldItems.ContainsKey("Weapons"))
             {
                 shopText += $"<br>|Weapons|";
-                foreach ((string key, List<ShopItem> value) in oldItems["Weapons"])
+                editShopText += $"<br>|Weapons|";
+                foreach ((string key, List<ShopItem> value) in _oldItems["Weapons"])
                 {
                     foreach (var item in value)
                     {
-                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} - [{ValueColor}{item.ql}{EndColor}] ";
-                        shopText += $"- {RedColor}Remove{EndColor} <a href='chatcmd:///shop remove {item.lowid} {item.highid} {item.ql}'>[X]</a>";
-                        editShopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} - [{ValueColor}{item.ql}{EndColor}]";
-                        editShopText += $"<br>          {RedColor}Remove{EndColor} item from shop <a href='chatcmd:///shop remove {item.lowid} {item.highid} {item.ql}'>[X]</a>";
+                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}] ";
+                        editShopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $" | {RedColor}[<a href='chatcmd:///editshop remove {item.lowid} {item.highid} {item.ql}'>X</a>]{EndColor}";
                     }
                 }
                 shopText += "<br>";
+                editShopText += "<br>";
             }
-            if (oldItems.ContainsKey("Armor"))
+            if (_oldItems.ContainsKey("Armor"))
             {
                 shopText += "<br>|Armor|";
-                foreach ((string key, List<ShopItem> value) in oldItems["Armor"])
+                editShopText += "<br>|Armor|";
+                foreach ((string key, List<ShopItem> value) in _oldItems["Armor"])
                 {
                     foreach (var item in value)
                     {
-                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} - [{ValueColor}{item.ql}{EndColor}]";
+                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $" | {RedColor}[<a href='chatcmd:///editshop remove {item.lowid} {item.highid} {item.ql}'>X</a>]{EndColor}";
                     }
                 }
                 shopText += "<br>";
+                editShopText += "<br>";
             }
-            if (oldItems.ContainsKey("Nanos"))
+            if (_oldItems.ContainsKey("Nanos"))
             {
                 shopText += "<br>|Nanos|";
-                foreach ((string key, List<ShopItem> value) in oldItems["Nanos"])
+                editShopText += "<br>|Nanos|";
+                foreach ((string key, List<ShopItem> value) in _oldItems["Nanos"])
                 {
                     foreach (var item in value)
                     {
-                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} - [{ValueColor}{item.ql}{EndColor}]";
+                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $" | {RedColor}[<a href='chatcmd:///editshop remove {item.lowid} {item.highid} {item.ql}'>X</a>]{EndColor}";
                     }
                 }
                 shopText += "<br>";
+                editShopText += "<br>";
             }
-            if (oldItems.ContainsKey("Symbiants"))
+            if (_oldItems.ContainsKey("Symbiants"))
             {
                 shopText += "<br>|Symbiants|";
-                foreach ((string key, List<ShopItem> value) in oldItems["Symbiants"])
+                editShopText += "<br>|Symbiants|";
+                foreach ((string key, List<ShopItem> value) in _oldItems["Symbiants"])
                 {
                     foreach (var item in value)
                     {
-                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} - [{ValueColor}{item.ql}{EndColor}]";
+                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $" | {RedColor}[<a href='chatcmd:///editshop remove {item.lowid} {item.highid} {item.ql}'>X</a>]{EndColor}";
                     }
                 }
                 shopText += "<br>";
+                editShopText += "<br>";
             }
-            if (oldItems.ContainsKey("Implants"))
+            if (_oldItems.ContainsKey("Implants"))
             {
                 shopText += "<br>|Implants|";
-                foreach ((string key, List<ShopItem> value) in oldItems["Implants"])
+                editShopText += "<br>|Implants|";
+                foreach ((string key, List<ShopItem> value) in _oldItems["Implants"])
                 {
                     foreach (var item in value)
                     {
-                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} - [{ValueColor}{item.ql}{EndColor}]";
+                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $" | {RedColor}[<a href='chatcmd:///editshop remove {item.lowid} {item.highid} {item.ql}'>X</a>]{EndColor}";
                     }
                 }
                 shopText += "<br>";
+                editShopText += "<br>";
             }
-            if (oldItems.ContainsKey("Other"))
+            if (_oldItems.ContainsKey("Other"))
             {
                 shopText += "<br>|Other|";
-                foreach ((string key, List<ShopItem> value) in oldItems["Other"])
+                editShopText += "<br>|Other|";
+                foreach ((string key, List<ShopItem> value) in _oldItems["Other"])
                 {
                     foreach (var item in value)
                     {
-                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} - [{ValueColor}{item.ql}{EndColor}]";
+                        shopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $"<br>     -{BuildItemRef(item.lowid, item.highid, item.ql, item.name)} [{ValueColor}{item.ql}{EndColor}]";
+                        editShopText += $" | {RedColor}[<a href='chatcmd:///editshop remove {item.lowid} {item.highid} {item.ql}'>X</a>]{EndColor}";
                     }
                 }
                 shopText += "<br>";
+                editShopText += "<br>";
             }
-            shopText += "<br><br><div align=right>Generated with PRKHelper\">Shop</a>";
-            return (1, shopText);
+            shopText += "<br><br><div align=right>Generated with <a href='chatcmd:///start https://github.com/Boxcar87/PRKHelper'>PRKHelper</a>\">Shop</a>";
+            editShopText += "<br><br><div align=right>Generated with PRKHelper\">Shop</a>";
+            return (shopText, editShopText);
         }
+
         private ShopItem ParseItem(string _itemString)
         {
             //"<a href=\'itemref://{_minID}/{_maxID}/{_QL}\'>{_name}</a>"
@@ -397,11 +507,12 @@ namespace PRKHelper.Helpbot.Components
                 name = clipped[nameStart..]
             };
         }
-        static AOItem GetItemByIDs(int _lowid, int _highid)
+
+        static AOItem GetItemByIDs(int _lowid)
         {
-
-            string query = $"SELECT * FROM Items WHERE lowid == {_lowid} AND highid == {_highid}";
-
+            string query = "";
+            query = $"SELECT * FROM Items WHERE lowid == {_lowid}";
+            
             return DB.QueryItemByIDs(query);
         }
     }
