@@ -113,7 +113,6 @@ namespace PRKHelp.Settings
 
         public static string GetScriptsPath()
         {
-
             Settings settings = GetSettings();
             return (string)settings.GetType().GetProperty("ScriptsPath").GetValue(settings);
         }
@@ -155,6 +154,27 @@ namespace PRKHelp.Settings
             catch (JsonException _ex)
             {
             }
+        }
+
+        public static void UpdateShopMessage(string _message)
+        {
+            Settings settings = GetSettings();
+            settings.GetType().GetProperty("ShopMessage").SetValue(settings, _message, null);
+            string jsonString = "";
+            try
+            {
+                jsonString = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(Path.Combine(Settings, SettingsFile), jsonString);
+            }
+            catch (JsonException _ex)
+            {
+            }
+        }
+
+        public static string GetShopMessage()
+        {
+            Settings settings = GetSettings();
+            return (string)settings.GetType().GetProperty("ShopMessage").GetValue(settings);
         }
 
         static Settings GetSettings()

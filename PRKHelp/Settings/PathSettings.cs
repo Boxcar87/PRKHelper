@@ -13,6 +13,7 @@
         public string LastSelectedCharacter { get; set; } = "";
         public int WindowPositionTop { get; set; } = 0;
         public int WindowPositionLeft { get; set; } = 0;
+        public string ShopMessage { get; set; } = "Peruse my ";
     }
 }
 
