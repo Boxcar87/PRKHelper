@@ -19,7 +19,7 @@ Step 2: "Log messages" of that window (right click its name)
 
 Step 3: Type a message in vicinity to generate log file
 
-Step 4: Launch PRKHelp and target your new log file
+Step 4: Launch PRKHelper and target your new log file
 
 Step 5: Target your scripts folder
 
