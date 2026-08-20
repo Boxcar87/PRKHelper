@@ -33,7 +33,7 @@ You can drag and drop items into your chat bar and create a persistent shop scri
 <img width="535" height="418" alt="{A391CC16-F704-46E4-ABCF-52A7CFE58C3D}" src="https://github.com/user-attachments/assets/e9d5b24f-a726-466d-b822-458c2317b473" />
 
 ### /editshop text (limited to 8 words, AO scripting limitation. You can manually edit the script file to make a longer message)
-<img width="307" height="46" alt="{40431B03-F2D2-49FB-BFB2-186187FBBF25}" src="https://github.com/user-attachments/assets/215a2f0d-6756-4ec2-bf3e-69d791991849" />
+<img width="387" height="49" alt="{24D59B5C-7FD8-4C34-A1FB-F6B59E669655}" src="https://github.com/user-attachments/assets/1617ba11-c2d7-4528-876b-bc83956daee1" />
 
 ### /postshop
 <img width="537" height="523" alt="{9650F73B-BFE8-489A-A9D6-2122E8C54E46}" src="https://github.com/user-attachments/assets/64887ccb-b029-4fbc-9b21-d0ec0bdede62" />
