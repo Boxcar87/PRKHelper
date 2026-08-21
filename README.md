@@ -32,7 +32,7 @@ You can drag and drop items into your chat bar and create a persistent shop scri
 ### /editshop add (drop item)
 <img width="535" height="418" alt="{A391CC16-F704-46E4-ABCF-52A7CFE58C3D}" src="https://github.com/user-attachments/assets/e9d5b24f-a726-466d-b822-458c2317b473" />
 
-### /editshop text (limited to 8 words, AO scripting limitation. You can manually edit your settings find in AppData/Local/PRKHelp to have a longer message)
+### /editshop text (limited to 8 words, AO scripting limitation. You can manually edit your settings file in AppData/Local/PRKHelp to have a longer message)
 <img width="387" height="49" alt="{24D59B5C-7FD8-4C34-A1FB-F6B59E669655}" src="https://github.com/user-attachments/assets/1617ba11-c2d7-4528-876b-bc83956daee1" />
 
 ### /postshop
