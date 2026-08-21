@@ -48,6 +48,11 @@ namespace PRKHelper.Helpbot.Components
         // If you have variable inputs you can override ValidateParams, otherwise this performs basic param validation
         public override (int, string) ValidateParams(string[] _params)
         {
+            string manualItemString = string.Join(" ", _params);
+            manualItemString = manualItemString.Replace("&lt;", "<");
+            manualItemString = manualItemString.Replace("&gt;", ">");
+            _params = manualItemString.Split(" ");
+
             int statusCode = -1;
             string statusMessage = "Invalid params";
 
@@ -152,7 +157,8 @@ namespace PRKHelper.Helpbot.Components
                 _params = _params[1..];
                 string newText = string.Join(" ", _params);
                 OutputStrings[0] = $"{TextColor}Shop text updated - \'{newText}\'";
-                UpdateText(newText);
+                (string shopText, string editShopText) = UpdateText(newText);
+                ScriptManager.UpdateShop(shopText, editShopText);
             }
             else if (route == "view")
             {
@@ -173,9 +179,12 @@ namespace PRKHelper.Helpbot.Components
             return editShopText;
         }
 
-        private void UpdateText(string _message)
+        private (string, string) UpdateText(string _message)
         {
             SettingsManager.UpdateShopMessage(_message);
+            (_, Dictionary<string, Dictionary<string, List<ShopItem>>> oldItems) = ReadShopItems();
+            (string shopText, string editShopText) = GenerateNewShop(oldItems);
+            return (shopText, editShopText);
         }
 
         private (int, string, string) RemoveFromShop(int lowid, int highid, int ql)
@@ -404,6 +413,7 @@ namespace PRKHelper.Helpbot.Components
         private (string, string) GenerateNewShop(Dictionary<string, Dictionary<string, List<ShopItem>>> _oldItems)
         {
             string foreText = SettingsManager.GetShopMessage();
+            Debug.WriteLine(foreText);
             string shopText = $"{foreText} <a href=\"text://";
             string editShopText = "<a href=\"text://";
             if (_oldItems.ContainsKey("Weapons"))
@@ -509,6 +519,7 @@ namespace PRKHelper.Helpbot.Components
 
         private ShopItem ParseItem(string _itemString)
         {
+            Debug.WriteLine(_itemString);
             //"<a href=\'itemref://{_minID}/{_maxID}/{_QL}\'>{_name}</a>"
             _itemString = _itemString.Replace("\"", "\'");
             int start = _itemString.IndexOf("//")+2;
