@@ -15,6 +15,7 @@
     <None Remove="Helpbot\SQL\Pocketboss.sql" />
     <None Remove="Helpbot\SQL\Symbiants.sql" />
     <None Remove="Helpbot\SQL\Trickle.sql" />
+    <None Remove="Resources\Icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +45,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

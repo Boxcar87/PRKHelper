@@ -191,7 +191,7 @@ INSERT INTO Items VALUES (152076, 152077, 121, 140, '1244 Co - Senior Mathis Mul
 INSERT INTO Items VALUES (153476, 153476, 1, 1, '1244 Co - Senior Mathis Multi-Energy Rifle Construction Manual', 136332, 0);
 INSERT INTO Items VALUES (287839, 287839, 200, 200, '150 to 200 Battle Station Terminal', 0, 0);
 INSERT INTO Items VALUES (287909, 287909, 174, 174, '151 to 174 Battle Station Terminal', 0, 0);
-INSERT INTO Items VALUES (36780, 36780, 50, 50, '16 - 31  NCU Memory', 13370, 1);
+INSERT INTO Items VALUES (36780, 36781, 50, 99, '16 - 31  NCU Memory', 13370, 0);
 INSERT INTO Items VALUES (287910, 287910, 214, 214, '175 to 214 Battle Station Terminal', 0, 0);
 INSERT INTO Items VALUES (101335, 101336, 1, 200, '1h Blunt Cluster - Bright (Right-Wrist)', 35999, 0);
 INSERT INTO Items VALUES (101334, 101334, 200, 200, '1h Blunt Cluster - Faded (Right-Hand)', 35998, 0);
@@ -229,7 +229,7 @@ INSERT INTO Items VALUES (200035, 200036, 225, 230, '1st Improvement Omni-Intern
 INSERT INTO Items VALUES (129063, 129063, 200, 200, '1st level Ninja Katana', 113999, 1);
 INSERT INTO Items VALUES (129068, 129068, 200, 200, '1st level Ninja Tanto', 113986, 1);
 INSERT INTO Items VALUES (125467, 125467, 200, 200, '1st level Ninja Wakisashi', 113984, 1);
-INSERT INTO Items VALUES (36779, 36779, 1, 1, '2 - 3 NCU Memory', 119135, 1);
+INSERT INTO Items VALUES (36779, 36778, 1, 19, '2 - 3 NCU Memory', 119135, 0);
 INSERT INTO Items VALUES (277905, 277906, 1, 300, '2-Hand Blunt Memory Cell', 276922, 1);
 INSERT INTO Items VALUES (278400, 278401, 1, 199, '2-Hand Blunt Skill NCU (1/6)', 276930, 1);
 INSERT INTO Items VALUES (278402, 278403, 200, 299, '2-Hand Blunt Skill NCU (1/6)', 276930, 1);
@@ -377,7 +377,7 @@ INSERT INTO Items VALUES (142916, 142917, 1, 200, '2x Layer Carbon-Notum Alloy B
 INSERT INTO Items VALUES (142922, 142923, 1, 200, '2x Layer Carbon-Notum Alloy Rod', 130831, 0);
 INSERT INTO Items VALUES (285740, 285740, 300, 300, '300k heal useitem', 268019, 0);
 INSERT INTO Items VALUES (287842, 287842, 60, 60, '31 to 60 Battle Station Terminal', 0, 0);
-INSERT INTO Items VALUES (36781, 36781, 120, 120, '32 - 63 NCU Memory', 119136, 1);
+INSERT INTO Items VALUES (36780, 36781, 100, 159, '32 - 63 NCU Memory', 119136, 0);
 INSERT INTO Items VALUES (500101, 500101, 1, 1, '3F1 Shirt', 500104, 2);
 INSERT INTO Items VALUES (128738, 128738, 176, 176, '3rd edition Pistola Di Macchina Mini Automatico 21', 21148, 1);
 INSERT INTO Items VALUES (199808, 199809, 245, 250, '3rd Improvement Omni-Internops Armor Boots', 13270, 2);
@@ -395,7 +395,7 @@ INSERT INTO Items VALUES (200039, 200040, 245, 250, '3rd Improvement Omni-Intern
 INSERT INTO Items VALUES (129059, 129060, 141, 160, '3rd level Ninja Katana', 113999, 1);
 INSERT INTO Items VALUES (129064, 129065, 1, 98, '3rd level Ninja Tanto', 113986, 1);
 INSERT INTO Items VALUES (125463, 125464, 101, 150, '3rd level Ninja Wakisashi', 113984, 1);
-INSERT INTO Items VALUES (36778, 36778, 20, 20, '4 - 7 NCU Memory', 119135, 1);
+INSERT INTO Items VALUES (36778, 36786, 20, 39, '4 - 7 NCU Memory', 119135, 0);
 INSERT INTO Items VALUES (274361, 274361, 1, 1, '40m Collsphere Test', 0, 0);
 INSERT INTO Items VALUES (199810, 199811, 255, 260, '4th Improvement Omni-Internops Armor Boots', 13270, 2);
 INSERT INTO Items VALUES (199831, 199832, 255, 260, '4th Improvement Omni-Internops Armor Gloves', 13283, 2);
@@ -435,7 +435,7 @@ INSERT INTO Items VALUES (129055, 129056, 101, 120, '5th level Ninja Katana', 11
 INSERT INTO Items VALUES (125459, 125460, 1, 50, '5th level Ninja Wakisashi', 113984, 1);
 INSERT INTO Items VALUES (287907, 287907, 100, 100, '61 to 100 Battle Station Terminal', 0, 0);
 INSERT INTO Items VALUES (287841, 287841, 99, 99, '61 to 99 Battle Station Terminal', 0, 0);
-INSERT INTO Items VALUES (95520, 95520, 200, 200, '64 NCU Memory', 119134, 1);
+INSERT INTO Items VALUES (36781, 95520, 160, 200, '64 NCU Memory', 119134, 0);
 INSERT INTO Items VALUES (199814, 199815, 275, 280, '6th Improvement Omni-Internops Armor Boots', 13270, 2);
 INSERT INTO Items VALUES (199835, 199836, 275, 280, '6th Improvement Omni-Internops Armor Gloves', 13283, 2);
 INSERT INTO Items VALUES (199856, 199857, 275, 280, '6th Improvement Omni-Internops Armor Helmet', 10840, 2);
@@ -450,7 +450,8 @@ INSERT INTO Items VALUES (200024, 200025, 275, 280, '6th Improvement Omni-Intern
 INSERT INTO Items VALUES (200045, 200046, 275, 280, '6th Improvement Omni-Internops Elite Body Armor', 19816, 2);
 INSERT INTO Items VALUES (129053, 129054, 81, 100, '6th level Ninja Katana', 113999, 1);
 INSERT INTO Items VALUES (129051, 129052, 61, 80, '7th level Ninja Katana', 113999, 1);
-INSERT INTO Items VALUES (36786, 36786, 40, 40, '8 - 15 NCU Memory', 119137, 1);
+INSERT INTO Items VALUES (36778, 36786, 30, 49, '8 - 15 NCU Memory', 119137, 0);
+INSERT INTO Items VALUES (36786, 36780, 40, 49, '8 - 15 NCU Memory', 119137, 0);
 INSERT INTO Items VALUES (129049, 129050, 41, 60, '8th level Ninja Katana', 113999, 1);
 INSERT INTO Items VALUES (142920, 142921, 1, 200, '8x Layer Carbon-Notum Alloy Blade', 130836, 0);
 INSERT INTO Items VALUES (142926, 142927, 1, 200, '8x Layer Carbon-Notum Alloy Rod', 130833, 0);
@@ -3974,12 +3975,16 @@ INSERT INTO Items VALUES (199737, 199737, 205, 205, 'Below Average Nadir Homage 
 INSERT INTO Items VALUES (199758, 199758, 205, 205, 'Below Average Nadir Homage Armor Sleeves', 22960, 2);
 INSERT INTO Items VALUES (199779, 199779, 205, 205, 'Below Average Nadir Homage Body Armor', 22985, 2);
 INSERT INTO Items VALUES (157386, 157386, 1, 1, 'Below Eighteen Rat Advantage', 81769, 0);
-INSERT INTO Items VALUES (36777, 36777, 40, 40, 'Belt Component Platform 300X', 119142, 1);
-INSERT INTO Items VALUES (36785, 36785, 80, 80, 'Belt Component Platform 4IX', 119142, 1);
-INSERT INTO Items VALUES (36784, 36784, 120, 120, 'Belt Component Platform 5000', 119144, 1);
-INSERT INTO Items VALUES (36787, 36787, 200, 200, 'Belt Component Platform 6K-X', 119143, 1);
-INSERT INTO Items VALUES (36783, 36783, 1, 1, 'Belt Component Platform Ti-100X', 119145, 1);
-INSERT INTO Items VALUES (36782, 36782, 20, 20, 'Belt Component Platform Ti-200X', 119145, 1);
+INSERT INTO Items VALUES (36782, 36777, 30, 39, 'Belt Component Platform 300X', 119142, 0);
+INSERT INTO Items VALUES (36777, 36785, 40, 59, 'Belt Component Platform 300X', 119142, 0);
+INSERT INTO Items VALUES (36777, 36785, 60, 79, 'Belt Component Platform 4IX', 119142, 0);
+INSERT INTO Items VALUES (36785, 36784, 80, 99, 'Belt Component Platform 4IX', 119142, 0);
+INSERT INTO Items VALUES (36785, 36784, 100, 119, 'Belt Component Platform 5000', 119144, 0);
+INSERT INTO Items VALUES (36784, 36787, 120, 159, 'Belt Component Platform 5000', 119144, 0);
+INSERT INTO Items VALUES (36784, 36787, 160, 200, 'Belt Component Platform 6K-X', 119143, 0);
+INSERT INTO Items VALUES (36783, 36782, 1, 9, 'Belt Component Platform Ti-100X', 119145, 0);
+INSERT INTO Items VALUES (36783, 36782, 10, 19, 'Belt Component Platform Ti-200X', 119145, 0);
+INSERT INTO Items VALUES (36782, 36777, 20, 29, 'Belt Component Platform Ti-200X', 119145, 0);
 INSERT INTO Items VALUES (202733, 202734, 1, 20, 'Belt of Justice', 119145, 1);
 INSERT INTO Items VALUES (202735, 202736, 40, 80, 'Belt of Justice', 119142, 1);
 INSERT INTO Items VALUES (202737, 202738, 120, 200, 'Belt of Justice', 119144, 1);
@@ -13450,7 +13455,7 @@ INSERT INTO Items VALUES (248907, 248907, 1, 1, 'Cowboy Boots of Synergy Factor'
 INSERT INTO Items VALUES (248906, 248906, 1, 1, 'Cowboy Jacket of Synergy Factor', 255299, 2);
 INSERT INTO Items VALUES (248908, 248908, 1, 1, 'Cowboy Pants of Synergy Factor', 255182, 2);
 INSERT INTO Items VALUES (248905, 248905, 1, 1, 'Cowboy Sleeves of Synergy Factor', 255241, 2);
-INSERT INTO Items VALUES (95512, 95512, 40, 40, 'CPU Upgrade', 119138, 1);
+INSERT INTO Items VALUES (95512, 95513, 40, 119, 'CPU Upgrade', 119138, 0);
 INSERT INTO Items VALUES (130639, 130639, 1, 1, 'Crab Surprise', 99298, 1);
 INSERT INTO Items VALUES (121684, 121685, 1, 23, 'Cracked  Bolter 42mm', 21149, 1);
 INSERT INTO Items VALUES (137340, 137340, 1, 1, 'Cracked  Bolter 42mm Construction Manual', 37931, 0);
@@ -23887,7 +23892,7 @@ INSERT INTO Items VALUES (211235, 211235, 300, 300, 'Hard Flabbergaster', 113986
 INSERT INTO Items VALUES (288640, 288640, 1, 1, 'Hard Target Shirt - Atlantean Edition', 288639, 2);
 INSERT INTO Items VALUES (288697, 288697, 1, 1, 'Hard Target Shirt - Blanks', 288639, 2);
 INSERT INTO Items VALUES (288641, 288641, 1, 1, 'Hard Target Shirt - Rimor Edition', 288639, 2);
-INSERT INTO Items VALUES (95513, 95513, 200, 200, 'Hardcore CPU Upgrade', 119138, 1);
+INSERT INTO Items VALUES (95512, 95513, 120, 200, 'Hardcore CPU Upgrade', 119138, 0);
 INSERT INTO Items VALUES (156261, 156262, 1, 200, 'Harmless Kamikaze Robot', 156096, 0);
 INSERT INTO Items VALUES (227151, 227151, 1, 1, 'Harmonize Body and Mind', 239151, 2);
 INSERT INTO Items VALUES (266209, 266209, 1, 1, 'Harvest Energy', 84310, 2);
