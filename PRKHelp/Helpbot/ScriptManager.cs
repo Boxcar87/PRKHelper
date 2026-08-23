@@ -73,26 +73,13 @@ namespace PRKHelp
             }
         }
 
-        public static void UpdateShop(string _shopText, string _editShopText)
+        public static void UpdateShop(string _shopText)
         {
             using (FileStream scriptStream = new(Path.Combine(ScriptFolder, "PRKHelp/Shop"), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
             {
                 using (StreamWriter scriptWriter = new(scriptStream))
                 {
                     scriptWriter.Write($"{_shopText}");
-
-                    // Create new page references as needed
-                    //if (_output.Count > 1 && _output.Count > i + 1)
-                    //{
-                    //    scriptWriter.Write($"\n/PRKHelp/Output{i + 1}");
-                    //}
-                }
-            }
-            using (FileStream scriptStream = new(Path.Combine(ScriptFolder, "PRKHelp/EditShop"), FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
-            {
-                using (StreamWriter scriptWriter = new(scriptStream))
-                {
-                    scriptWriter.Write($"{_editShopText}");
 
                     // Create new page references as needed
                     //if (_output.Count > 1 && _output.Count > i + 1)

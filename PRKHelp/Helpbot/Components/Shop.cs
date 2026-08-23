@@ -106,10 +106,16 @@ namespace PRKHelper.Helpbot.Components
                     _params = _params[1..];
                 }
 
-                ShopItem newItem = ParseItem(string.Join(" ", _params));
-                lowid = newItem.lowid;
-                highid = newItem.highid;
-                ql = newItem.ql;
+                string itemString = string.Join(" ", _params);
+                itemString = itemString.Replace("\"", "\'");
+                int start = itemString.IndexOf("//") + 2;
+                string clipped = itemString[start..^4];
+                string numberString = clipped[..clipped.IndexOf("\'")];
+                string[] numbers = numberString.Split('/');
+
+                lowid = int.Parse(numbers[0]);
+                highid = int.Parse(numbers[1]);
+                ql = int.Parse(numbers[2]);
             }
             else if (_params[0] == "remove" && int.TryParse(_params[1], out statusCode) && int.TryParse(_params[2], out statusCode) && int.TryParse(_params[3], out statusCode))
             {
@@ -135,7 +141,7 @@ namespace PRKHelper.Helpbot.Components
                 else
                 {
                     OutputStrings[0] = $"{TextColor}Item successfully added to shop - View {editShopText}";
-                    ScriptManager.UpdateShop(shopText, editShopText);
+                    ScriptManager.UpdateShop(shopText);
                 }
             }
             else if (route == "remove")
@@ -149,7 +155,7 @@ namespace PRKHelper.Helpbot.Components
                 else
                 {
                     OutputStrings[0] = $"{TextColor}Item successfully added to shop - View {editShopText}";
-                    ScriptManager.UpdateShop(shopText, editShopText);
+                    ScriptManager.UpdateShop(shopText);
                 }
             }
             else if (route == "text")
@@ -158,11 +164,10 @@ namespace PRKHelper.Helpbot.Components
                 string newText = string.Join(" ", _params);
                 OutputStrings[0] = $"{TextColor}Shop text updated - \'{newText}\'";
                 (string shopText, string editShopText) = UpdateText(newText);
-                ScriptManager.UpdateShop(shopText, editShopText);
+                ScriptManager.UpdateShop(shopText);
             }
             else if (route == "view")
             {
-                Debug.WriteLine("view");
                 string editShopText = ViewEditShop();
                 OutputStrings[0] = $"{TextColor}View {editShopText}";
             }
@@ -191,7 +196,7 @@ namespace PRKHelper.Helpbot.Components
         {
             (int itemCount, Dictionary<string, Dictionary<string, List<ShopItem>>> oldItems) = ReadShopItems();
 
-            AOItem itemActual = GetItemByIDs(lowid);
+            AOItem itemActual = GetItemByIDs(lowid, ql);
             if (itemActual.name == null)
             {
                 return (-1, "Item not inside database. Filled implants not supported", "");
@@ -231,7 +236,7 @@ namespace PRKHelper.Helpbot.Components
                 return (-1, "Maximum item count reached", "");
             }
 
-            AOItem itemActual = GetItemByIDs(lowid);
+            AOItem itemActual = GetItemByIDs(lowid, ql);
             if (itemActual.name == null)
             {
                 return (-1, "Item not inside database. Filled implants not supported", "");
@@ -413,7 +418,6 @@ namespace PRKHelper.Helpbot.Components
         private (string, string) GenerateNewShop(Dictionary<string, Dictionary<string, List<ShopItem>>> _oldItems)
         {
             string foreText = SettingsManager.GetShopMessage();
-            Debug.WriteLine(foreText);
             string shopText = $"{foreText} <a href=\"text://";
             string editShopText = "<a href=\"text://";
             if (_oldItems.ContainsKey("Weapons"))
@@ -519,7 +523,6 @@ namespace PRKHelper.Helpbot.Components
 
         private ShopItem ParseItem(string _itemString)
         {
-            Debug.WriteLine(_itemString);
             //"<a href=\'itemref://{_minID}/{_maxID}/{_QL}\'>{_name}</a>"
             _itemString = _itemString.Replace("\"", "\'");
             int start = _itemString.IndexOf("//")+2;
@@ -537,10 +540,10 @@ namespace PRKHelper.Helpbot.Components
             };
         }
 
-        static AOItem GetItemByIDs(int _lowid)
+        static AOItem GetItemByIDs(int _lowid, int _ql)
         {
             string query = "";
-            query = $"SELECT * FROM Items WHERE lowid == {_lowid}";
+            query = $"SELECT * FROM Items WHERE lowid == {_lowid} AND {_ql} BETWEEN lowql AND highql";
             
             return DB.QueryItemByIDs(query);
         }
