@@ -9,6 +9,7 @@
         internal string name { get; set; }
         internal int icon { get; set; }
         internal int type { get; set; }
+        internal int value { get; set; }
     }
 
     public class Item : Component
@@ -69,7 +70,9 @@
 
                 OutputStrings[page] += $"<img src=rdb://{item.icon}><br>";
                 OutputStrings[page] += $"{BuildItemRef(item.lowid, item.highid, localQl, item.name)} [{localQl}] [{BuildItemRef(item.lowid, item.highid, item.lowql, item.lowql.ToString())} - {BuildItemRef(item.lowid, item.highid, item.highql, item.highql.ToString())}]<br>";
-                OutputStrings[page] += $"Link to chat - QL {localQl} <a href='chatcmd:///PRKHelp/Itemlink {item.lowid} {item.highid} {localQl} {cleanName}'>[->]</a><br><br>";
+                OutputStrings[page] += $"Link to chat <a href='chatcmd:///PRKHelp/Itemlink {item.lowid} {item.highid} {localQl} {cleanName}'>[->]</a><br>";
+                if(item.type == 1)
+                    OutputStrings[page] += $"Add to DPM Planner <a href='chatcmd:///character plan mainhand raw {item.lowid} {item.highid} {localQl}'>[Mainhand]</a>|<a href='chatcmd:///character plan offhand raw {item.lowid} {item.highid} {localQl}'>[Offhand]</a><br>";
 
                 if (OutputStrings[page].Length > 3600)
                 {
