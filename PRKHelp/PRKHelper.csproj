@@ -22,6 +22,9 @@
     <Content Include="Helpbot\SQL\Items.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Helpbot\SQL\WeaponStats.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Helpbot\SQL\Levels.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

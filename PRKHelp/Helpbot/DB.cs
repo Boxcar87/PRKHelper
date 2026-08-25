@@ -57,6 +57,7 @@ namespace PRKHelper.Helpbot
                                 highql = reader.GetInt32(reader.GetOrdinal("highql")),
                                 name = reader.GetString(reader.GetOrdinal("name")),
                                 icon = reader.GetInt32(reader.GetOrdinal("icon")),
+                                type = reader.GetInt32(reader.GetOrdinal("class"))
                             };
                             if (item.name.Equals(_name, StringComparison.OrdinalIgnoreCase))
                                 items.Insert(0, item);
@@ -100,6 +101,29 @@ namespace PRKHelper.Helpbot
                 Debug.WriteLine(_ex);
             }
             return item;
+        }
+
+        public static int QueryItemValue(string _query)
+        {
+            int value = 0;
+            try
+            {
+                using (var command = new SqliteCommand(_query, Connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            value = reader.GetInt32(reader.GetOrdinal("value"));
+                        }
+                    }
+                }
+            }
+            catch (SqliteException _ex)
+            {
+                Debug.WriteLine(_ex);
+            }
+            return value;
         }
 
         public static Dictionary<string, Dictionary<string, float>> QueryTrickle(string _query)
@@ -275,6 +299,32 @@ namespace PRKHelper.Helpbot
                 Debug.WriteLine(_ex);
             }
             return missions;
+        }
+        public static Weapon QueryWeaponStats(string _query)
+        {
+            Weapon weaponStats = new();
+            try
+            {
+                using (var command = new SqliteCommand(_query, Connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            weaponStats.min = reader.GetInt32(reader.GetOrdinal("min"));
+                            weaponStats.max = reader.GetInt32(reader.GetOrdinal("max"));
+                            weaponStats.crit = reader.GetInt32(reader.GetOrdinal("crit"));
+                            weaponStats.attack = reader.GetInt32(reader.GetOrdinal("attack"));
+                            weaponStats.recharge = reader.GetInt32(reader.GetOrdinal("recharge"));
+                        }
+                    }
+                }
+            }
+            catch (SqliteException _ex)
+            {
+                Debug.WriteLine(_ex);
+            }
+            return weaponStats;
         }
     }
 }

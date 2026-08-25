@@ -25,6 +25,9 @@ namespace PRKHelper.Helpbot
             Components.Add("level", new Level(DB));
             Components.Add("mission", new Mission(DB));
             Components.Add("editshop", new Shop(DB));
+            Components.Add("dps", new DPS(DB));
+            Components.Add("vendor", new VendorValue(DB));
+            Components.Add("character", new Character());
             Components.Add("timer", gameTimers);
             Components.Add("timers", gameTimers);
         }
