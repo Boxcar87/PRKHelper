@@ -26,6 +26,16 @@ Step 5: Target your scripts folder
 Step 6: Hit confirm
 
 Step 7: Use commands as shown below
+## Character stats
+This is the foundation for a lot of cool features in the pipeline. Through this we can run accurate damage calculations for different loadouts or get more accurate results for other functions.
+A more user friendly UI will come in the future so you can view what stats are stored and get quick access to hidden stats like crit rate
+<img width="309" height="61" alt="{8F7A2E3B-AF62-4DFC-93F6-B0BE582F0FEB}" src="https://github.com/user-attachments/assets/544c7cdf-69a3-43af-ba35-606f6db6821d" />
+
+
+## Vendor pricing for items
+Drag and drop item into chat and get reliably close pricing. Be sure to update your characters complit first (/character complit 123)
+<img width="804" height="60" alt="{466566B0-14A9-4CB5-B1A0-C2A17CC36651}" src="https://github.com/user-attachments/assets/496aa096-e22b-4b65-a2e2-86989e5b09a9" />
+
 
 ## Shop script generator
 You can drag and drop items into your chat bar and create a persistent shop script. Limited to 15 items due to AO/PRK script size limitation. 
@@ -72,3 +82,7 @@ You can drag and drop items into your chat bar and create a persistent shop scri
 
 ### /mission level
 <img width="608" height="62" alt="{BD17DD3F-4E8A-4C61-AA27-08E31BF9AB77}" src="https://github.com/user-attachments/assets/2f639bc5-7894-411f-98da-493f0aee97fe" />
+
+### /stats
+<img width="540" height="680" alt="{3A6769AE-D955-45EA-A2A1-B418935715FC}" src="https://github.com/user-attachments/assets/b5225b3e-9f02-4d91-9b95-fe2f21c44669" />
+
