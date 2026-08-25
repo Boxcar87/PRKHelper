@@ -83,7 +83,7 @@ namespace PRKHelper.Helpbot.Components
                 }
                 else if (_params[1].ToLower() == "mainhand" || _params[1].ToLower() == "offhand")
                 {
-                    if (_params[2] == "<a")
+                    if (_params[2] == "<a" || _params[2] == "raw")
                     {
                         return (1, "Accepted");
                     }
@@ -187,14 +187,22 @@ namespace PRKHelper.Helpbot.Components
                     }
                     else
                     {
+                        string[] numbers;
                         string slot = _params[1];
-                        _params = _params[2..];
-                        string itemString = string.Join(" ", _params);
-                        itemString = itemString.Replace("\"", "\'");
-                        int start = itemString.IndexOf("//") + 2;
-                        string clipped = itemString[start..^4];
-                        string numberString = clipped[..clipped.IndexOf("\'")];
-                        string[] numbers = numberString.Split('/');
+                        if (_params[2] == "raw")
+                        {
+                            numbers = [_params[3], _params[4], _params[5]];
+                        }
+                        else
+                        {
+                            _params = _params[2..];
+                            string itemString = string.Join(" ", _params);
+                            itemString = itemString.Replace("\"", "\'");
+                            int start = itemString.IndexOf("//") + 2;
+                            string clipped = itemString[start..^4];
+                            string numberString = clipped[..clipped.IndexOf("\'")];
+                            numbers = numberString.Split('/');
+                        }
 
                         (int, int, int) weapon = (int.Parse(numbers[0]), int.Parse(numbers[1]), int.Parse(numbers[2]));
                         AddWeaponToPlan(slot.ToLower(), weapon);
