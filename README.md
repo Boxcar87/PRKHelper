@@ -26,6 +26,13 @@ Step 5: Target your scripts folder
 Step 6: Hit confirm
 
 Step 7: Use commands as shown below
+
+## DPM Calculator
+Right now this is in phase 1, almost to be considered alpha. It does work well for what it can do, but more accurate calculations are in the works. Right now you can update your character stats as show in the section here.
+Commands not yet shown in character include /character gear||plan mainhand||offhand||ma (insert item)||maAmount||clear which will allow you to compare different weapon configurations to see dpm differences. Init is not yet factored in. You can use /character class classname if you need to calculate martial arts as well.
+### /dps gear||plan||compare
+<img width="370" height="65" alt="{7CC5AB00-ECF3-499D-AE91-D6CA61E73888}" src="https://github.com/user-attachments/assets/e7f9c84c-0a1c-4a75-ade5-78d22662562f" />
+
 ## Character stats
 This is the foundation for a lot of cool features in the pipeline. Through this we can run accurate damage calculations for different loadouts or get more accurate results for other functions.
 A more user friendly UI will come in the future so you can view what stats are stored and get quick access to hidden stats like crit rate
