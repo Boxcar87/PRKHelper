@@ -29,12 +29,14 @@ Step 7: Use commands as shown below
 ## Character stats
 This is the foundation for a lot of cool features in the pipeline. Through this we can run accurate damage calculations for different loadouts or get more accurate results for other functions.
 A more user friendly UI will come in the future so you can view what stats are stored and get quick access to hidden stats like crit rate
+/character stat amount (currently support stats are "init", "crit", "ar", "dmg", "complit"
 
 <img width="309" height="61" alt="{8F7A2E3B-AF62-4DFC-93F6-B0BE582F0FEB}" src="https://github.com/user-attachments/assets/544c7cdf-69a3-43af-ba35-606f6db6821d" />
 
 
 ## Vendor pricing for items
 Drag and drop item into chat and get reliably close pricing. Be sure to update your characters complit first (/character complit 123)
+### /vendor (drop item)
 <img width="804" height="60" alt="{466566B0-14A9-4CB5-B1A0-C2A17CC36651}" src="https://github.com/user-attachments/assets/496aa096-e22b-4b65-a2e2-86989e5b09a9" />
 
 
