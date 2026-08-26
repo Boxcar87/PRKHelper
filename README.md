@@ -37,7 +37,7 @@ Commands not yet shown in character include `/character gear||plan mainhand||off
 ## Character stats
 This is the foundation for a lot of cool features in the pipeline. Through this we can run accurate damage calculations for different loadouts or get more accurate results for other functions.
 A more user friendly UI will come in the future so you can view what stats are stored and get quick access to hidden stats like crit rate
-### /character stat amount (currently support stats are "init", "crit", "ar", "dmg", "complit")
+### /character stat amount (currently support stats are "init", "crit", "ar", "dmg", "complit", "burst", "fullauto")
 
 <img width="309" height="61" alt="{8F7A2E3B-AF62-4DFC-93F6-B0BE582F0FEB}" src="https://github.com/user-attachments/assets/544c7cdf-69a3-43af-ba35-606f6db6821d" />
 
