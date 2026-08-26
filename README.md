@@ -7,9 +7,14 @@ You can build the solution yourself or download the zipped executable on the rig
 PRKHelper does not inject into AO, it works by reading logfiles. The premise is that you setup a new chat window which logs vicinity messages and then the program reads commands from vicinity that begin with a !.
 The commands are sent via /whisper which has a very low range so conflicting messages between users are highly unlikely. The results themselves are echoed so that only you can see them. 
 
-The flagship feature of PRKHelper is being able to post items and PB loot tables directly to chat. Items, symbiants, and pb commands are all currently supported.
+Some flagship features of PRKHelper include:
+- !items
+- !pb
+- !symbiant
+- Extensive weapon DPM calculator
+- Persistent shop script generator
 
-Planned features: Symbiant wishlist tracker, "Shop" advertisement script generator.
+Planned features: Symbiant wishlist tracker.
 
 ### Setup
 
