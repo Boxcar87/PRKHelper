@@ -316,6 +316,9 @@ namespace PRKHelper.Helpbot
                             weaponStats.crit = reader.GetInt32(reader.GetOrdinal("crit"));
                             weaponStats.attack = reader.GetInt32(reader.GetOrdinal("attack"));
                             weaponStats.recharge = reader.GetInt32(reader.GetOrdinal("recharge"));
+                            weaponStats.arCap = reader.GetInt32(reader.GetOrdinal("arcap"));
+                            weaponStats.burst = reader.GetInt32(reader.GetOrdinal("burst"));
+                            weaponStats.fullAuto = reader.GetInt32(reader.GetOrdinal("fullauto"));
                         }
                     }
                 }

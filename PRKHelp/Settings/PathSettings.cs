@@ -11,6 +11,8 @@
         public int AR { get; set; } = 0;
         public int Dmg { get; set; } = 0;
         public int Complit { get; set; } = 0;
+        public int Burst { get; set; } = 0;
+        public int Fullauto { get; set; } = 0;
         public string CharacterClass { get; set; } = "other";
     }
 
