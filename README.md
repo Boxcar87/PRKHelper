@@ -11,7 +11,7 @@ Some flagship features of PRKHelper include:
 - !items
 - !pb
 - !symbiant
-- Extensive weapon DPM calculator
+- Extensive weapon DPM calculator (Returns optimal agg def with drag and drop item configuration)
 - Persistent shop script generator
 
 Planned features: Symbiant wishlist tracker.
