@@ -28,7 +28,7 @@ Step 6: Hit confirm
 Step 7: Use commands as shown below
 
 ## DPM Calculator
-Right now this is in phase 2. Inits are now factored into calculation and the output will provide you with optimal agg/def settings for 1/1 as well as DPM metrics for lower agg/def settings.
+Inits are factored into calculation and the output will provide you with optimal agg/def settings for 1/1 as well as DPM metrics for lower agg/def settings.
 Commands not yet shown in character include `/character gear||plan mainhand||offhand||ma (insert item)||maAmount||clear` which will allow you to compare different weapon configurations to see dpm differences. You can use /character class classname if you need to calculate martial arts as well. You can update your character stats as show in the section here.
 ### /dps gear||plan||compare
 <img width="438" height="636" alt="{7171747E-5749-4021-87A7-7CFF799ED30E}" src="https://github.com/user-attachments/assets/d86e4ccb-c951-45b7-abb2-9dc1b03ea3f9" />
@@ -36,7 +36,7 @@ Commands not yet shown in character include `/character gear||plan mainhand||off
 ## Character stats
 This is the foundation for a lot of cool features in the pipeline. Through this we can run accurate damage calculations for different loadouts or get more accurate results for other functions.
 A more user friendly UI will come in the future so you can view what stats are stored and get quick access to hidden stats like crit rate
-### /character stat amount (currently support stats are "init", "crit", "ar", "dmg", "complit", "burst", "fullauto")
+### /character stat amount (currently support stats are "init", "crit", "ar", "dmg", "complit", "burst", "fullauto", "flingshot", "fastattack", "brawl")
 
 <img width="309" height="61" alt="{8F7A2E3B-AF62-4DFC-93F6-B0BE582F0FEB}" src="https://github.com/user-attachments/assets/544c7cdf-69a3-43af-ba35-606f6db6821d" />
 
