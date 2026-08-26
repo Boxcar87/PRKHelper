@@ -31,8 +31,7 @@ Step 7: Use commands as shown below
 Right now this is in phase 2. Inits are now factored into calculation and the output will provide you with optimal agg/def settings for 1/1 as well as DPM metrics for lower agg/def settings.
 Commands not yet shown in character include `/character gear||plan mainhand||offhand||ma (insert item)||maAmount||clear` which will allow you to compare different weapon configurations to see dpm differences. You can use /character class classname if you need to calculate martial arts as well. You can update your character stats as show in the section here.
 ### /dps gear||plan||compare
-<img width="466" height="659" alt="{2826A62E-A454-40BE-8204-88EBD6ECE6E9}" src="https://github.com/user-attachments/assets/b5d2f10f-dcf8-425d-9883-f2057cb52593" />
-
+<img width="438" height="636" alt="{7171747E-5749-4021-87A7-7CFF799ED30E}" src="https://github.com/user-attachments/assets/d86e4ccb-c951-45b7-abb2-9dc1b03ea3f9" />
 
 ## Character stats
 This is the foundation for a lot of cool features in the pipeline. Through this we can run accurate damage calculations for different loadouts or get more accurate results for other functions.
