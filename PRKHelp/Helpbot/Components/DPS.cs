@@ -294,7 +294,6 @@ namespace PRKHelper.Helpbot.Components
                             faDamage = 14500 + (faDamage - 14500) / 2;
                         if (faDamage > 15000)
                             faDamage = 15000;
-
                     }
                     if (faDamageCapped > 10000)
                     {
@@ -307,8 +306,6 @@ namespace PRKHelper.Helpbot.Components
                             faDamageCapped = 14500 + (faDamageCapped - 14500) / 2;
                         if (faDamageCapped > 15000)
                             faDamageCapped = 15000;
-
-
                     }
 
                     dpm += faDamage;
