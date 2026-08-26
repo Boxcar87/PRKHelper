@@ -103,7 +103,7 @@
             else
                 range = 2;
 
-            return (lowid, highid, (int)qualityLevel);
+            return (brawlIDs[range].Item1, brawlIDs[range].Item2, (int)qualityLevel);
         }
     }
 }

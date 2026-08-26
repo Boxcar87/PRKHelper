@@ -317,8 +317,11 @@ namespace PRKHelper.Helpbot
                             weaponStats.attack = reader.GetInt32(reader.GetOrdinal("attack"));
                             weaponStats.recharge = reader.GetInt32(reader.GetOrdinal("recharge"));
                             weaponStats.arCap = reader.GetInt32(reader.GetOrdinal("arcap"));
+                            weaponStats.flingShot = reader.GetInt32(reader.GetOrdinal("flingshot"));
                             weaponStats.burst = reader.GetInt32(reader.GetOrdinal("burst"));
                             weaponStats.fullAuto = reader.GetInt32(reader.GetOrdinal("fullauto"));
+                            weaponStats.fastAttack = reader.GetInt32(reader.GetOrdinal("fastattack"));
+                            weaponStats.brawl = reader.GetInt32(reader.GetOrdinal("brawl"));
                         }
                     }
                 }
@@ -326,7 +329,7 @@ namespace PRKHelper.Helpbot
             catch (SqliteException _ex)
             {
                 Debug.WriteLine(_ex);
-            }
+            }            
             return weaponStats;
         }
     }

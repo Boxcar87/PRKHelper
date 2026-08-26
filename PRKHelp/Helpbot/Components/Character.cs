@@ -29,7 +29,7 @@ namespace PRKHelper.Helpbot.Components
             {
                 return (-1, $"No parameters given");
             }
-            if (_params[0].ToLower() == "init" || _params[0].ToLower() == "crit" || _params[0].ToLower() == "ar" || _params[0].ToLower() == "dmg" || _params[0].ToLower() == "complit" || _params[0].ToLower() == "burst" || _params[0].ToLower() == "fullauto")
+            if (_params[0].ToLower() == "init" || _params[0].ToLower() == "crit" || _params[0].ToLower() == "ar" || _params[0].ToLower() == "dmg" || _params[0].ToLower() == "complit" || _params[0].ToLower() == "burst" || _params[0].ToLower() == "fullauto" || _params[0].ToLower() == "flingshot" || _params[0].ToLower() == "fastattack" || _params[0].ToLower() == "brawl")
             {
                 if (_params.Length != 2)
                 {
@@ -113,8 +113,11 @@ namespace PRKHelper.Helpbot.Components
                 case "ar":
                 case "dmg":
                 case "complit":
+                case "flingshot":
                 case "burst":
                 case "fullauto":
+                case "brawl":
+                case "fastattack":
                     int value = int.Parse(_params[1]);
                     // Giving 3% base crit to equation;
                     if (_params[0] == "crit")
