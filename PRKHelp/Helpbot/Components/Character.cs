@@ -29,7 +29,7 @@ namespace PRKHelper.Helpbot.Components
             {
                 return (-1, $"No parameters given");
             }
-            if (_params[0].ToLower() == "init" || _params[0].ToLower() == "crit" || _params[0].ToLower() == "ar" || _params[0].ToLower() == "dmg" || _params[0].ToLower() == "complit")
+            if (_params[0].ToLower() == "init" || _params[0].ToLower() == "crit" || _params[0].ToLower() == "ar" || _params[0].ToLower() == "dmg" || _params[0].ToLower() == "complit" || _params[0].ToLower() == "burst" || _params[0].ToLower() == "fullauto" || _params[0].ToLower() == "flingshot" || _params[0].ToLower() == "fastattack" || _params[0].ToLower() == "brawl")
             {
                 if (_params.Length != 2)
                 {
@@ -106,12 +106,18 @@ namespace PRKHelper.Helpbot.Components
             {
                 case "class":
                     UpdateClass(_params[1]);
+                    OutputStrings[0] = $"{TextColor}Updated class to {_params[1]}. Please add martial arts skill again (only relevant for martial arts).";
                     break;
                 case "init":
                 case "crit":
                 case "ar":
                 case "dmg":
                 case "complit":
+                case "flingshot":
+                case "burst":
+                case "fullauto":
+                case "brawl":
+                case "fastattack":
                     int value = int.Parse(_params[1]);
                     // Giving 3% base crit to equation;
                     if (_params[0] == "crit")
@@ -129,6 +135,7 @@ namespace PRKHelper.Helpbot.Components
                     {
                         // Get MA item
                         (int, int, int)[] maItems = MA.GetMAItems(int.Parse(_params[2]));
+                        Debug.WriteLine(maItems[1]);
                         string characterClass = SettingsManager.GetClass();
                         switch (characterClass)
                         {
@@ -305,8 +312,9 @@ namespace PRKHelper.Helpbot.Components
                     _class = "other";
                     break;
             }
-            OutputStrings[0] = $"{TextColor}Updated class to {_class} (only relevant for martial arts)";
             SettingsManager.UpdateClass(_class);
+            RemoveWeaponFromGear("ma");
+            RemoveWeaponFromPlan("ma");
         }
     }
 }

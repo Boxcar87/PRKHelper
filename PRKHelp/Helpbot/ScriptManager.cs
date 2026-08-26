@@ -110,20 +110,29 @@ namespace PRKHelp
         // Append appropriate amount of parameter inputs via add %1 %2 etc
         private static void GenerateInterfaceScripts(string _scriptsFolderPath)
         {
+
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "ma"), $"/w !mafist %1\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Input is number
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "mafist"), $"/w !mafist %1\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Input is number
+
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "calc"), $"/w !calc %1\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Input is number
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "oe"), $"/w !oe %1\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Input is number
-            File.WriteAllText(Path.Combine(_scriptsFolderPath, "mafist"), $"/w !mafist %1\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Input is number
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "level"), $"/w !level %1\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Input is number
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "mission"), $"/w !mission %1\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Input is number
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "timer"), $"/w !timer %1 %2\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // First input is string second is number
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "timers"), $"/w !timers\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // No inputs
+
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "dps"), $"/w !dps %1\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Input is a string
+            File.WriteAllText(Path.Combine(_scriptsFolderPath, "dpm"), $"/w !dps %1\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Input is a string
+
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "itemfind"), $"/w !itemfind %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs, each input is a word of the item name, first input can be ql
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "trickle"), $"/w !trickle %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 8 inputs, 9th input is used for error handling
+
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "symb"), $"/w !symbiant %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs, each input is a word of the item name
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "symbiant"), $"/w !symbiant %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs, each input is a word of the item name
+
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "pb"), $"/w !pocketboss %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs, input could be an inserted pattern
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "pocketboss"), $"/w !pocketboss %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs, input could be an inserted pattern
+
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "editshop"), $"/w !editshop %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs 2rd input could be start of item 
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "character"), $"/w !character %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs 3rd input could be start of item
             File.WriteAllText(Path.Combine(_scriptsFolderPath, "vendor"), $"/w !vendor %1 %2 %3 %4 %5 %6 %7 %8 %9\n/delay {ExecutionDelay}\n/PRKHelp/Output"); // Allows 9 inputs 1st input should be start of item

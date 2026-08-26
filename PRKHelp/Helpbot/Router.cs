@@ -12,12 +12,10 @@ namespace PRKHelper.Helpbot
             DB = new DB();
 
             // Add new script components here
-            MA maFist = new MA();
             GameTimers gameTimers = new();
             Components.Add("calc", new Calc());
             Components.Add("oe", new OE());
-            Components.Add("mafist", maFist);
-            Components.Add("ma", maFist);
+            Components.Add("mafist", new MA());
             Components.Add("itemfind", new Item(DB));
             Components.Add("trickle", new Trickle(DB));
             Components.Add("symbiant", new Symbiant(DB));

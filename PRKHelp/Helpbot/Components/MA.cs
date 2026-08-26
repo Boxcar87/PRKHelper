@@ -57,10 +57,53 @@
             }
             else
                 range = 3;
+
             maItems[0] = (martialArtistIDs[range].Item1, martialArtistIDs[range].Item2, (int)qualityLevel);
             maItems[1] = (shadeIDs[range].Item1, shadeIDs[range].Item2, (int)qualityLevel);
             maItems[2] = (othersIDs[range].Item1, othersIDs[range].Item2, (int)qualityLevel);
             return maItems;
+        }
+
+        public static (int, int, int) GetBrawlItem(int _skill)
+        {
+            int lowid = 0;
+            int highid = 0;
+            double qualityLevel = 0;
+
+
+            if (_skill > 3000)
+                _skill = 3000;
+
+            switch (_skill)
+            {
+                case < 1001:
+                    qualityLevel = Math.Floor(_skill / 2.0);
+                    break;
+                case < 2001:
+                    qualityLevel = Math.Floor((_skill - 1000) / 2.0);
+                    break;
+                case < 3001:
+                    qualityLevel = Math.Floor((_skill - 2000) / 2.0);
+                    break;
+            }
+
+            int[] thresholds = [1001, 2001];
+            (int, int)[] brawlIDs = [(70292, 70293), (211401, 211402), (211403, 211404)];
+
+            int range = 0;
+            if (_skill <= 2001)
+            {
+                for (int i = 0; i < thresholds.Length; i++)
+                {
+                    range = i;
+                    if (_skill < thresholds[range])
+                        break;
+                }
+            }
+            else
+                range = 2;
+
+            return (brawlIDs[range].Item1, brawlIDs[range].Item2, (int)qualityLevel);
         }
     }
 }

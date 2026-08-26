@@ -8,7 +8,7 @@
         public string TextColor = "<font color=#FFFFFF>";
         public string ValueColor = "<font color=#00FFFF>";
         public string HighlightColor = "<font color=#FFFF00>";
-        public string RedColor = "<font color=#FF0000>";
+        public string RedColor = "<font color=#FFA127>";
         public string EndColor = "</font>";
         public string Indent = "   ";
 
