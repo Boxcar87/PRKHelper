@@ -83,9 +83,9 @@ You can drag and drop items into your chat bar and create a persistent shop scri
 ### /trickle stat amount stat amount
 <img width="481" height="633" alt="{948AA090-3D5B-44D0-8276-BAAD71267098}" src="https://github.com/user-attachments/assets/42b4d6a7-c8df-4762-98f8-9dd2a3f06a1e" />
 
-/items and /item are reserved commands it seems, sorry. Went with /itemfind as a hopefully acceptable substitute. QL is optional.
+/items and /item are reserved commands it seems, sorry. Went with /itemfind as a hopefully acceptable substitute. QL is optional. You can link items to active chat or assign weapons to dpm planner from inside output window.
 ### /itemfind (ql) item name
-<img width="451" height="686" alt="{B12EEEAD-DC00-497A-A843-ECCFE311ABDF}" src="https://github.com/user-attachments/assets/30976286-7571-46ff-8a09-a76faceb6434" />
+<img width="511" height="674" alt="{D62B2006-B627-4E62-907B-D558E7A93BBF}" src="https://github.com/user-attachments/assets/18767e17-e984-4c1a-af9d-0cfb49587e38" />
 
 ### /calc formula+no*spaces
 <img width="199" height="54" alt="{B0E3934B-530F-4BAE-ABFC-6473C3218D79}" src="https://github.com/user-attachments/assets/4e02baae-c48b-4f86-8f5e-7117cae2d381" />
