@@ -57,7 +57,7 @@ This is the foundation for a lot of cool features in the pipeline. Through this 
 
 
 ## Vendor pricing for items
-Drag and drop item into chat and get reasonably close pricing. Some items have unknown special price reduction mechanics. Be sure to update your characters complit first (/character complit 123)
+Drag and drop item into chat and get reasonably close pricing. Items have a variety unknown special price reduction mechanics so there may be some unique scenarios where price is drastically off from actual sell value. Be sure to update your characters complit first (/character complit 123)
 ### /vendor (drop item)
 <img width="804" height="60" alt="{466566B0-14A9-4CB5-B1A0-C2A17CC36651}" src="https://github.com/user-attachments/assets/496aa096-e22b-4b65-a2e2-86989e5b09a9" />
 
