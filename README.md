@@ -35,7 +35,7 @@ Step 7: Use commands as shown below
 ## DPM Calculator
 Inits are factored into calculation and the output will provide you with optimal agg/def settings for 1/1 as well as DPM metrics for lower agg/def settings.
 Commands not yet shown in character include `/character gear||plan mainhand||offhand||ma (insert item)||maAmount||clear` which will allow you to compare different weapon configurations to see dpm differences. You can use /character class classname if you need to calculate martial arts as well. You can update your character stats as show in the section here.
-### /dps gear||plan||compare
+### /dps (gear||plan||compare)
 <img width="438" height="636" alt="{7171747E-5749-4021-87A7-7CFF799ED30E}" src="https://github.com/user-attachments/assets/d86e4ccb-c951-45b7-abb2-9dc1b03ea3f9" />
 
 ## Character stats
