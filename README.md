@@ -40,8 +40,17 @@ Commands not yet shown in character include `/character gear||plan mainhand||off
 
 ## Character stats
 This is the foundation for a lot of cool features in the pipeline. Through this we can run accurate damage calculations for different loadouts or get more accurate results for other functions.
-A more user friendly UI will come in the future so you can view what stats are stored and get quick access to hidden stats like crit rate
-### /character stat amount (currently support stats are "init", "crit", "ar", "dmg", "complit", "burst", "fullauto", "flingshot", "fastattack", "brawl")
+
+### /character
+<img width="444" height="624" alt="{8ECAB8A5-5BF6-4275-894D-FE721B9EBBCF}" src="https://github.com/user-attachments/assets/45e2c3ed-1fd2-45d5-8094-6ac3904fc679" />
+
+### /character (gear||plan) (mainhand||offhand) (insert item)
+<img width="538" height="59" alt="{337B1861-9A70-47B9-9703-B06581DA2293}" src="https://github.com/user-attachments/assets/90b670ab-1c5a-449f-be14-499722eaafc8" />
+
+### /character (gear||plan) ma 123
+<img width="303" height="63" alt="{84449783-E333-42F9-A4DE-FF46E723DB42}" src="https://github.com/user-attachments/assets/df4703d6-dd06-45b5-b919-4dfff23fd277" />
+
+### /character stat 123 (currently support stats are "init", "crit", "ar", "dmg", "complit", "burst", "fullauto", "flingshot", "fastattack", "brawl")
 
 <img width="309" height="61" alt="{8F7A2E3B-AF62-4DFC-93F6-B0BE582F0FEB}" src="https://github.com/user-attachments/assets/544c7cdf-69a3-43af-ba35-606f6db6821d" />
 
