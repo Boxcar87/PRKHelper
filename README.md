@@ -75,15 +75,15 @@ You can drag and drop items into your chat bar and create a persistent shop scri
 
 
 ## General bot commands
-/items and /item are reserved commands it seems, sorry. Went with /itemfind as a hopefully acceptable substitute. QL is optional.
-/pb can take a pattern piece as input for search
 
+/pb can take a pattern piece as input for search
 ### /symbiant and /pb 
 <img width="456" height="604" alt="{01A62B65-CAB8-4B4A-8281-CF790095CE4A}" src="https://github.com/user-attachments/assets/e240b0bd-18f7-4131-be14-ace05bd878b7" />
 
 ### /trickle stat amount stat amount
 <img width="481" height="633" alt="{948AA090-3D5B-44D0-8276-BAAD71267098}" src="https://github.com/user-attachments/assets/42b4d6a7-c8df-4762-98f8-9dd2a3f06a1e" />
 
+/items and /item are reserved commands it seems, sorry. Went with /itemfind as a hopefully acceptable substitute. QL is optional.
 ### /itemfind (ql) item name
 <img width="451" height="686" alt="{B12EEEAD-DC00-497A-A843-ECCFE311ABDF}" src="https://github.com/user-attachments/assets/30976286-7571-46ff-8a09-a76faceb6434" />
 
