@@ -158,8 +158,6 @@ namespace PRKHelper.Helpbot.Components
 
         private (string, string, string, int) GetDPM(List<Weapon> _weapons, List<string> _hrefWeapons)
         {
-
-
             int ar = SettingsManager.GetStat("AR");
             int init = SettingsManager.GetStat("Init");
             int crit = SettingsManager.GetStat("Crit");
