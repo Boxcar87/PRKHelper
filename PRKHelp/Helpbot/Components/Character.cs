@@ -16,9 +16,11 @@ namespace PRKHelper.Helpbot.Components
         //List<Type> ParamTypes
 
         //List<string> OutputStrings; // Inherited object retrieved for response by Route()
-        public Character(/*DB _db*/) // Pass DB reference in from route if needed
+        DB DB;
+        public Character(DB _db) // Pass DB reference in from route if needed
         {
             // Base class will perform basic validation on params
+            DB = _db;
             ParamSyntax = "/character string string (insert item)";
         }
 
@@ -163,8 +165,11 @@ namespace PRKHelper.Helpbot.Components
                         string[] numbers = numberString.Split('/');
 
                         (int, int, int) weapon = (int.Parse(numbers[0]), int.Parse(numbers[1]), int.Parse(numbers[2]));
-                        AddWeaponToGear(slot.ToLower(), weapon);
-                        OutputStrings[0] = $"{TextColor}Updated {slot} weapon for gear";
+                        bool success = AddWeaponToGear(slot.ToLower(), weapon);
+                        if (success)
+                            OutputStrings[0] = $"{TextColor}Updated {slot} weapon for gear";
+                        else
+                            OutputStrings[0] = $"{HighlightColor}Invalid weapon given for {slot}. Please check inputs.";
                     }
                     break;
                 case "plan":
@@ -212,8 +217,11 @@ namespace PRKHelper.Helpbot.Components
                         }
 
                         (int, int, int) weapon = (int.Parse(numbers[0]), int.Parse(numbers[1]), int.Parse(numbers[2]));
-                        AddWeaponToPlan(slot.ToLower(), weapon);
-                        OutputStrings[0] = $"{TextColor}Updated {slot} weapon for plan";
+                        bool success = AddWeaponToPlan(slot.ToLower(), weapon);
+                        if (success)
+                            OutputStrings[0] = $"{TextColor}Updated {slot} weapon for plan";
+                        else
+                            OutputStrings[0] = $"{HighlightColor}Invalid weapon given for {slot}. Please check inputs.";
                     }
                     break;
             }
@@ -221,8 +229,10 @@ namespace PRKHelper.Helpbot.Components
             return statusCode;
         }
 
-        private void AddWeaponToGear(string _slot, (int, int, int) _weapon)
+        private bool AddWeaponToGear(string _slot, (int, int, int) _weapon)
         {
+            if(!CheckIfValidWeapon(_weapon.Item1))
+                return false;
             (int, int, int)[] weapons = SettingsManager.GetGear();
             switch (_slot)
             {
@@ -237,6 +247,7 @@ namespace PRKHelper.Helpbot.Components
                     break;
             }
             SettingsManager.UpdateGear(weapons);
+            return true;
         }
 
         private void RemoveWeaponFromGear(string _slot)
@@ -257,8 +268,10 @@ namespace PRKHelper.Helpbot.Components
             SettingsManager.UpdateGear(weapons);
         }
 
-        private void AddWeaponToPlan(string _slot, (int, int, int) _weapon)
+        private bool AddWeaponToPlan(string _slot, (int, int, int) _weapon)
         {
+            if (!CheckIfValidWeapon(_weapon.Item1))
+                return false;
             (int, int, int)[] weapons = SettingsManager.GetPlan();
             switch (_slot)
             {
@@ -273,6 +286,7 @@ namespace PRKHelper.Helpbot.Components
                     break;
             }
             SettingsManager.UpdatePlan(weapons);
+            return true;
         }
 
         private void RemoveWeaponFromPlan(string _slot)
@@ -315,6 +329,12 @@ namespace PRKHelper.Helpbot.Components
             SettingsManager.UpdateClass(_class);
             RemoveWeaponFromGear("ma");
             RemoveWeaponFromPlan("ma");
+        }
+
+        private bool CheckIfValidWeapon(int _lowid)
+        {
+            string query = $"Select * FROM WeaponStats WHERE {_lowid} == lowid";
+            return DB.QueryIfWeaponExists(query);
         }
     }
 }
