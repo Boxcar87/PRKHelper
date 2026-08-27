@@ -241,8 +241,8 @@ namespace PRKHelper.Helpbot.Components
                 double nonCritHitsBase = hitsPerWeapon * nonCritHitRate;
                 double critHitsBase = hitsPerWeapon * critHitRate;
 
-                // Get damage of specials 
 
+                // Get damage of specials 
                 if(weapon.flingShot == 1 && flingShot > 0 && flingShotNotAdded)
                 {
                     int flingRecharge = GetFlingRecharge(flingShot, weapon.attack);
@@ -351,6 +351,8 @@ namespace PRKHelper.Helpbot.Components
                     brawlNotAdded = false;
                 }
 
+
+                // Differnt DPM per agg/def settings
                 // Fastest hit rate possible
                 double nonCritHits = nonCritHitsBase / ((fastestAttackRate + fastestRechargeRate) / 200.00);
                 double critHits = critHitsBase / ((fastestAttackRate + fastestRechargeRate) / 200.00);
@@ -403,8 +405,8 @@ namespace PRKHelper.Helpbot.Components
                 
                 hrefString += $"<br><br>";
             }
-            // Draw dpm rates for each agg/def position (hide surpassed rates)
 
+            // Draw dpm rates for each agg/def position (hide surpassed rates)
             hrefString += $"    0% DPM - {ValueColor}{fullDefDpm+specialsDpm}{EndColor} | (Capped) {ValueColor}{fullDefDpmCapped+specialsDpmCapped}{EndColor}<br>";
             if (lowestAllAgg > 25)
                 hrefString += $"  25% DPM - {ValueColor}{threeQuarterDefDpm+specialsDpm}{EndColor} | (Capped) {ValueColor}{threeQuarterDefDpmCapped+specialsDpmCapped}{EndColor}<br>";
@@ -415,6 +417,7 @@ namespace PRKHelper.Helpbot.Components
             if (lowestAllAgg == 100)
                 hrefString += $" 100% DPM - {ValueColor}{dpm+specialsDpm}{EndColor} | (Capped) {ValueColor}{dpmCapped+specialsDpmCapped}{EndColor}<br>";
             hrefString += $"<br>{RedColor}Lowest{EndColor} 1/1 Agg = {ValueColor}{lowestAllAgg}{EndColor}% ({ValueColor}{(int)(-100 + (200) * (lowestAllAgg/100.00))}{EndColor})\">Breakdown</a>";
+
             return (dpm.ToString(), dpmCapped.ToString(), hrefString, lowestAllAgg);
         }
 

@@ -64,9 +64,9 @@ namespace PRKHelper.Helpbot.Components
 
         private int GetItemValue(int _lowid, int _ql)
         {
-            string interpolationProgress = $"(({_ql}*1.0) - lowql) / (highql - lowql)";
+            string interpolationProgress = $"(({_ql}*1.000) - lowql) / (highql - lowql)";
             string query = "SELECT ";
-            query += $"(lowvalue + ROUND({interpolationProgress} * (highvalue - lowvalue))) AS value ";
+            query += $"(lowvalue + ROUND(CASE WHEN highql = lowql THEN 0 ELSE {interpolationProgress} END * (highvalue - lowvalue))) AS value ";
             query += $"FROM Items WHERE lowid == {_lowid} AND {_ql} BETWEEN lowql AND highql";
             return DB.QueryItemValue(query);
         }
