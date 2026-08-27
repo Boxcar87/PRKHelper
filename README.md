@@ -76,9 +76,12 @@ You can drag and drop items into your chat bar and create a persistent shop scri
 
 ## General bot commands
 
-/pb can take a pattern piece as input for search
-### /symbiant and /pb 
+
+### /symbiant (slot||type||name) (slot||type||name) (slot||type||name) (It's basically just a string search with some words redirected for convenience, can input symb you want to find in many ways)
 <img width="456" height="604" alt="{01A62B65-CAB8-4B4A-8281-CF790095CE4A}" src="https://github.com/user-attachments/assets/e240b0bd-18f7-4131-be14-ace05bd878b7" />
+
+### /pb (bossname||(insert pattern))
+<img width="501" height="633" alt="{149EC6BB-BDA4-4C3B-9C00-3D818ABB2EAB}" src="https://github.com/user-attachments/assets/37fbb379-a828-427c-8013-3eeb062a0592" />
 
 ### /trickle stat amount stat amount
 <img width="481" height="633" alt="{948AA090-3D5B-44D0-8276-BAAD71267098}" src="https://github.com/user-attachments/assets/42b4d6a7-c8df-4762-98f8-9dd2a3f06a1e" />
