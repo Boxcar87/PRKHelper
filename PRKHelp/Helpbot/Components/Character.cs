@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Diagnostics;
 using PRKHelp.Settings;
+using static System.Windows.Forms.AxHost;
 
 namespace PRKHelper.Helpbot.Components
 {
@@ -29,7 +30,7 @@ namespace PRKHelper.Helpbot.Components
         {
             if (_params.Length == 0)
             {
-                return (-1, $"No parameters given");
+                return (1, $"Accepted");
             }
             if (_params[0].ToLower() == "init" || _params[0].ToLower() == "crit" || _params[0].ToLower() == "ar" || _params[0].ToLower() == "dmg" || _params[0].ToLower() == "complit" || _params[0].ToLower() == "burst" || _params[0].ToLower() == "fullauto" || _params[0].ToLower() == "flingshot" || _params[0].ToLower() == "fastattack" || _params[0].ToLower() == "brawl")
             {
@@ -103,130 +104,203 @@ namespace PRKHelper.Helpbot.Components
         public override int Process(string[] _params)
         {
             int statusCode = 1; // -1 for error 1 for success
-            _params[0] = _params[0].ToLower();
-            switch (_params[0])
+            if(_params.Length == 0)
             {
-                case "class":
-                    UpdateClass(_params[1]);
-                    OutputStrings[0] = $"{TextColor}Updated class to {_params[1]}. Please add martial arts skill again (only relevant for martial arts).";
-                    break;
-                case "init":
-                case "crit":
-                case "ar":
-                case "dmg":
-                case "complit":
-                case "flingshot":
-                case "burst":
-                case "fullauto":
-                case "brawl":
-                case "fastattack":
-                    int value = int.Parse(_params[1]);
-                    // Giving 3% base crit to equation;
-                    if (_params[0] == "crit")
-                        value += 3;
-                    UpdateStat(_params[0], value);
-                    OutputStrings[0] = $"{TextColor}Updated {_params[0]} to {_params[1]}";
-                    break;
-                case "gear":
-                    if (_params[2].ToLower() == "clear")
-                    {
-                        RemoveWeaponFromGear(_params[1].ToLower());
-                        OutputStrings[0] = $"{TextColor}Removed {_params[1]} weapon from gear";
-                    }
-                    else if (_params[1].ToLower() == "ma")
-                    {
-                        // Get MA item
-                        (int, int, int)[] maItems = MA.GetMAItems(int.Parse(_params[2]));
-                        Debug.WriteLine(maItems[1]);
-                        string characterClass = SettingsManager.GetClass();
-                        switch (characterClass)
+                OutputStrings[0] = DrawCharacter();
+            }
+            else
+            {
+                _params[0] = _params[0].ToLower();
+                switch (_params[0])
+                {
+                    case "class":
+                        UpdateClass(_params[1]);
+                        OutputStrings[0] = $"{TextColor}Updated class to {_params[1]}. Please add martial arts skill again (only relevant for martial arts).";
+                        break;
+                    case "init":
+                    case "crit":
+                    case "ar":
+                    case "dmg":
+                    case "complit":
+                    case "flingshot":
+                    case "burst":
+                    case "fullauto":
+                    case "brawl":
+                    case "fastattack":
+                        int value = int.Parse(_params[1]);
+                        // Giving 3% base crit to equation;
+                        if (_params[0] == "crit")
+                            value += 3;
+                        UpdateStat(_params[0], value);
+                        OutputStrings[0] = $"{TextColor}Updated {_params[0]} to {_params[1]}";
+                        break;
+                    case "gear":
+                        if (_params[2].ToLower() == "clear")
                         {
-                            case "ma":
-                                AddWeaponToGear("ma", maItems[0]);
-                                break;
-                            case "shade":
-                                AddWeaponToGear("ma", maItems[1]);
-                                break;
-                            case "other":
-                                AddWeaponToGear("ma", maItems[2]);
-                                break;
+                            RemoveWeaponFromGear(_params[1].ToLower());
+                            OutputStrings[0] = $"{TextColor}Removed {_params[1]} weapon from gear";
                         }
-                        OutputStrings[0] = $"{TextColor}Updated martial arts for gear";
-                    }
-                    else
-                    {
-                        string slot = _params[1];
-                        _params = _params[2..];
-                        string itemString = string.Join(" ", _params);
-                        itemString = itemString.Replace("\"", "\'");
-                        int start = itemString.IndexOf("//") + 2;
-                        string clipped = itemString[start..^4];
-                        string numberString = clipped[..clipped.IndexOf("\'")];
-                        string[] numbers = numberString.Split('/');
-
-                        (int, int, int) weapon = (int.Parse(numbers[0]), int.Parse(numbers[1]), int.Parse(numbers[2]));
-                        bool success = AddWeaponToGear(slot.ToLower(), weapon);
-                        if (success)
-                            OutputStrings[0] = $"{TextColor}Updated {slot} weapon for gear";
-                        else
-                            OutputStrings[0] = $"{HighlightColor}Invalid weapon given for {slot}. Please check inputs.";
-                    }
-                    break;
-                case "plan":
-                    if (_params[2].ToLower() == "clear")
-                    {
-                        RemoveWeaponFromPlan(_params[1].ToLower());
-                        OutputStrings[0] = $"{TextColor}Removed {_params[1]} weapon from plan";
-                    }
-                    else if (_params[1].ToLower() == "ma")
-                    {
-                        // Get MA item
-                        (int, int, int)[] maItems = MA.GetMAItems(int.Parse(_params[2]));
-                        string characterClass = SettingsManager.GetClass();
-                        switch (characterClass)
+                        else if (_params[1].ToLower() == "ma")
                         {
-                            case "ma":
-                                AddWeaponToPlan("ma", maItems[0]);
-                                break;
-                            case "shade":
-                                AddWeaponToPlan("ma", maItems[1]);
-                                break;
-                            case "other":
-                                AddWeaponToPlan("ma", maItems[2]);
-                                break;
-                        }
-                        OutputStrings[0] = $"{TextColor}Updated martial arts for plan";
-                    }
-                    else
-                    {
-                        string[] numbers;
-                        string slot = _params[1];
-                        if (_params[2] == "raw")
-                        {
-                            numbers = [_params[3], _params[4], _params[5]];
+                            // Get MA item
+                            (int, int, int)[] maItems = MA.GetMAItems(int.Parse(_params[2]));
+                            Debug.WriteLine(maItems[1]);
+                            string characterClass = SettingsManager.GetClass();
+                            switch (characterClass)
+                            {
+                                case "ma":
+                                    AddWeaponToGear("ma", maItems[0]);
+                                    break;
+                                case "shade":
+                                    AddWeaponToGear("ma", maItems[1]);
+                                    break;
+                                case "other":
+                                    AddWeaponToGear("ma", maItems[2]);
+                                    break;
+                            }
+                            OutputStrings[0] = $"{TextColor}Updated martial arts for gear";
                         }
                         else
                         {
+                            string slot = _params[1];
                             _params = _params[2..];
                             string itemString = string.Join(" ", _params);
                             itemString = itemString.Replace("\"", "\'");
                             int start = itemString.IndexOf("//") + 2;
                             string clipped = itemString[start..^4];
                             string numberString = clipped[..clipped.IndexOf("\'")];
-                            numbers = numberString.Split('/');
-                        }
+                            string[] numbers = numberString.Split('/');
 
-                        (int, int, int) weapon = (int.Parse(numbers[0]), int.Parse(numbers[1]), int.Parse(numbers[2]));
-                        bool success = AddWeaponToPlan(slot.ToLower(), weapon);
-                        if (success)
-                            OutputStrings[0] = $"{TextColor}Updated {slot} weapon for plan";
+                            (int, int, int) weapon = (int.Parse(numbers[0]), int.Parse(numbers[1]), int.Parse(numbers[2]));
+                            bool success = AddWeaponToGear(slot.ToLower(), weapon);
+                            if (success)
+                                OutputStrings[0] = $"{TextColor}Updated {slot} weapon for gear";
+                            else
+                                OutputStrings[0] = $"{HighlightColor}Invalid weapon given for {slot}. Please check inputs.";
+                        }
+                        break;
+                    case "plan":
+                        if (_params[2].ToLower() == "clear")
+                        {
+                            RemoveWeaponFromPlan(_params[1].ToLower());
+                            OutputStrings[0] = $"{TextColor}Removed {_params[1]} weapon from plan";
+                        }
+                        else if (_params[1].ToLower() == "ma")
+                        {
+                            // Get MA item
+                            (int, int, int)[] maItems = MA.GetMAItems(int.Parse(_params[2]));
+                            string characterClass = SettingsManager.GetClass();
+                            switch (characterClass)
+                            {
+                                case "ma":
+                                    AddWeaponToPlan("ma", maItems[0]);
+                                    break;
+                                case "shade":
+                                    AddWeaponToPlan("ma", maItems[1]);
+                                    break;
+                                case "other":
+                                    AddWeaponToPlan("ma", maItems[2]);
+                                    break;
+                            }
+                            OutputStrings[0] = $"{TextColor}Updated martial arts for plan";
+                        }
                         else
-                            OutputStrings[0] = $"{HighlightColor}Invalid weapon given for {slot}. Please check inputs.";
-                    }
-                    break;
+                        {
+                            string[] numbers;
+                            string slot = _params[1];
+                            if (_params[2] == "raw")
+                            {
+                                numbers = [_params[3], _params[4], _params[5]];
+                            }
+                            else
+                            {
+                                _params = _params[2..];
+                                string itemString = string.Join(" ", _params);
+                                itemString = itemString.Replace("\"", "\'");
+                                int start = itemString.IndexOf("//") + 2;
+                                string clipped = itemString[start..^4];
+                                string numberString = clipped[..clipped.IndexOf("\'")];
+                                numbers = numberString.Split('/');
+                            }
+
+                            (int, int, int) weapon = (int.Parse(numbers[0]), int.Parse(numbers[1]), int.Parse(numbers[2]));
+                            bool success = AddWeaponToPlan(slot.ToLower(), weapon);
+                            if (success)
+                                OutputStrings[0] = $"{TextColor}Updated {slot} weapon for plan";
+                            else
+                                OutputStrings[0] = $"{HighlightColor}Invalid weapon given for {slot}. Please check inputs.";
+                        }
+                        break;
+                }
             }
             // Route() will return a generic failure if value here is -1.
             return statusCode;
+        }
+
+        private string DrawCharacter()
+        {
+            string hrefString = $"<a href=\"text://{HighlightColor}Character{EndColor}<br><br>Stats:<br>";
+
+            Dictionary<string, int> stats = new Dictionary<string, int>() {
+
+                ["AR"] = SettingsManager.GetStat("AR"),
+                ["Init"] = SettingsManager.GetStat("Init"),
+                ["Crit"] = SettingsManager.GetStat("Crit"),
+                ["AddDmg"] = SettingsManager.GetStat("Dmg"),
+                ["FlingShot"] = SettingsManager.GetStat("Flingshot"),
+                ["Burst"] = SettingsManager.GetStat("Burst"),
+                ["FullAuto"] = SettingsManager.GetStat("Fullauto"),
+                ["FastAttack"] = SettingsManager.GetStat("Fastattack"),
+                ["Brawl"] = SettingsManager.GetStat("Brawl"),
+                ["CompLit"] = SettingsManager.GetStat("Complit")
+            };
+
+            (int, int, int)[] gearData = SettingsManager.GetGear();
+            (int, int, int)[] planData = SettingsManager.GetPlan();
+            
+            foreach (KeyValuePair<string,int> stat in stats)
+            {
+                hrefString += $"{Indent}{stat.Key} - {ValueColor}{stat.Value}{EndColor} | {RedColor}[<a href='chatcmd:///character {stat.Key.ToLower()} 0'>X</a>]{EndColor}<br>";
+            }
+
+            hrefString += $"<br>Gear Weapons:<br>";
+            for (int g=0; g<gearData.Length; g++)
+            {
+                string slot = "Mainhand";
+                switch (g)
+                {
+                    case 1:
+                        slot = "Offhand";
+                        break;
+                    case 2:
+                        slot = "MA";
+                        break;
+                }
+                if (gearData[g].Item1 > 0)
+                {
+                    hrefString += $"{Indent}{slot} - {GetWeaponAsHref(gearData[g].Item1, gearData[g].Item3)} | {RedColor}[<a href='chatcmd:///character gear {slot.ToLower()} clear'>X</a>]{EndColor}<br>";
+                }
+            }
+            hrefString += $"<br>Plan Weapons:<br>";
+            for (int p = 0; p < planData.Length; p++)
+            {
+                string slot = "Mainhand";
+                switch (p)
+                {
+                    case 1:
+                        slot = "Offhand";
+                        break;
+                    case 2:
+                        slot = "MA";
+                        break;
+                }
+                if (planData[p].Item1 > 0)
+                {
+                    hrefString += $"{Indent}{slot} - {GetWeaponAsHref(planData[p].Item1, planData[p].Item3)} | {RedColor}[<a href='chatcmd:///character plan {slot.ToLower()} clear'>X</a>]{EndColor}<br>";
+                }
+            }
+            hrefString += "\">View Character</a>";
+            return hrefString;
         }
 
         private bool AddWeaponToGear(string _slot, (int, int, int) _weapon)
@@ -335,6 +409,14 @@ namespace PRKHelper.Helpbot.Components
         {
             string query = $"Select * FROM WeaponStats WHERE {_lowid} == lowid";
             return DB.QueryIfWeaponExists(query);
+        }
+
+        private string GetWeaponAsHref(int _lowid, int _ql)
+        {
+            string itemQuery = "";
+            itemQuery = $"SELECT * FROM Items WHERE lowid == {_lowid} AND {_ql} BETWEEN lowql AND highql";
+            AOItem item = DB.QueryItemByIDs(itemQuery);
+            return BuildItemRef(item.lowid, item.highid, _ql, item.name);
         }
     }
 }
