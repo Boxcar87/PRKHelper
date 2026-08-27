@@ -8,9 +8,9 @@ PRKHelper does not inject into AO, it works by reading logfiles. The premise is 
 The commands are sent via /whisper which has a very low range so conflicting messages between users are highly unlikely. The results themselves are echoed so that only you can see them. 
 
 Some flagship features of PRKHelper include:
-- !items
-- !pb
-- !symbiant
+- !items (/itemfind)
+- !pb (/pb or /pocketboss)
+- !symbiant (/symb or /symbiant)
 - Extensive weapon DPM calculator (Returns optimal agg def with drag and drop item configuration)
 - Persistent shop script generator
 
