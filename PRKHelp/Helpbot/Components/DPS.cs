@@ -220,7 +220,7 @@ namespace PRKHelper.Helpbot.Components
                 double critHitRate = (double)crit / 100;
 
                 // Get various attack and recharge rates
-                (int attackRate, int rechargeRate) = GetWeaponSpeed(init, weapon.attack, weapon.recharge);
+                (int attackRate, int rechargeRate, int lowestAgg) = GetWeaponSpeed(init, weapon.attack, weapon.recharge);
                 int highestRate = attackRate > rechargeRate ? attackRate : rechargeRate;
                 int fullDefAttack = (attackRate + 175) < 100 ? 100 : attackRate + 175;
                 int fullDefRecharge = (rechargeRate + 175) < 100 ? 100 : rechargeRate + 175;
@@ -384,7 +384,6 @@ namespace PRKHelper.Helpbot.Components
                 neutralDefDpmCapped += (int)((nonCritCapped * nonCritHits) + (critCapped * critHits));
 
                 // Get lowest we can set our agg/def for all equipped weapons to maintain 1/1
-                int lowestAgg = (int)((highestRate + 100.00) / 275 * 100);
                 if (lowestAgg < 0)
                     lowestAgg = 0;
                 if (lowestAgg > 100)
@@ -421,13 +420,16 @@ namespace PRKHelper.Helpbot.Components
             return (dpm.ToString(), dpmCapped.ToString(), hrefString, lowestAllAgg);
         }
 
-        private (int, int) GetWeaponSpeed(int _init, int _attack, int _recharge)
+        private (int, int, int) GetWeaponSpeed(int _init, int _attack, int _recharge)
         {
             _init = _init > 1200 ? _init + ((_init - 1200) / 3) : _init; 
             int attackRate = (int)(_attack - (_init / 600.00) * 100);
             int rechargeRate = (int)(_recharge - (_init / 300.00) * 100);
+            double attackAgg = ((((_attack/100.00) - (_init / 600.00)) - 1) / 0.02) + 87.5;
+            double rechargeAgg = ((((_attack/100.00) - (_init / 300.00)) - 1) / 0.02) + 87.5;
+            double lowestAgg = attackAgg > rechargeAgg ? attackAgg : rechargeAgg;
 
-            return (attackRate, rechargeRate);
+            return (attackRate, rechargeRate, (int)lowestAgg);
         }
 
         // Brawl recharge is 15s flat
