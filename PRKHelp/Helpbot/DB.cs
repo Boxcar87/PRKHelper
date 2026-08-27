@@ -332,5 +332,26 @@ namespace PRKHelper.Helpbot
             }            
             return weaponStats;
         }
+
+        public static bool QueryIfWeaponExists(string _query)
+        {
+            bool weaponExists = false;
+            try
+            {
+                using (var command = new SqliteCommand(_query, Connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                            weaponExists = true;
+                    }
+                }
+            }
+            catch (SqliteException _ex)
+            {
+                Debug.WriteLine(_ex);
+            }
+            return weaponExists;
+        }
     }
 }
