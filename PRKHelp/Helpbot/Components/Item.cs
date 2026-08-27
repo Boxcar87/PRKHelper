@@ -74,7 +74,7 @@
                 if(item.type == 1)
                     OutputStrings[page] += $"Add to DPM Planner <a href='chatcmd:///character plan mainhand raw {item.lowid} {item.highid} {localQl}'>[Mainhand]</a>|<a href='chatcmd:///character plan offhand raw {item.lowid} {item.highid} {localQl}'>[Offhand]</a><br>";
 
-                if (OutputStrings[page].Length > 3600)
+                if (OutputStrings[page].Length > 3500)
                 {
                     OutputStrings[page] += $"\">Item Search Results ({pageFirstItem} - {pageItem} of {items.Count})</a>";
                     OutputStrings.Add($"<a href=\"text://{HighlightColor}Item Search Results ({pageFirstItem} - {pageItem} of {items.Count}){EndColor}<br><br>");
