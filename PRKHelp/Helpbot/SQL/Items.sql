@@ -2219,7 +2219,7 @@ INSERT INTO Items VALUES (220992, 220992, 90, 90, 'Badly Eroded Crystal (Grinnin
 INSERT INTO Items VALUES (220570, 220570, 93, 93, 'Badly Eroded Crystal (Grinning Hunter (Team))', 220431, 0, 0, 0);
 INSERT INTO Items VALUES (222132, 222132, 83, 83, 'Badly Eroded Crystal (Grinning Hunter)', 220431, 0, 0, 0);
 INSERT INTO Items VALUES (221659, 221659, 90, 90, 'Badly Eroded Crystal (Guard of the Grizzly)', 220433, 0, 0, 0);
-INSERT INTO Items VALUES (221825, 221825, 0, 0, 'Badly Eroded Crystal (Healing Rays of Sunrise)', 0, 0, 0, 0);
+INSERT INTO Items VALUES (221825, 221825, 156, 156, 'Badly Eroded Crystal (Healing Rays of Sunrise)', 220436, 0, 0, 0);
 INSERT INTO Items VALUES (222003, 222003, 153, 153, 'Badly Eroded Crystal (Implacability of Life)', 220436, 0, 0, 0);
 INSERT INTO Items VALUES (221927, 221927, 142, 142, 'Badly Eroded Crystal (Interlocking Barbs)', 220413, 0, 0, 0);
 INSERT INTO Items VALUES (220907, 220907, 159, 159, 'Badly Eroded Crystal (Invocation of the Phoenix)', 220436, 0, 0, 0);
@@ -40550,4 +40550,16 @@ INSERT INTO Items VALUES (219140, 219140, 220, 220, 'Persisting Ocular Symbiant,
 INSERT INTO Items VALUES (219130, 219130, 70, 70, 'Animated Ocular Symbiant, Artillery Unit Aban', 230979, 3, 500, 500);
 INSERT INTO Items VALUES (219134, 219134, 150, 150, 'Surviving Ocular Symbiant, Artillery Unit Aban', 230979, 3, 500, 500);
 INSERT INTO Items VALUES (219135, 219135, 170, 170, 'Active Ocular Symbiant, Artillery Unit Aban', 230979, 3, 500, 500);
+INSERT INTO Items VALUES (211352, 211353, 1, 100, 'Martial Arts (MA)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (211353, 211354, 100, 500, 'Martial Arts (MA)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (211357, 211358, 1, 500, 'Martial Arts (MA)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (211363, 211364, 1, 500, 'Martial Arts (MA)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (211349, 211350, 1, 100, 'Martial Arts (Shade)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (211350, 211351, 100, 500, 'Martial Arts (Shade)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (211359, 211360, 1, 500, 'Martial Arts (Shade)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (211365, 211366, 1, 500, 'Martial Arts (Shade)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (43712, 144745, 1, 100, 'Martial Arts (Other)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (144745, 43713, 100, 500, 'Martial Arts (Other)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (211355, 211356, 1, 500, 'Martial Arts (Other)', 11708, 1, 0, 0);
+INSERT INTO Items VALUES (211361, 211362, 1, 500, 'Martial Arts (Other)', 11708, 1, 0, 0);
 CREATE INDEX idx_highid ON Items(highid);
