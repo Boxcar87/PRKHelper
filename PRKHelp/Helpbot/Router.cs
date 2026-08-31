@@ -16,6 +16,7 @@ namespace PRKHelper.Helpbot
             Components.Add("calc", new Calc());
             Components.Add("oe", new OE());
             Components.Add("mafist", new MA());
+            Components.Add("whois", new Whois());
             Components.Add("itemfind", new Item(DB));
             Components.Add("trickle", new Trickle(DB));
             Components.Add("symbiant", new Symbiant(DB));
