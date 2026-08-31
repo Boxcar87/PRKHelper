@@ -78,7 +78,7 @@ You can drag and drop items into your chat bar and create a persistent shop scri
 ### /whois charactername
 <img width="497" height="668" alt="{6AD515BC-D9D1-4990-8BBD-38117E7AA34E}" src="https://github.com/user-attachments/assets/bd649b93-51fe-48f4-b9c7-9049a294f51b" />
 
-Once a character has alts, any of the alts names can be given to associate with the main character. For example you can say `/whois altName add anotherAltName` and it will find the appropriate main character.
+Once a character has alts, any of the alt's names can be given to associate with the main character. For example you can say `/whois altName add anotherAltName` and it will find the appropriate main character.
 ### /whois mainCharacterName add altCharacterName (altClass) (class can be input as a 4th argument to declare it inline with alt assignment)
 <img width="347" height="65" alt="{05331F43-E57C-4EC2-B9F8-D2C8D95EE8D6}" src="https://github.com/user-attachments/assets/d854ec89-4bee-403c-b57e-973cf1d087d2" />
 
