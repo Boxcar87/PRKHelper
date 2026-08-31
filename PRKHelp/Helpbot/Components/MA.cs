@@ -66,8 +66,6 @@
 
         public static (int, int, int) GetBrawlItem(int _skill)
         {
-            int lowid = 0;
-            int highid = 0;
             double qualityLevel = 0;
 
 

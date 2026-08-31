@@ -1,12 +1,5 @@
-﻿
-using System;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.IO;
+﻿using System.Diagnostics;
 using System.Text.Json;
-using Microsoft.VisualBasic;
-using PRKHelper.Helpbot.Components;
-using PRKHelper.Properties;
 
 namespace PRKHelp.Settings
 {
@@ -15,6 +8,7 @@ namespace PRKHelp.Settings
         readonly static string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         readonly static string Settings = Path.Combine(AppDataPath, "PRKHelp", "Settings");
         readonly static string SettingsFile = "PRKHelpSettings.json";
+        readonly static string WhoisFile = "PRKHelpWhois.json";
 
         public static string GetLastSelectedCharacter()
         {
@@ -304,6 +298,29 @@ namespace PRKHelp.Settings
             }
             string jsonString = File.ReadAllText(Path.Combine(Settings, SettingsFile));
             return JsonSerializer.Deserialize<Settings>(jsonString, new JsonSerializerOptions { IncludeFields = true });
+        }
+
+        public static List<(string characterName, string mainName, string className)> GetWhoisList()
+        {
+            if (!File.Exists(Path.Combine(Settings, WhoisFile)))
+            {
+                return [("", "", "")];
+            }
+            string jsonString = File.ReadAllText(Path.Combine(Settings, WhoisFile));
+            return JsonSerializer.Deserialize<List<(string, string, string)>>(jsonString, new JsonSerializerOptions { IncludeFields = true });
+        }
+
+        public static void OverwriteWhoisList(List<(string , string, string)> _list)
+        {
+            string jsonString = "";
+            try
+            {
+                jsonString = JsonSerializer.Serialize(_list, new JsonSerializerOptions { WriteIndented = true, IncludeFields = true });
+                File.WriteAllText(Path.Combine(Settings, WhoisFile), jsonString);
+            }
+            catch (JsonException _ex)
+            {
+            }
         }
     }
 }
