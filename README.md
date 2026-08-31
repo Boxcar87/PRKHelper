@@ -73,6 +73,23 @@ You can drag and drop items into your chat bar and create a persistent shop scri
 ### /postshop
 <img width="537" height="523" alt="{9650F73B-BFE8-489A-A9D6-2122E8C54E46}" src="https://github.com/user-attachments/assets/64887ccb-b029-4fbc-9b21-d0ec0bdede62" />
 
+## Whois / Alts
+
+### /whois charactername
+<img width="497" height="668" alt="{6AD515BC-D9D1-4990-8BBD-38117E7AA34E}" src="https://github.com/user-attachments/assets/bd649b93-51fe-48f4-b9c7-9049a294f51b" />
+
+Once a character has alts, any of the alts names can be given to associate with the main character. For example you can say `/whois altName add anotherAltName` and it will find the appropriate main character.
+### /whois mainCharacterName add altCharacterName (altClass) (class can be input as a 4th argument to declare it inline with alt assignment)
+<img width="347" height="65" alt="{05331F43-E57C-4EC2-B9F8-D2C8D95EE8D6}" src="https://github.com/user-attachments/assets/d854ec89-4bee-403c-b57e-973cf1d087d2" />
+
+### /whois mainCharacterName remove altCharacterName
+<img width="359" height="58" alt="{CF006E15-DB73-4424-9998-66AD06108489}" src="https://github.com/user-attachments/assets/a722fd9c-69cf-4ad7-ac8c-70e782ac4ffd" />
+
+### /whois characterName class className
+<img width="581" height="69" alt="{022A9440-3A1A-48A0-A890-FAE475F0DE33}" src="https://github.com/user-attachments/assets/da882a21-abbc-4354-9a8e-d41ec3dff882" />
+
+### /whois characterName main newMainName
+<img width="586" height="94" alt="{A017649C-395F-4791-A890-840E61B69B6F}" src="https://github.com/user-attachments/assets/c9433a84-7817-4924-af21-10442d27def9" />
 
 ## General bot commands
 
