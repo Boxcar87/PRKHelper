@@ -367,7 +367,7 @@ namespace PRKHelper.Helpbot.Components
                     }
                     SettingsManager.OverwriteWhoisList(altsList);
                 }
-                OutputStrings[0] = $"Set main of {searchedName} and all associated alts as {newMainName}";
+                OutputStrings[0] = $"{TextColor}Set main of {searchedName} and all associated alts as {ValueColor}{newMainName}";
             }
 
             // Route() will return a generic failure if value here is -1.
