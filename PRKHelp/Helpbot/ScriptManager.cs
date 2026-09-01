@@ -89,7 +89,7 @@ namespace PRKHelp
                 string text = _channel + _output[i];
                 if (_output.Count > 1 && _output.Count > i + 1)
                     text += ($"\n/PRKHelp/Output{i + 1}");
-                File.WriteAllText(_outputIndexString, $"{_channel}{_output[i]}");
+                File.WriteAllText(_outputIndexString, $"{text}");
 
                 //using (FileStream scriptStream = new(_outputIndexString, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
                 //{
