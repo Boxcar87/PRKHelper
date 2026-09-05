@@ -60,7 +60,9 @@
             }
             OutputStrings.Clear();
             OutputStrings.Add("");
-            return (outputStrings, ChannelOverride);
+            string channel = ChannelOverride;
+            ChannelOverride = null;
+            return (outputStrings, channel);
         }
 
         public string BuildItemRef(int _minID, int _maxID, int _QL, string _name)

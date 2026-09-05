@@ -21880,7 +21880,7 @@ INSERT INTO Items VALUES (164397, 164398, 1, 200, 'Metallic Mantis Armor Gloves'
 INSERT INTO Items VALUES (164399, 164400, 1, 200, 'Metallic Mantis Armor Legs', 13294, 2, 800, 800000);
 INSERT INTO Items VALUES (164395, 164396, 1, 200, 'Metallic Mantis Armor Sleeves', 13227, 2, 300, 300000);
 INSERT INTO Items VALUES (164349, 164349, 200, 200, 'Metallic Mantis Body Armor', 13249, 2, 120000, 120000);
-INSERT INTO Items VALUES (164392, 164392, 1, 1, 'Metallic Mantis Body Armor', 13249, 2, 1200, 1200);
+INSERT INTO Items VALUES (164392, 164349, 1, 200, 'Metallic Mantis Body Armor', 13249, 2, 1200, 1200);
 INSERT INTO Items VALUES (164487, 164488, 1, 200, 'Metallic Mantis Helmet', 31729, 2, 1000, 1000000);
 INSERT INTO Items VALUES (164431, 164431, 120, 120, 'Metallic Mantis Predator Blade', 269399, 1, 866000, 866000);
 INSERT INTO Items VALUES (119218, 119218, 1, 1, 'Metallic Paper Bin', 119210, 0, 300, 300);
